@@ -1,0 +1,36 @@
+
+<div style="background: green;" th:if="${THONG_BAO_OK}" th:text="${THONG_BAO_OK}">
+</div>
+    
+<a href="#" role="button" class="primary" th:href="@{/admin/danhmuc/them}">Thêm Mới</a>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h4 class="mb-0">Danh Mục</h4>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+            <thead>
+                    <tr class="text-dark">
+                        <th scope="col"><h5>Tên Danh Mục</h5></th>
+                        <!-- <th>Tên Sản Phẩm</th> -->
+                        <th scope="col"><h5>Action</h5></th>
+                    </tr>
+            </thead>    
+            <tbody>
+                    <tr class="text-dark" th:each="dl : ${ds}">
+                        <td th:text="${dl.tenDanhMuc}"></td>
+                        <td>
+                            <!-- <a th:href="@{/admin/danhmuc/xem/{id}(id=${dl.Id})}">Xem</a> 
+                            | -->
+                            <a th:href="@{/admin/danhmuc/sua(id=${dl.Id})}"><i class="fas fa-edit"></i></a> 
+                            |
+                            <a th:href="@{/admin/danhmuc/xoa(id=${dl.Id})}"><i class="fas fa-trash-alt"></i></a>
+                            
+                        </td>
+                    </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>

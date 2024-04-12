@@ -1,0 +1,55 @@
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="mb-0">Chi Tiết Sản Phẩm</h2>
+        </div>
+        <div class="table-responsive">  
+
+            <table class="table text-start align-middle table-bordered table-hover mb-0" th:object="${dl}">
+                    <tr class="text-dark" >
+                        <td rowspan="8" >
+                               <img  style="height: 200px;width: 300px;object-fit: cover;" th:src="${dl.anhSanPham}" alt="Product Image" class="img-fluid">
+                          
+                        </td>
+                        <td>            <p><strong>Tên Sản Phẩm:</strong> <span th:text="${dl.tenSanPham}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>            <p><strong>Giá($):</strong> <span th:text="${dl.donGia}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Danh Mục:</strong> <span th:text="${dl.dm.tenDanhMuc}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Nhà Sản Xuất:</strong> <span th:text="${dl.nsx.tenNhaSanXuat}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Mô Tả:</strong> <span th:text="${dl.moTa}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Trạng Thái:</strong> <span th:text="${dl.trangThai}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Bán Chạy:</strong> <span th:text="${dl.banChay}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Nổi Bật:</strong> <span th:text="${dl.noiBat}"></span></p>
+                        </td>
+                    </tr>
+                    	
+            </table>
+        </div>
+    </div>
+</div>

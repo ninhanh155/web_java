@@ -1,0 +1,22 @@
+<form th:object="${dl}">
+
+    <fieldset>
+        <legend>Xem Chi Tiết</legend>
+        
+        <label>Tên Đầy Đủ</label>
+        <input type="text" th:field="*{tenDayDu}" />
+
+        <label>Email</label>
+        <input type="email" th:field="*{email}" />
+
+        <label>Mật Khẩu</label>
+        <input type="password" th:field="*{matKhau}" />
+
+        <label>Xác Nhận Mật Khẩu</label>
+        <input type="password" th:field="*{xacNhanMatKhau}" />
+
+        <br />
+        <a th:href="@{/admin/khachhang/duyet}" role="button" class="primary">Quay Lại</a>
+    </fieldset>
+
+</form>

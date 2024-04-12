@@ -1,0 +1,80 @@
+<form method="post" enctype="multipart/form-data" th:action="@{/admin/nhanvien/sua}" th:object="${dl}">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mb-0">Cập Nhật</h2>
+                <input type="hidden" th:field="*{Id}"/>
+        
+                <label>&nbsp;</label>
+                <button type="submit" class="primary">Lưu</button>
+            </div>
+            <div class="table-responsive">  
+    
+                <table class="table text-start align-middle table-bordered table-hover" th:object="${dl}">
+                        <tr class="text-dark"  >
+                            <td rowspan="8"  style="text-align:center;">
+                                <div>
+                                    <img style="height: 280px; width: 280px; object-fit: cover; margin-left: 80px;" th:src="*{anhNhanVien}">
+                                </div>
+                                <br>
+                                <input type="file" th:field="*{fileNv}" />
+                            </td>
+                            <td>            
+                                <p>
+                                    <strong>Tên Đầy Đủ:</strong>
+                                    <input type="text" th:field="*{tenDayDu}" />
+                                </p>
+                                            
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>            
+                                <p>
+                                    <strong>Email:</strong> 
+                                    <input type="email"  th:field="*{email}"/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>            
+                                <p>
+                                    <strong>Mật Khẩu:</strong> 
+                                    <input type="password"  th:field="*{matKhau}"/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>            
+                                <p>
+                                    <strong>Điện Thoại:</strong> 
+                                    <input type="text"  th:field="*{dienThoai}"/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>            
+                                <p>
+                                    <strong>Ngày Tạo:</strong>
+                                    <input type="date" th:field="*{ngayTaoNV}"/>
+                                </p>
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            
+                            <td>                
+                                <p>
+                                    <strong>Mô Tả:</strong> 
+                                    <input type="text" th:field="*{moTaNhanVien}"/>
+                                </p>
+                        </td>
+                    </tr>
+                    
+            </table>
+        </div>
+    </div>
+</div>
+</form>

@@ -1,0 +1,70 @@
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Liên Hệ</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a th:href="@{/trangchu}">Trang Chủ</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Liên Hệ</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+
+
+<!-- Contact Start -->
+<div class="container-fluid contact py-5">
+    <div class="container py-5">
+        <div class="p-5 bg-light rounded">
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="text-center mx-auto" style="max-width: 700px;">
+                        <h1 class="text-primary">Phản Hồi</h1>
+                        <p class="mb-4">Xin vui lòng để lại tin nhắn cho chúng tôi. Chúng tôi đánh giá cao phản hồi của bạn và sẽ liên hệ lại với bạn sớm nhất có thể. Cảm ơn bạn đã đạt ra cho chúng tôi.</p>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="h-100 rounded">
+                        
+                        <iframe class="rounded w-100" 
+                        width="600" height="450" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.8665208366606!2d105.77152607387653!3d21.038026187462904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454c9d8488649%3A0xde9170f0f1b846cb!2zMTI4YSDEkC4gSOG7kyBUw7luZyBN4bqtdSwgTWFpIEThu4tjaCwgQ-G6p3UgR2nhuqV5LCBIw6AgTuG7mWkgMTAwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1712753164344!5m2!1svi!2s"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <form method="post" th:action="@{/admin/lienhe/them}" th:object="${dl}">
+                            <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Nhập tên" name="tenKhach">
+                            <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Nhập email" name="email">
+                            <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Nhập số điện thoại" name="soDienThoai">
+                            <input type="date" class="w-100 form-control border-0 py-3 mb-4" placeholder="dd/MM/yyyy" name="ngayPhanHoi">
+                            <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Nhập tiêu đề" name="tieuDe">
+                            <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Phản Hồi" name="phanHoi"></textarea>
+
+                            <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary" type="submit">Gửi</button>
+                    </form>
+                </div>
+                <div class="col-lg-5">
+                    <div class="d-flex p-4 rounded mb-4 bg-white">
+                        <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
+                        <div>
+                            <h4>Địa Chỉ</h4>
+                            <p class="mb-2"><span th:text="${caidat.get('diachi')}"></span></p>
+                        </div>
+                    </div>
+                    <div class="d-flex p-4 rounded mb-4 bg-white">
+                        <i class="fas fa-envelope fa-2x text-primary me-4"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p class="mb-2"><span th:text="${caidat.get('email')}"></span></p>
+                        </div>
+                    </div>
+                    <div class="d-flex p-4 rounded bg-white">
+                        <i class="fas fa-phone-alt fa-2x text-primary me-4"></i>
+                        <div>
+                            <h4>Điện Thoại</h4>
+                            <p class="mb-2"><span th:text="${caidat.get('phone')}"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

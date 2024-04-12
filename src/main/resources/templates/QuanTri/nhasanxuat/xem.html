@@ -1,0 +1,16 @@
+<form th:object="${dl}">
+
+    <fieldset>
+        <legend>Xem Chi Tiết</legend>
+        
+        <label>Ảnh Nhà Sản Xuất</label>
+        <img style="height: 70px; width: 70px;" th:src="*{anhNhaSanXuat}" disabled/>
+
+        <label>Tên sản phẩm</label>
+        <input type="text" th:field="*{tenNhaSanXuat}" disabled/>
+
+        <br />
+        <a th:href="@{/admin/nhasanxuat/duyet}" role="button" class="primary">Quay Lại</a>
+    </fieldset>
+
+</form>

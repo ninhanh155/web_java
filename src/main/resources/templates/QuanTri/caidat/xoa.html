@@ -1,0 +1,37 @@
+<form method="post" th:action="@{/admin/caidat/xoa}" th:object="${dl}">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mb-0">Xác Nhận Xóa</h2>
+                <input type="hidden" th:field="*{Id}"/>
+        
+                <label>&nbsp;</label>
+                <button type="submit">Xóa</button>
+            </div>
+            <div class="table-responsive">  
+    
+                <table class="table text-start align-middle table-bordered table-hover" th:object="${dl}">
+                        <tr>
+                            <td>            
+                                <p>
+                                    <strong>Khóa:</strong> 
+                                    <input type="text" th:field="*{khoa}"/>
+                                </p>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            
+                            <td>            
+                                <p>
+                                    <strong>Giá Trị:</strong>
+                                    <input type="text" th:field="*{giaTri}" />
+                                </p>
+                            </td>
+                        </tr>
+                        
+            </table>
+        </div>
+    </div>
+</div>
+</form>

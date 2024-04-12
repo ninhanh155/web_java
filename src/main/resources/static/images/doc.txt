@@ -1,0 +1,63 @@
+images: lưu ảnh upload từ file
+
+cách upload ảnh
+tdl
+    private String anh;
+
+    @Transient
+    private MultipartFile file;
+    
+    public MultipartFile getFile(){
+      return file;
+    }
+
+dvl
+
+sửa 
+@Override
+    public void lưuSanPham(SanPham dl)
+    {
+
+        this.kdl.save(dl);
+    }
+thành
+
+ @Override
+    public void lưuNhaSanXuat(NhaSanXuat dl)
+    {
+       MultipartFile file = dl.getFile();
+        if (file != null && !file.isEmpty()){
+            try {
+                String fileName = file.getOriginalFilename();
+
+                String uploadDir = "src/main/resources/static/images/";
+
+                // String uploadDir = "src/main/resources/static/img/";
+
+                if(!Files.exists(Paths.get(uploadDir)))
+                {
+                    new File(uploadDir).mkdirs();
+                }
+                String filePath = uploadDir + UUID.randomUUID().toString() + "_" +fileName;// target of upload
+                // String filePath = uploadDir + fileName;// target of upload
+
+
+                Files.createFile(Paths.get(filePath));
+                Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+                
+                String savedFileName = filePath.substring(filePath.lastIndexOf("/") + 1); // Lấy tên file đã lưu
+                dl.setAnhNhaSanXuat("/images/" + savedFileName); // Lưu tên file vào trường "image" của đối tượng SamPham
+            } catch (IOException e) {
+                // Xử lý lỗi nếu có
+            }
+        }
+        this.kdl.save(dl);
+    }
+
+
+vào html trang thêm
+sửa 
+<form method="post" th:action="@{/sanpham/them}" th:object="${dl}"><!--XÓA KÍ TỰ TRẮNG sau đô la-->
+thành
+<form method="post" enctype="multipart/form-data" th:action="@{/sanpham/them}" th:object="${dl}"><!--XÓA KÍ TỰ TRẮNG sau đô la-->
+

@@ -1,0 +1,49 @@
+<form method="post" enctype="multipart/form-data" th:action="@{/admin/khachhang/xoa}" th:object="${dl}">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mb-0">Xác Nhận Xóa</h2>
+                <input type="hidden" th:field="*{Id}"/>
+        
+                <label>&nbsp;</label>
+                <button type="submit" class="primary">Xóa</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover" th:object="${dl}">
+                    <tr>
+                        <td>            
+                            <p>
+                                <strong>Tên Đầy Đủ:</strong> 
+                                <input type="text" th:field="*{tenDayDu}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>            
+                            <p>
+                                <strong>Email:</strong> 
+                                <input type="email" th:field="*{email}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>            
+                            <p>
+                                <strong>Mật Khẩu:</strong> 
+                                <input type="password" th:field="*{matKhau}"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>            
+                            <p>
+                                <strong>Xác Nhận Mật Khẩu:</strong>
+                                <input type="password" th:field="*{xacNhanMatKhau}" />
+                            </p>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</form>

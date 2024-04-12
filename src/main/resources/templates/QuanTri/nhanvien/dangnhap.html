@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Đăng Nhập</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="/QuanTri/css/style1.css" rel="stylesheet">
+</head>
+<body>
+  <div class="login-box">
+    <h2>Đăng Nhập</h2>
+    <form method="post" th:action="@{/admin/dangnhap}" th:object="${dl}">
+      <div class="user-box">
+        <input type="email" id="email" th:field="*{Email}"/>
+        <label for="email">Email</label>
+      </div>
+      <div class="user-box">
+        <input type="password" id="matKhau" th:field="*{MatKhau}"/>
+        <label for="matKhau">Mật Khẩu</label>
+      </div>
+      <button>
+        <a href="">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </a>
+      </button>
+      
+    </form>
+  </div>
+</body>
+</html>

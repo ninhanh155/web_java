@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="account.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    
+</head>
+<body>
+  <div class="container-fluid py-5 mb-5 hero-header d-flex justify-content-center">
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+              <form method="post" th:action="@{/khachang/forgotPassword}" onsubmit="return validateForm()">
+      
+                <div class="divider d-flex align-items-center my-4">
+                  <p class="text-center"><h3>Quên mật khẩu</h3></p>
+                </div>
+      
+                <!-- Email input -->
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="form3Example4">Email</label>
+                  <input type="text" id="email" name="email"  class="form-control form-control-lg"
+                    placeholder="Nhập địa chỉ email" required/>
+                  
+                </div>
+      
+                <div class="text-center text-lg-start mt-4 pt-2">
+                  <button type="submit" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Gửi Email</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<form method="post" enctype="multipart/form-data" th:action="@{/admin/nhasanxuat/them}" th:object="${dl}">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mb-0">Tạo mới</h2>
+                <input type="hidden" th:field="*{Id}"/>
+        
+                <label>&nbsp;</label>
+                <button type="submit">Lưu</button>
+                <button type="reset">Huỷ</button>
+            </div>
+            <div class="table-responsive">  
+    
+                <table class="table text-start align-middle table-bordered table-hover" th:object="${dl}">
+                        <tr class="text-dark"  >
+                            <td rowspan="8"  style="text-align:center;">
+                                <div>
+                                    <img style="height: 280px;width: 280px;object-fit: cover;margin-left: 80px;" th:src="*{anhNhaSanXuat}">
+                                </div>
+                                <br>
+                                <input type="file" th:field="*{file}"/>
+                            </td>
+                            <td>            
+                                <p>
+                                    <strong>Tên Sản Phẩm:</strong>
+                                    <input type="text" th:field="*{tenNhaSanXuat}" />
+                                </p>
+                                            
+                            </td>
+                        </tr>
+                        
+            </table>
+        </div>
+    </div>
+</div>
+</form>

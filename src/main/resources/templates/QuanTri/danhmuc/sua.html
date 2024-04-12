@@ -1,0 +1,26 @@
+<form method="post" th:action="@{/admin/danhmuc/sua}" th:object="${dl}">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mb-0">Cập Nhật</h2>
+                <input type="hidden" th:field="*{Id}"/>
+        
+                <label>&nbsp;</label>
+                <button type="submit">Lưu</button>
+            </div>
+            <div class="table-responsive">  
+    
+                <table class="table text-start align-middle table-bordered table-hover" th:object="${dl}">
+                        <tr>
+                            <td>            
+                                <p>
+                                    <strong>Tên Danh Mục:</strong> 
+                                    <input type="text" th:field="*{tenDanhMuc}"/>
+                                </p>
+                            </td>
+                        </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</form>

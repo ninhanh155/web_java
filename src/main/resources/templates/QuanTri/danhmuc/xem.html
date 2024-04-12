@@ -1,0 +1,11 @@
+<form th:object="${dl}">
+
+    <fieldset>
+        <legend>Xem Chi Tiết</legend>
+        <label>Tên Danh Mục</label>
+        <input type="text" th:field="*{tenDanhMuc}" />
+        <br />
+        <a th:href="@{/admin/danhmuc/duyet}" role="button" class="primary">Quay Lại</a>
+    </fieldset>
+
+</form>

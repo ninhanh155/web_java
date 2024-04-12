@@ -1,0 +1,44 @@
+
+<div style="background: rgb(84, 154, 177);" th:if="${USER_LOGGED}" th:text="${USER_LOGGED}">
+</div>
+    
+<a href="#" role="button" class="primary" th:href="@{/admin/khachhang/them}">Thêm Mới</a>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="mb-0">Danh Sách Khách Hàng</h2>
+        </div>
+        <div class="table-responsive">  
+
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Tên Đầy Đủ</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Mật Khẩu</th>
+                        <th scope="col">Xác Nhận Mật Khẩu</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="text-dark" th:each="dl : ${ds}">
+                        <td th:text="${dl.tenDayDu}"></td>
+                        <td th:text="${dl.email}"></td>
+                        <td th:text="${dl.matKhau}"></td>
+                        <td th:text="${dl.xacNhanMatKhau}"></td>
+                        <td>
+                            <!-- <a th:href="@{/admin/sanpham/xem/{id}(id=${dl.Id})}">Xem</a>
+                            | -->
+                            <a th:href="@{/admin/khachhang/sua(id=${dl.Id})}"><i class="fas fa-edit"></i></a>
+                            |
+                            <a th:href="@{/admin/khachhang/xoa(id=${dl.Id})}"><i class="fas fa-trash-alt"></i></a>
+                            
+                        </td>
+                    </tr>
+                </tbody>	
+            </table>
+        </div>
+    </div>
+</div>

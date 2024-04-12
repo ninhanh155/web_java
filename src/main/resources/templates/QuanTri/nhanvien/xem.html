@@ -1,0 +1,27 @@
+<form th:object="${dl}">
+
+    <fieldset>
+        <legend>Xem Chi Tiết</legend>
+        
+        <label>Ảnh Nhân Viên</label>
+        <img style="height: 70px; width: 70px;" th:src="*{anhNhanVien}">
+
+        <label>Tên Đầy Đủ</label>
+        <input type="text" th:field="*{tenDayDu}" disabled/>
+
+        <label>Email</label>
+        <input type="email" th:field="*{email}" disabled/>
+
+        <label>Điện Thoại</label>
+        <input type="text" th:field="*{dienThoai}" disabled/>
+
+        <label for="ngayTaoNV">Ngày Tạo</label>
+        <input type="text" th:field="*{ngayTaoNV}" disabled/>
+
+        <label>Mô Tả</label>
+        <input type="text" th:field="*{moTaNhanVien}" disabled/>
+        <br />
+        <a th:href="@{/admin/nhanvien/duyet}" role="button" class="primary">Quay Lại</a>
+    </fieldset>
+
+</form>

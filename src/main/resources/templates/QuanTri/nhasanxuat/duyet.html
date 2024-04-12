@@ -1,0 +1,42 @@
+
+
+<div style="background: green;" th:if="${THONG_BAO_OK}" th:text="${THONG_BAO_OK}">
+</div>
+  
+<a href="#" role="button" class="primary" th:href="@{/admin/nhasanxuat/them}">Thêm Mới</a>
+<div class="container-fluid pt-4 px-4">
+  <div class="bg-light text-center rounded p-4">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+          <h2 class="mb-0">Nhà Sản Xuất</h2>
+      </div>
+      <div class="table-responsive">  
+
+          <table class="table text-start align-middle table-bordered table-hover mb-0">
+              <thead>
+                  <tr class="text-dark">
+                    <th scope="col">Ảnh</th>
+                    <th scope="col">Tên Nhà Sản Xuất</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead>
+
+              <tbody>
+                  <tr th:each="dl : ${ds}">
+                    <td>
+                        <img style="height: 70px; width: 70px;" th:src="${dl.anhNhaSanXuat}">
+                    </td>
+                      <td th:text="${dl.tenNhaSanXuat}"></td>
+                      <td>
+                          <!-- <a th:href="@{/admin/nhasanxuat/xem/{id}(id=${dl.Id})}">Xem</a> 
+                          | -->
+                          <a th:href="@{/admin/nhasanxuat/sua(id=${dl.Id})}"><i class="fas fa-edit"></i></a> 
+                          |
+                          <a th:href="@{/admin/nhasanxuat/xoa(id=${dl.Id})}"><i class="fas fa-trash-alt"></i></a>
+                          
+                      </td>
+                  </tr>
+              </tbody>	
+          </table>
+      </div>
+  </div>
+</div>
