@@ -21,8 +21,8 @@
                     <tr class="text-dark" th:each="dl : ${ds}">
                         <td th:text="${dl.tenDanhMuc}"></td>
                         <td>
-                            <!-- <a th:href="@{/admin/danhmuc/xem/{id}(id=${dl.Id})}">Xem</a> 
-                            | -->
+                            <a th:href="@{/admin/danhmuc/xem/{id}(id=${dl.Id})}"><i class="fas fa-eye"></i></a> 
+                            |
                             <a th:href="@{/admin/danhmuc/sua(id=${dl.Id})}"><i class="fas fa-edit"></i></a> 
                             |
                             <a th:href="@{/admin/danhmuc/xoa(id=${dl.Id})}"><i class="fas fa-trash-alt"></i></a>

@@ -1,0 +1,42 @@
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="mb-0">Tài Khoản</h2>
+        </div>
+        <div class="table-responsive">  
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <tr class="text-dark">
+                    <td rowspan="8">
+                        <img style="height: 300px; object-fit: cover;" th:src="${tknv.anhNhanVien}" class="img-fluid">
+                    </td>
+                    <td>
+                        <p><strong>Tên Đầy Đủ:</strong> <span th:text="${tknv.tenDayDu}"></span></p>
+                    </td>
+                </tr>
+                <tr class="text-dark">
+                    <td>
+                        <p><strong>Email:</strong> <span th:text="${tknv.email}"></span></p>
+                    </td>
+                </tr>
+                <tr class="text-dark">
+                    <td>
+                        <p><strong>Điện Thoại:</strong> <span th:text="${tknv.dienThoai}"></span></p>
+                    </td>
+                </tr>
+                <tr class="text-dark">
+                    <td>
+                        <p><strong>Ngày Tạo:</strong> <span th:text="${tknv.ngayTaoVi}"></span></p>
+                    </td>
+                </tr>
+                <tr class="text-dark">
+                    <td>
+                        <p><strong>Mô Tả:</strong> <span th:text="${tknv.moTaNhanVien}"></span></p>
+                    </td>
+                </tr>
+            </table>
+             <br/>
+            <a th:href="@{/admin}" role="button" class="primary">Quay Lại</a>
+           
+        </div>
+    </div>
+</div>

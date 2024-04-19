@@ -41,8 +41,8 @@
                         <td th:text="${dl.banChay}"></td>
                         <td th:text="${dl.noiBat}"></td>
                         <td>
-                            <!-- <a th:href="@{/admin/sanpham/xem/{id}(id=${dl.Id})}">Xem</a>
-                            | -->
+                            <a th:href="@{/admin/sanpham/xem/{id}(id=${dl.Id})}"><i class="fas fa-eye"></i></a>
+                            |
                             <a th:href="@{/admin/sanpham/sua(id=${dl.Id})}"><i class="fas fa-edit"></i></a>
                             |
                             <a th:href="@{/admin/sanpham/xoa(id=${dl.Id})}"><i class="fas fa-trash-alt"></i></a>

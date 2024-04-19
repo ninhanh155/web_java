@@ -1,7 +1,5 @@
 package banhang.quanlythucpham.dvl;
 
-
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,12 +21,9 @@ public class DvlSanPham implements DviSanPham
 {
     @Autowired private KdlSanPham kdl;// kho dữ liệu;
 
+    
     @Override public List<SanPham> dsSanPham() // getAllThucThe()
     {
-  
-        // return null;
-
-        // mã bởi lập trình viên:
         return kdl.findAll();
     }
 
@@ -37,12 +32,14 @@ public class DvlSanPham implements DviSanPham
         return kdl.findAll();
     }
 
+    @Override public List<SanPham> ds_sp_thuoc_MaDanhMuc(int id_danh_muc){
+
+        return kdl.findByMaDanhMuc(id_danh_muc);
+    }
+
+
     @Override public SanPham  tìmSanPhamTheoId(int id)// 
     {
-        // TODO Auto-generated method stub
-        // return null;
-
-        // return kdl.findById(id);
 
         SanPham dl = null;
 

@@ -3,7 +3,7 @@ package banhang.quanlythucpham.qdl;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
-// Thư viện web: Java Spring
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +32,11 @@ public class QdlNhanVien
     })
     public String getDuyet(Model model, HttpSession session, HttpServletRequest request) 
     {
-        // if(session.getAttribute("USER_LOGGED")==null)
-        // {
-        //     request.getSession().setAttribute("LOCATION","/admin/nhanvien/duyet");
-        //     return "redirect:/admin/dangnhap";
-        // }
+        session = request.getSession();
+        int userId = (int) session.getAttribute("USER_ID");
+        NhanVien nv = dvl.tìmNhanVienTheoId(userId);
+
+        System.out.println("bao" + nv.getTenDayDu());
         // Đọc dữ liệu bảng rồi chứa vào biến tạm
         List<NhanVien> list = dvl.duyệtNhanVien();
 
@@ -78,9 +78,7 @@ public class QdlNhanVien
 
         // Gửi đối tượng dữ liệu sang bên view
         model.addAttribute("dl", dl);
-//      model.addAttribute("dsBangNgoai", this.dvlBangNgoai.dsBangNgoai());
-
-        // Hiển thị giao diện view html
+        
         // Nội dung riêng của trang...
         model.addAttribute("content", "QuanTri/nhanvien/sua.html"); // sua.html
 
@@ -158,7 +156,6 @@ public class QdlNhanVien
     HttpServletRequest request,
     HttpSession session) 
     {
-        
          String old_password=null;
         
         if(dvl.tồnTạiEmail(Email))
@@ -174,45 +171,36 @@ public class QdlNhanVien
             (mật_khẩu_khớp){
                 System.out.println("\n Đúng tài khoản, đăng nhập thành công");
                 request.getSession().setAttribute("USER_LOGGED", old_dl.getEmail());
+                request.getSession().setAttribute("USER_ID", old_dl.getId());
+                request.getSession().setAttribute("USER_IMG",old_dl.getAnhNhanVien());
+                request.getSession().setAttribute("USER_NAME",old_dl.getTenDayDu());
+                request.getSession().setAttribute("USER_COMMENT",old_dl.getMoTaNhanVien());
 
 
             }else{
                 System.out.println("\n Sai mật khẩu");
                 // Gửi thông báo thành công từ view Add/Edit sang view List
-            redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Sai mật khẩu !");
-            return "redirect:/nhanvien/loidangnhap";
+                redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Sai mật khẩu !");
+                return "redirect:/admin/dangnhap";
             }
         }
         else {
             System.out.println("\n Không tồn tại tên đăng nhập");
             // Gửi thông báo thành công từ view Add/Edit sang view List
             redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Sai tên đăng nhập !");
-            return "redirect:/nhanvien/loidangnhap";
+            return "redirect:/admin/dangnhap";
         }
 
         return "redirect:"+(String)session.getAttribute("LOCATION");
         // return "redirect:/admin";
     }
 
-    @GetMapping("/nhanvien/loidangnhap")
-    public String loiDangNhap(Model model) {
-
-        model.addAttribute("dl", new NhanVien());
-        // Lấy ra bản ghi theo id
-        model.addAttribute("content", "QuanTri/nhanvien/loidangnhap.html");
-
-        // ...được đặt vào bố cục chung của toàn website
-        return "QuanTri/nhanvien/loidangnhap"; // layout.html
-    }
-
-    @GetMapping("/nhanvien/dangthoat")
+    @GetMapping("/admin/nhanvien/dangthoat")
     public String getDangThoat(HttpServletRequest request) {
-
         request.getSession().invalidate();
         return "redirect:/admin";
     }
 
-    
   
     @PostMapping("/admin/nhanvien/sua")
     public String postSua(@ModelAttribute("NhanVien") NhanVien dl, RedirectAttributes redirectAttributes) {
@@ -237,6 +225,18 @@ public class QdlNhanVien
         return "redirect:/admin/nhanvien/duyet";
     }
 
+    @GetMapping("/admin/nhanvien/taikhoan")
+    public String getTaiKhoan(Model model, HttpSession session) {
+        String email = (String) session.getAttribute("USER_LOGGED");
+        if (email != null) {
+            NhanVien dl = dvl.tìmNhanVienTheoEmail(email);
+            model.addAttribute("tknv", dl);
+            model.addAttribute("content", "QuanTri/nhanvien/taikhoan.html");
+            return "QuanTri/layout.html";
+        } else {
+            return "redirect:/admin/dangnhap"; // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+        }
+    }
 
 
 }// end class

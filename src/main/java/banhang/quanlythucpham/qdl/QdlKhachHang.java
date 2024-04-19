@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import banhang.quanlythucpham.dvl.DvlBinhLuan;
 import banhang.quanlythucpham.dvl.DvlKhachHang;
 import banhang.quanlythucpham.dvl.DvlNhanVien;
 import banhang.quanlythucpham.dvl.DvlSanPham;
+import banhang.quanlythucpham.tdl.BinhLuan;
 import banhang.quanlythucpham.tdl.KhachHang;
 import banhang.quanlythucpham.tdl.NhanVien;
 import banhang.quanlythucpham.tdl.SanPham;
@@ -39,6 +40,9 @@ public class QdlKhachHang
 
     @Autowired
     private DvlSanPham dvlSanPham;
+
+    @Autowired
+    private DvlBinhLuan dvlBinhLuan;
 
     @Autowired
     private DvlNhanVien dvlNhanVien;
@@ -74,16 +78,12 @@ public class QdlKhachHang
     // @GetMapping("/admin/khachhang/sua/{id}")
     @GetMapping("/admin/khachhang/sua")
     public String getSua(Model model, @RequestParam("id") int id) {
-        // trangSua(Model model, @PathVariable(value = "id") int id) {
         // Lấy ra bản ghi theo id
         KhachHang dl = dvl.xemKhachHang(id);
 
         // Gửi đối tượng dữ liệu sang bên view
         model.addAttribute("dl", dl);
-//        model.addAttribute("dsBangNgoai", this.dvlBangNgoai.dsBangNgoai());
 
-        // Hiển thị giao diện view html
-        // Nội dung riêng của trang...
         model.addAttribute("content", "QuanTri/khachhang/sua.html"); // sua.html
 
         // ...được đặt vào bố cục chung của toàn website
@@ -158,8 +158,8 @@ public class QdlKhachHang
         var inputPassword = dl.getMatKhau();
         var confirmPassword = dl.getXacNhanMatKhau();
 
-        System.out.println(" mk 1 " + inputPassword);
-        System.out.println(" mk 2 " + confirmPassword);
+        // System.out.println(" mk 1 " + inputPassword);
+        // System.out.println(" mk 2 " + confirmPassword);
 
         if(inputPassword == confirmPassword)
         {
@@ -198,53 +198,46 @@ public class QdlKhachHang
     }
 
     @PostMapping("/dangnhap")
-    public String postDangNhap(Model model, 
-    RedirectAttributes redirectAttributes, 
-    @RequestParam("Email") String Email, 
-    @RequestParam("MatKhau") String MatKhau,
-    HttpServletRequest request,
-    HttpSession session) 
+    public String postDangNhap(
+        Model model, 
+        RedirectAttributes redirectAttributes, 
+        @RequestParam("Email") String Email, 
+        @RequestParam("MatKhau") String MatKhau, 
+        HttpServletRequest request, HttpSession session) 
     {
         
-         String old_password=null;
-        // var old_dl = dvl.tìmKhachHangTheoEmail(TenDangNhap);
-        if// Nếu tồn tại tên đăng nhập trong csdl
-        // (old_dl!=null)// chạy OK
-        (dvl.tồnTạiEmail(Email))
-        { 
-            var old_dl = dvl.tìmKhachHangTheoEmail(Email) ;
+        String old_password = null;
+        
+        if (dvl.tồnTạiEmail(Email)) {
+            var old_dl = dvl.tìmKhachHangTheoEmail(Email);
             System.out.println(old_dl.getEmail());
             old_password = old_dl.getMatKhau();
-            // So sánh mật khẩu trên Form và trong MySQL
-        // xem có khớp không
-            var mật_khẩu_khớp = BCrypt.checkpw(MatKhau, old_password);
+            
+            boolean mật_khẩu_khớp = BCrypt.checkpw(MatKhau, old_password);
 
-            if// nếu
-            (mật_khẩu_khớp){
+            if (mật_khẩu_khớp) {
                 System.out.println("\n Đúng tài khoản, đăng nhập thành công");
-                // Gửi thông báo thành công từ view Add/Edit sang view List
-            // redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Đã đăng nhập thành công ! Xin chào"+old_dl.getTenDayDu());
+                request.getSession().setAttribute("USER_LOGGED", old_dl.getEmail());
 
-            request.getSession().setAttribute("USER_LOGGED", old_dl.getEmail());
-
-            request.getSession().setAttribute("USER_ID", old_dl.getId());
-
-            }else{
+                request.getSession().setAttribute("USER_ID", old_dl.getId());
+                
+            } else {
                 System.out.println("\n Sai mật khẩu");
-                // Gửi thông báo thành công từ view Add/Edit sang view List
-            redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Tài khoản hoặc mật khẩu không chính xác!");
-            return "redirect:/dangnhap";
+                redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Tài khoản hoặc mật khẩu không chính xác!");
+                return "redirect:/dangnhap";
             }
-        }
-        else {
+        } else {
             System.out.println("\n Không tồn tại tên đăng nhập");
-            // Gửi thông báo thành công từ view Add/Edit sang view List
             redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Sai tên đăng nhập !");
             return "redirect:/dangnhap";
         }
 
-        // return "redirect:"+(String)session.getAttribute("LOCATION");
-        return "redirect:/trangchu";
+        String location = (String) session.getAttribute("LOCATION");
+        if (location != null) {
+            return "redirect:" + location;
+        } else {
+            return "redirect:/trangchu";
+        }
     }
 
     
@@ -352,14 +345,29 @@ public class QdlKhachHang
         return "KhachHang/layout.html"; 
     }
 
-    @GetMapping({"/chitietsanpham"})
-    public String getChiTietSanPham(Model model) 
+    @GetMapping("/danhmuc/{id}")
+    public String getDanhMuc(Model model, @PathVariable(value = "id") int id)
+    {
+        System.out.println("id danh muc : " + id);
+        List<SanPham> list_sp_thuoc_danh_muc = dvlSanPham.ds_sp_thuoc_MaDanhMuc(id);
+
+        model.addAttribute("ds", list_sp_thuoc_danh_muc);
+        model.addAttribute("content", "KhachHang/danhmuc.html");
+        return "KhachHang/layout.html";
+    }
+
+    @GetMapping({"/chitietsanpham/{id}"})
+    public String getChiTietSanPham(Model model, @PathVariable(value = "id") int id) 
     {
         // Đọc dữ liệu bảng rồi chứa vào biến tạm
-        List<SanPham> list = dvlSanPham.duyệtSanPham();
+        SanPham dl = dvlSanPham.xemSanPham(id);
 
+        List<BinhLuan> binhluan = dvlBinhLuan.dsBinhLuan_thuoc_SanPham(id);
         // Gửi danh sách sang giao diện View HTML
-        model.addAttribute("ds", list);
+        model.addAttribute("ds", dl);
+        
+        // hiện danh sách các bình luận thuộc về sản phẩm đó
+        model.addAttribute("bl", binhluan);
 
         // Nội dung riêng của trang...
         model.addAttribute("content", "KhachHang/chitietsanpham.html"); // duyet.html
@@ -367,7 +375,7 @@ public class QdlKhachHang
         // ...được đặt vào bố cục chung của toàn website
         return "KhachHang/layout.html"; 
     }
-
+    
     @GetMapping("/gioithieu")
     public String getGioiThieu(Model model) {
 

@@ -6,11 +6,48 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="/QuanTri/css/style1.css" rel="stylesheet">
+    <style>
+      #error-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt 50% */
+        z-index: 1; /* Đảm bảo lớp phủ nằm trên tất cả các phần tử khác */
+        }
+
+        #error-container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid black;
+        text-align: center;
+        z-index: 2; /* Đảm bảo container nằm trên lớp phủ */
+        box-shadow: 0 0 5px 5px  #4a4b46;
+        }
+
+        #error-message {
+        color: rgb(10, 6, 6);
+        text-align: center;
+        z-index: 1;
+        }
+
+        #error-container button {
+        z-index: 1; /* Đảm bảo button này nằm trên cả #error-container */
+        }
+  </style>
 </head>
 <body>
   <div class="login-box">
     <h2>Đăng Nhập</h2>
-    <form method="post" th:action="@{/admin/dangnhap}" th:object="${dl}">
+    <form method="post" th:action="@{/admin/dangnhap}" th:object="${dl}" onsubmit="validateForm()">
       <div class="user-box">
         <input type="email" id="email" th:field="*{Email}"/>
         <label for="email">Email</label>
@@ -20,7 +57,7 @@
         <label for="matKhau">Mật Khẩu</label>
       </div>
       <button>
-        <a href="">
+        <a>
         <span></span>
         <span></span>
         <span></span>
@@ -31,5 +68,62 @@
       
     </form>
   </div>
+  <div id="error-overlay" onclick="hideErrorContainer()"></div>
+              <div id="error-container">
+                <div id="error-message"></div>
+                <button type="button" class="btn btn-primary btn-lg" onclick="hideErrorContainer()">
+                  <a style="display: flex; align-items: center;" href="#"><h5>Quay lại đăng nhập</h5></a>
+                </button>
+  </div>
+
+<script>
+  function validateForm() {
+    var username = document.forms["loginForm"]["username"].value;
+    var password = document.forms["loginForm"]["password"].value;
+
+    if (username == "" && password == "") {
+        showError("Username and password are required");
+        return false;
+    }
+
+    else if (username == "") {
+        showError("Username is required");
+        return false;
+    }
+
+    else if (password == "") {
+        showError("Password is required");
+        return false;
+    }
+
+    const user = getUserFromDatabase(username);
+    const isPasswordValid = comparePasswords(password, user.password);
+    if (!user) {
+            showError("User not found");
+            return false;
+        }
+    else if (!isPasswordValid) {
+        showError("Invalid email or password");
+        return false;
+    }
+    return true;
+}
+
+function showError(message) {
+    var errorOverlay = document.getElementById("error-overlay");
+    var errorContainer = document.getElementById("error-container");
+    var errorMessage = document.getElementById("error-message");
+errorMessage.innerText = message;
+    errorOverlay.style.display = "block";
+    errorContainer.style.display = "block";
+}
+
+function hideErrorContainer() {
+    var errorOverlay = document.getElementById("error-overlay");
+    var errorContainer = document.getElementById("error-container");
+    errorOverlay.style.display = "none";
+    errorContainer.style.display = "none";
+}
+</script>
 </body>
 </html>

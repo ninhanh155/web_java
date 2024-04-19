@@ -17,12 +17,12 @@
                                     <img style="height: 280px;width: 280px;object-fit: cover;margin-left: 80px;" th:src="*{anhSanPham}">
                                 </div>
                                 <br>
-                                <input type="file" th:field="*{fileSp}" />
+                                <input type="file" th:field="*{fileSp}" disabled />
                             </td>
                             <td>            
                                 <p>
                                     <strong>Tên Sản Phẩm:</strong>
-                                    <input type="text" th:field="*{tenSanPham}" />
+                                    <input type="text" th:field="*{tenSanPham}" disabled />
                                 </p>
                                             
                             </td>
@@ -31,7 +31,7 @@
                             <td>            
                                 <p>
                                     <strong>Giá($):</strong> 
-                                    <input type="text" th:field="*{donGia}"/>
+                                    <input type="text" th:field="*{donGia}" disabled/>
                                 </p>
                             </td>
                         </tr>
@@ -40,7 +40,7 @@
                             <td>            
                                 <p>
                                     <strong>Danh Mục:</strong>
-                                    <select th:field="*{maDanhMuc}">
+                                    <select th:field="*{maDanhMuc}" disabled>
                                         <option th:each="dl:${dsdm}" th:value="${dl.Id}" th:text="${dl.tenDanhMuc}"></option>
                                     </select>
                                 </p>
@@ -51,7 +51,7 @@
                             <td>            
                                 <p>
                                     <strong>Nhà Sản Xuất:</strong>
-                                    <select th:field="*{maNhaSanXuat}">
+                                    <select th:field="*{maNhaSanXuat}" disabled>
                                         <option th:each="dl:${dsnsx}" th:value="${dl.Id}" th:text="${dl.tenNhaSanXuat}"></option>
                                     </select>
                                 </p>
@@ -62,7 +62,7 @@
                             <td>            
                                 <p>
                                     <strong>Mô Tả:</strong>
-                                    <input type="text" th:field="*{moTa}" />
+                                    <input type="text" th:field="*{moTa}" disabled />
                                 </p>
                             </td>
                         </tr>
@@ -70,7 +70,7 @@
                             
                             <td>            
                                 <p><strong>Trạng Thái:</strong>
-                                    <select th:field="*{trangThai}">
+                                    <select th:field="*{trangThai}" disabled>
                                         <option value="1">Còn Hàng</option>
                                         <option value="0">Hết Hàng</option>
                                     </select>
@@ -82,7 +82,7 @@
                             <td>                
                                 <p>
                                     <strong>Bán Chạy:</strong>
-                                    <select th:field="*{banChay}">
+                                    <select th:field="*{banChay}" disabled>
                                         <option value="1">Bán Chạy</option>
                                         <option value="0">Không Bán chạy </option>
                                     </select>
@@ -93,7 +93,7 @@
                         <td>            
                             <p>
                                 <strong>Nổi Bật:</strong>
-                                <select th:field="*{banChay}">
+                                <select th:field="*{banChay}" disabled>
                                     <option value="1">Nổi Bật</option>
                                     <option value="0">Không Nổi Bật </option>
                                 </select>

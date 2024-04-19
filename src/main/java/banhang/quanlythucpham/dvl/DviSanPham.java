@@ -11,6 +11,7 @@ public interface DviSanPham
     // Đọc dữ liệu nhiều bản ghi // getAllThucThe();
     List<SanPham> dsSanPham();
     List<SanPham> duyệtSanPham();
+    List<SanPham> ds_sp_thuoc_MaDanhMuc(int id_danh_muc);
 
     // Đọc dữ liệu của một bản ghi
     SanPham tìmSanPhamTheoId(int id);// getThucTheById( int id );

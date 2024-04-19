@@ -37,8 +37,8 @@
                         <td th:text="${dl.ngayTaoNV}"></td>
                         <td th:text="${dl.moTaNhanVien}"></td>
                         <td>
-                            <!-- <a th:href="@{/admin/sanpham/xem/{id}(id=${dl.Id})}">Xem</a>
-                            | -->
+                            <a th:href="@{/admin/nhanvien/xem/{id}(id=${dl.Id})}"><i class="fas fa-eye"></i></a>
+                            |
                             <a th:href="@{/admin/nhanvien/sua(id=${dl.Id})}"><i class="fas fa-edit"></i></a>
                             |
                             <a th:href="@{/admin/nhanvien/xoa(id=${dl.Id})}"><i class="fas fa-trash-alt"></i></a>

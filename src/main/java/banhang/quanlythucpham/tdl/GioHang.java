@@ -24,6 +24,7 @@ public class GioHang
     private double gia;
     private int soLuong = 1;
     private int idSanPham;
+    private String anhSanPham;
 
     private int maKhachHang;
     @ManyToOne @JoinColumn(name="maKhachHang",insertable=false,updatable=false)

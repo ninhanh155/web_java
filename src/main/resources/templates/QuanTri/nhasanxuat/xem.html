@@ -1,16 +1,24 @@
-<form th:object="${dl}">
 
-    <fieldset>
-        <legend>Xem Chi Tiết</legend>
-        
-        <label>Ảnh Nhà Sản Xuất</label>
-        <img style="height: 70px; width: 70px;" th:src="*{anhNhaSanXuat}" disabled/>
 
-        <label>Tên sản phẩm</label>
-        <input type="text" th:field="*{tenNhaSanXuat}" disabled/>
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="mb-0">Chi Tiết Nhà Sản Xuất</h2>
+        </div>
+        <div class="table-responsive">  
 
-        <br />
+            <table class="table text-start align-middle table-bordered table-hover mb-0" th:object="${dl}">
+                    <tr class="text-dark" >
+                        <td>
+                               <img  style="height: 150px;width: 200px;object-fit: cover;" th:src="${dl.anhNhaSanXuat}" alt="Product Image" class="img-fluid">
+                          
+                        </td>
+                        <td>            <p><strong>Tên Nhà Sản Xuất:</strong> <span th:text="${dl.tenNhaSanXuat}"></span></p>
+                        </td>
+                    </tr>
+                   
+            </table>
+        </div> <br />
         <a th:href="@{/admin/nhasanxuat/duyet}" role="button" class="primary">Quay Lại</a>
-    </fieldset>
-
-</form>
+    </div>
+</div>

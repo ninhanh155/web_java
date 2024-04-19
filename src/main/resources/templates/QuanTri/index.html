@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Trang Quản Lí</title>
+    <title>Admin</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -33,30 +33,24 @@
 </head>
 
 <body>
+    
     <div class="container-fluid position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
-
-
+       
+        <div th:value="${#ctx.session.USER_ID}"></div>
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Nguyễn Sơn</h3>
+                <a th:href="@{/admin}" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary">Group 3</h3>
                 </a>
-                <div class="d-flex align-items-center ms-4 mb-4">
+                <div class="d-flex align-items-center ms-4 mb-4" >
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" th:src="${#ctx.session.USER_IMG}" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Admin</h6>
-                        <span>Quản trị</span>
+                        <h6 class="mb-0" th:text="${#ctx.session.USER_NAME}"></h6>
+                        <span th:text="${#ctx.session.USER_COMMENT}"></span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -70,7 +64,7 @@
                             <a th:href="@{/admin/khachhang/duyet}" class="dropdown-item"><i class="fa fa-users fa-fw me-2"></i>Khách Hàng</a>
                             <a th:href="@{/admin/lienhe/duyet}" class="dropdown-item"><i class="fas fa-address-book me-2"></i>Liên Hệ</a>
                             <a th:href="@{/donhang/duyet}" class="dropdown-item"><i class="fa fa-shopping-cart fa-fw me-2"></i>Đơn Hàng</a>
-                            <a th:href="@{/admin/quangcao/duyet}" class="dropdown-item"><i class="fas fa-slideshare me-2"></i>Ảnh Quảng Cáo</a>
+                            <a th:href="@{/admin/quangcao/duyet}" class="dropdown-item"><i class="bi bi-file-earmark-richtext-fill me-2"></i>Ảnh Quảng Cáo</a>
 
                         </div>
                     </div>
@@ -99,17 +93,12 @@
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" th:src="${#ctx.session.USER_IMG}" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex" th:text="${#ctx.session.USER_LOGGED}"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">Tài Khoản</a>
-                            <a th:href="@{/nhanvien/dangthoat}" class="dropdown-item">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-fill-down me-2" viewBox="0 0 16 16">
-                                    <path d="M12.5 9a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7m.354 5.854 1.5-1.5a.5.5 0 0 0-.708-.708l-.646.647V10.5a.5.5 0 0 0-1 0v2.793l-.646-.647a.5.5 0 0 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                    <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
-                              </svg>
-                                Đăng xuất</a>
+                            <a th:href="@{/admin/nhanvien/taikhoan}" class="dropdown-item"><i class="fas fa-user me-2"></i>Tài Khoản</a>
+                            <a th:href="@{/admin/nhanvien/dangthoat}" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a>
                         </div>
                     </div>
                 </div>
@@ -223,9 +212,6 @@
                 </div>
             </div>
             <!-- Recent Sales End -->
-
-
-           
 
 
             <!-- Footer Start -->

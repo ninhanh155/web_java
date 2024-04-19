@@ -1,0 +1,43 @@
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="mb-0">Chi Tiết</h2>
+        </div>
+        <div class="table-responsive">  
+
+            <table class="table text-start align-middle table-bordered table-hover mb-0" th:object="${dl}">
+                    <tr>
+                        <td>            <p><strong>Tên Khách Hàng:</strong> <span th:text="${dl.tenKhach}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Email:</strong> <span th:text="${dl.email}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Số Điện Thoại:</strong> <span th:text="${dl.soDienThoai}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Tiêu Đề:</strong> <span th:text="${dl.tieuDe}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Phản Hồi:</strong> <span th:text="${dl.phanHoi}"></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>            <p><strong>Ngày Phản Hồi:</strong> <span th:text="${dl.ngayPhanHoiVi}"></span></p>
+                        </td>
+                    </tr>
+                   
+            </table>
+        </div><br>
+        <a th:href="@{/admin/lienhe/duyet}" role="button" class="primary">Quay Lại</a>
+    </div>
+</div>

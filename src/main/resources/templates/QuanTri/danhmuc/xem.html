@@ -1,11 +1,20 @@
-<form th:object="${dl}">
 
-    <fieldset>
-        <legend>Xem Chi Tiết</legend>
-        <label>Tên Danh Mục</label>
-        <input type="text" th:field="*{tenDanhMuc}" />
-        <br />
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="mb-0">Chi Tiết</h2>
+        </div>
+        <div class="table-responsive">  
+
+            <table class="table text-start align-middle table-bordered table-hover mb-0" th:object="${dl}">
+                    
+                    <tr>
+                        <td>            <p><strong>Tên Danh Mục:</strong> <span th:text="${dl.tenDanhMuc}"></span></p>
+                        </td>
+                    </tr>
+                    
+            </table>
+        </div><br/>
         <a th:href="@{/admin/danhmuc/duyet}" role="button" class="primary">Quay Lại</a>
-    </fieldset>
-
-</form>
+    </div>
+</div>

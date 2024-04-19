@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import banhang.quanlythucpham.dvl.DviKhachHang;
+import banhang.quanlythucpham.dvl.DviNhanVien;
 import banhang.quanlythucpham.dvl.DvlCaiDat;
 import banhang.quanlythucpham.dvl.DvlDanhMuc;
 import banhang.quanlythucpham.dvl.DvlGioHang;
@@ -90,6 +91,7 @@ public class QdlLayout
         public List<KhachHang> getKhachHang(){
             return this.kh.dsKhachHang();
         }
+
     }
 
 

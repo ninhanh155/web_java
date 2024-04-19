@@ -1,0 +1,72 @@
+<form method="post" enctype="multipart/form-data" th:action="@{/admin/lienhe/xoa}" th:object="${dl}">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mb-0">Xóa bỏ</h2>
+                <input type="hidden" th:field="*{Id}"/>
+        
+                <label>&nbsp;</label>
+                <button type="submit" class="secondary">Xóa</button>
+            </div>
+            <div class="table-responsive">  
+    
+                <table class="table text-start align-middle table-bordered table-hover" th:object="${dl}">
+                        <tr>
+                            <td>            
+                                <p>
+                                    <strong>Tên Khách Hàng:</strong> 
+                                    <input type="text" th:field="*{tenKhach}" disabled/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>            
+                                <p>
+                                    <strong>Email:</strong> 
+                                    <input type="text" th:field="*{email}" disabled/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>            
+                                <p>
+                                    <strong>Số Điện Thoại:</strong> 
+                                    <input type="text" th:field="*{soDienThoai}" disabled/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>            
+                                <p>
+                                    <strong>Tiêu Đề:</strong>
+                                    <input type="text" th:field="*{tieuDe}" disabled/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>            
+                                <p>
+                                    <strong>Phản Hồi:</strong> 
+                                    <input type="text" th:field="*{phanHoi}" disabled/>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>                
+                                <p>
+                                    <strong>Ngày Tạo:</strong> 
+                                    <input type="text" th:field="*{ngayPhanHoiVi}" disabled/>
+                                </p>
+                        </td>
+                    </tr>
+                    
+            </table>
+        </div>
+    </div>
+</div>
+</form>

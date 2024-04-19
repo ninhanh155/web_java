@@ -34,13 +34,18 @@ public class QdlGioHang
     
     
     
-    @GetMapping({
-            "/shopping-cart/views"
-    })
+    @GetMapping({"/giohang" })
     public String getDuyet(Model model,
      HttpServletRequest request,
+     HttpSession session,
      RedirectAttributes redirectAttributes) 
     {
+        if(session.getAttribute("USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/giohang");
+            return "redirect:/dangnhap";
+        }
+
         // Gửi danh sách sang giao diện View HTML
         model.addAttribute("ds", dvl.getdlgiohang());
         model.addAttribute("total", dvl.getGia());
@@ -54,14 +59,16 @@ public class QdlGioHang
         return "KhachHang/layout.html";
     }
 
-    @GetMapping({"/add_to_cart/{id}"})
-    public String addToCart(@PathVariable("id") Integer id,
-    Model model,
-    HttpServletRequest request,
-    RedirectAttributes redirectAttributes
-    )
+    @GetMapping("/giohang/them/{id}")
+    public String addToCart(@PathVariable("id") Integer id, Model model, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes) 
     {
-        HttpSession session = request.getSession();
+
+        if (session.getAttribute("USER_LOGGED") == null) {
+            request.getSession().setAttribute("LOCATION", "/giohang/them/" + id);
+            return "redirect:/dangnhap";
+        }
+
+        session = request.getSession();
         int UserId = (int) session.getAttribute("USER_ID");
         KhachHang kh = dvl_kh.tìmKhachHangTheoId(UserId);
         SanPham sp = dvl_sp.tìmSanPhamTheoId(id);
@@ -69,24 +76,25 @@ public class QdlGioHang
         GioHang item = new GioHang();
         item.setMaKhachHang(kh.getId());
         item.setIdSanPham(sp.getId());
+        item.setAnhSanPham(sp.getAnhSanPham());
         item.setTenSanPham(sp.getTenSanPham());
         item.setGia(sp.getDonGia());
         item.setSoLuong(1);
         dvl.themgiohang(item);
-        return "redirect:/shopping-cart/views";
+        return "redirect:/giohang";
     }
 
     @GetMapping("/shopping-cart/clear")
     public String clearCart()
     {
         dvl.xoatatca();
-        return "redirect:/shopping-cart/views";
+        return "redirect:/giohang";
     }
-    @GetMapping("/shopping-cart/remove/{id}")
+    @GetMapping("/giohang/xoabo/{id}")
     public String removeCart(@PathVariable("id") Integer id )
     {
         dvl.xoatungsanpham(id);
-        return "redirect:/shopping-cart/views";
+        return "redirect:/giohang";
     }
 
     @PostMapping("/shopping-cart/update")
@@ -97,7 +105,7 @@ public class QdlGioHang
     {
 
         dvl.sua(id, quantity);
-        return "redirect:/shopping-cart/views";
+        return "redirect:/giohang";
 
     }
     

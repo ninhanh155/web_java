@@ -1,7 +1,7 @@
 
-<div style="background: rgb(84, 154, 177);" th:if="${USER_LOGGED}" th:text="${USER_LOGGED}">
-</div>
-    
+<div style="background: rgb(84, 154, 177);" th:if="${USER_LOGGED}" th:text="${USER_LOGGED}"></div>
+<!-- <div th:value="${#ctx.session.USER_ID}"></div> -->
+
 <a href="#" role="button" class="primary" th:href="@{/admin/khachhang/them}">Thêm Mới</a>
 
 <div class="container-fluid pt-4 px-4">
@@ -29,8 +29,8 @@
                         <td th:text="${dl.matKhau}"></td>
                         <td th:text="${dl.xacNhanMatKhau}"></td>
                         <td>
-                            <!-- <a th:href="@{/admin/sanpham/xem/{id}(id=${dl.Id})}">Xem</a>
-                            | -->
+                            <a th:href="@{/admin/khachhang/xem/{id}(id=${dl.Id})}"><i class="fas fa-eye"></i></a>
+                            |
                             <a th:href="@{/admin/khachhang/sua(id=${dl.Id})}"><i class="fas fa-edit"></i></a>
                             |
                             <a th:href="@{/admin/khachhang/xoa(id=${dl.Id})}"><i class="fas fa-trash-alt"></i></a>

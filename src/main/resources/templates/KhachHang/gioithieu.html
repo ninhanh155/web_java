@@ -3,33 +3,27 @@
        <h1 class="text-center text-white display-6">Giới Thiệu</h1>
        <ol class="breadcrumb justify-content-center mb-0">
            <li class="breadcrumb-item"><a th:href="@{/trangchu}">Home</a></li>
-           <li class="breadcrumb-item"><a href="#">Pages</a></li>
+           <!-- <li class="breadcrumb-item"><a href="#">Pages</a></li> -->
            <li class="breadcrumb-item active text-white">Giới Thiệu</li>
        </ol>
    </div>
        
    <div id="content" class="col-sm-9">
-       <h1><p style="vertical-align: inherit;"><p style="vertical-align: inherit;">Thành Viên Nhóm</p></p></h1>
-       <p></p>
-       <table width="100%" cellpadding="15" border="0" th:each="dl: ${ds}">
-           <tbody>
-              <tr valign="top">
-                 <td><img style="width: 120px;" th:src="${dl.anhNhanVien}">
-                 </td>
-                 <td>
-                     <b><p style="vertical-align: inherit;">Tên: <span th:text="${dl.tenDayDu}"></span></p></b>
-                    <p style="vertical-align: inherit;">Email: <span th:text="${dl.email}"></span></p>
-                    <p style="vertical-align: inherit;">Điện thoại: <span th:text="${dl.dienThoai}"></span></p>
-                   <p style="vertical-align: inherit;">Mô tả: <span th:text="${dl.moTaNhanVien}"></span></p>
-                 </td>
-              </tr>
-              <tr>
-                 <td colspan="1"></td>
-              </tr>
-           </tbody>
-        </table>
-     </div>
-     
-     
-   </div>
+      <h1>Thành Viên Nhóm</h1>
+      <p></p>
+      <table width="100%" cellpadding="15" style="border-collapse: collapse;" th:each="dl: ${ds}">
+          <tbody>
+            <tr valign="top">
+               <td style="vertical-align: top;"><img style="width: 130px;" th:src="${dl.anhNhanVien}"></td>
+               <td style="vertical-align: top;">
+                   <b style="color: black;">Tên: <span th:text="${dl.tenDayDu}"></span></b>
+                   <br><br><p style="color: black;">Email: <span th:text="${dl.email}"></span></p>
+                   <p style="color: black;">Điện thoại: <span th:text="${dl.dienThoai}"></span></p>
+                   <p style="color: black;">Mô tả: <span th:text="${dl.moTaNhanVien}"></span></p>
+               </td>
+           </tr>
+           <tr><td colspan="1"></td></tr>
+          </tbody>
+      </table>
+  </div>
 </div>

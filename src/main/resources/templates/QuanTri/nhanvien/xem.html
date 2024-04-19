@@ -1,27 +1,42 @@
-<form th:object="${dl}">
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="mb-0">Chi Tiết</h2>
+        </div>
+        <div class="table-responsive">  
 
-    <fieldset>
-        <legend>Xem Chi Tiết</legend>
-        
-        <label>Ảnh Nhân Viên</label>
-        <img style="height: 70px; width: 70px;" th:src="*{anhNhanVien}">
-
-        <label>Tên Đầy Đủ</label>
-        <input type="text" th:field="*{tenDayDu}" disabled/>
-
-        <label>Email</label>
-        <input type="email" th:field="*{email}" disabled/>
-
-        <label>Điện Thoại</label>
-        <input type="text" th:field="*{dienThoai}" disabled/>
-
-        <label for="ngayTaoNV">Ngày Tạo</label>
-        <input type="text" th:field="*{ngayTaoNV}" disabled/>
-
-        <label>Mô Tả</label>
-        <input type="text" th:field="*{moTaNhanVien}" disabled/>
-        <br />
-        <a th:href="@{/admin/nhanvien/duyet}" role="button" class="primary">Quay Lại</a>
-    </fieldset>
-
-</form>
+            <table class="table text-start align-middle table-bordered table-hover mb-0" th:object="${dl}">
+                    <tr class="text-dark" >
+                        <td rowspan="5" >
+                               <img  style="height: 300px;object-fit: cover;" th:src="${dl.anhNhanVien}" alt="Product Image" class="img-fluid">
+                          
+                        </td>
+                        <td>            <p><strong>Tên Nhân Viên:</strong> <span th:text="${dl.tenDayDu}"></span></p>
+                        </td>
+                    </tr>
+                    <tr class="text-dark">
+                        <td>            <p><strong>Email:</strong> <span th:text="${dl.email}"></span></p>
+                        </td>
+                    </tr>
+                    <tr class="text-dark">
+                        
+                        <td>            <p><strong>Điện Thoại:</strong> <span th:text="${dl.dienThoai}"></span></p>
+                        </td>
+                    </tr>
+                    <tr class="text-dark">
+                        
+                        <td>            <p><strong>Ngày Tạo:</strong> <span th:text="${dl.ngayTaoNV}"></span></p>
+                        </td>
+                    </tr>
+                    <tr class="text-dark">
+                        
+                        <td>            <p><strong>Mô Tả:</strong> <span th:text="${dl.moTaNhanVien}"></span></p>
+                        </td>
+                    </tr>
+                   
+            </table>
+            <br/>
+            <a th:href="@{/admin/nhanvien/duyet}" role="button" class="primary">Quay Lại</a>
+        </div>
+    </div>
+</div>

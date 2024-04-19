@@ -3,12 +3,11 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Fruitables - Vegetable Website Template</title>
+        <title>Fresh Flavors</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-
-        <!-- Google Web Fonts -->
+        
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
@@ -41,13 +40,13 @@
                         <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><span th:text="${caidat.get('email')}"></span></small>
                     </div>
                     <div class="top-link pe-2">
-                        <small class="me-3"><i class="bi bi-phone-vibrate-fill me-2 text-secondary"></i> <span th:text="${caidat.get('phone')}"></span></small>
+                        <small class="me-3"><i class="bi bi-telephone-fill me-2 text-secondary"></i><span th:text="${caidat.get('phone')}"></span></small>
                     </div>
                 </div>
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                    <a href="/" class="navbar-brand"><h1 class="text-primary display-6">Fresh Flavors</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
@@ -62,8 +61,7 @@
                                 <a th:href="@{/danhmuc}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Danh Mục</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     <div th:each="dl: ${dm}">
-                                        <!-- <a th:href="@{'/admin/danhmuc/' + ${dl.Id}}" class="dropdown-item" th:text="${dl.tenDanhMuc}"></a> -->
-                                        <a th:href="@{'/danhmuc'}" class="dropdown-item" th:text="${dl.tenDanhMuc}"></a>
+                                        <a th:href="@{/danhmuc/{id}(id=${dl.Id})}" class="dropdown-item" th:text="${dl.tenDanhMuc}" ></a>
                                     </div>
                                 </div>
                             </div>
@@ -72,9 +70,9 @@
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            <a th:href="@{/shopping-cart/views}" class="position-relative me-4 my-auto">
+                            <a th:href="@{/giohang}" class="position-relative me-4 my-auto">
                                 <i class="fa fa-shopping-bag fa-2x"></i>
-                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                                <!-- <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span> -->
                             </a>
                             <div th:unless="${#ctx.session.USER_LOGGED}">
                                 <a th:href="@{/dangnhap}" class="btn btn-outline-secondary">Đăng Nhập</a>
@@ -87,9 +85,9 @@
                                     </i>
                                 </a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a th:href="@{/khachhang/taikhoan}" class="dropdown-item">Tài khoản</a>
-                                    <a th:href="@{/khachhang/doimatkhau}" class="dropdown-item">Đổi mật khẩu</a>
-                                    <a th:href="@{/khachhang/dangthoat}" class="dropdown-item">Đăng xuất</a>
+                                    <a th:href="@{/khachhang/taikhoan}" class="dropdown-item"><i class="fas fa-user me-2" style="color: #81c408;"></i>Tài khoản</a>
+                                    <a th:href="@{/khachhang/doimatkhau}" class="dropdown-item"><i class="fas fa-key me-2" style="color: #81c408;"></i>Đổi mật khẩu</a>
+                                    <a th:href="@{/khachhang/dangthoat}" class="dropdown-item"><i class="fas fa-sign-out-alt me-2" style="color: #81c408;"></i>Đăng xuất</a>
                                 </div>
                             </div>
                             
@@ -112,23 +110,23 @@
                 <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
                     <div class="row g-4">
                         <div class="col-lg-3">
-                            <a href="#">
-                                <h1 class="text-primary mb-0">Fruitables</h1>
-                                <p class="text-secondary mb-0">Fresh products</p>
+                            <a href="/">
+                                <h1 class="text-primary mb-0">Fresh Flavors</h1>
+                                <p class="text-secondary mb-0">Sản Phẩm Tươi Sống</p>
                             </a>
                         </div>
                         <div class="col-lg-6">
                             <div class="position-relative mx-auto">
-                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Your Email">
+                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Nhập Email">
                                 <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Subscribe Now</button>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="d-flex justify-content-end pt-3">
-                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href="#"><i class="fab fa-twitter"></i></a>
+                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
                                 <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
-                                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href="https://www.instagram.com/"><i class="fab fa-linkedin-in"></i></a>
                             </div>
                         </div>
                     </div>
@@ -148,15 +146,15 @@
                             <h4 class="text-light mb-3">Thông Tin Cửa Hàng</h4>
                             <a class="btn-link" th:href="@{/gioithieu}">Giới Thiệu Về Chúng Tôi</a>
                             <a class="btn-link" th:href="@{/lienhe}">Liên Hệ Với Chúng Tôi</a>
-                            <a class="btn-link" href="">Chính Sách Quyền Riêng Tư</a>
-                            <a class="btn-link" href="">Chính Sách Bảo Mật</a>
+                            <a class="btn-link" href="#">Chính Sách Quyền Riêng Tư</a>
+                            <a class="btn-link" href="#">Chính Sách Bảo Mật</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Thông Tin Tài Khoản</h4>
                             <a class="btn-link" th:href="@{/khachhang/taikhoan}">Tài Khoản</a>
-                            <a class="btn-link" href="">Giỏ Hàng</a>
+                            <a class="btn-link" th:href="@{/giohang}">Giỏ Hàng</a>
                             <a class="btn-link" href="">Yêu Thích</a>
                             <a class="btn-link" href="">Lịch Sử Mua Hàng</a>
                         </div>
@@ -168,8 +166,8 @@
                             <p>Địa Chỉ: </p>
                             <p>Email: <span th:text="${caidat.get('email')}"></span></p>
                             <p>Phone: <span th:text="${caidat.get('phone')}"></span></p>
-                            <p>Payment Accepted</p>
-                            <img src="/KhachHang/img/payment.png" class="img-fluid" alt="">
+                            <!-- <p>Payment Accepted</p>
+                            <img src="/KhachHang/img/payment.png" class="img-fluid" alt=""> -->
                         </div>
                     </div>
                 </div>
@@ -182,31 +180,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Group 3</a>, All right reserved.</span>
-                    </div>
-                    <div class="col-md-6 my-auto text-center text-md-end text-white">
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        <span class="text-light"><a th:href="@{/gioithieu}"><i class="fas fa-copyright text-light me-2"></i>Group 3</a>, All right reserved.</span>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Copyright End -->
 
-
-
-        <!-- Back to Top -->
         <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
-
         
-    <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/KhachHang/lib/easing/easing.min.js"></script>
     <script src="/KhachHang/lib/waypoints/waypoints.min.js"></script>
     <script src="/KhachHang/lib/lightbox/js/lightbox.min.js"></script>
     <script src="/KhachHang/lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Template Javascript -->
+    
     <script src="/KhachHang/js/main.js"></script>
     </body>
 

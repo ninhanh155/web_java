@@ -17,12 +17,12 @@
                                     <img style="height: 280px; width: 280px; object-fit: cover; margin-left: 80px;" th:src="*{anhNhanVien}">
                                 </div>
                                 <br>
-                                <input type="file" th:field="*{fileNv}" />
+                                <input type="file" th:field="*{fileNv}"  disabled/>
                             </td>
                             <td>            
                                 <p>
                                     <strong>Tên Đầy Đủ:</strong>
-                                    <input type="text" th:field="*{tenDayDu}" />
+                                    <input type="text" th:field="*{tenDayDu}"  disabled/>
                                 </p>
                                             
                             </td>
@@ -31,7 +31,7 @@
                             <td>            
                                 <p>
                                     <strong>Email:</strong> 
-                                    <input type="email"  th:field="*{email}"/>
+                                    <input type="email"  th:field="*{email}" disabled/>
                                 </p>
                             </td>
                         </tr>
@@ -40,7 +40,7 @@
                             <td>            
                                 <p>
                                     <strong>Mật Khẩu:</strong> 
-                                    <input type="password"  th:field="*{matKhau}"/>
+                                    <input type="password"  th:field="*{matKhau}" disabled/>
                                 </p>
                             </td>
                         </tr>
@@ -49,7 +49,7 @@
                             <td>            
                                 <p>
                                     <strong>Điện Thoại:</strong> 
-                                    <input type="text"  th:field="*{dienThoai}"/>
+                                    <input type="text"  th:field="*{dienThoai}" disabled/>
                                 </p>
                             </td>
                         </tr>
@@ -58,7 +58,7 @@
                             <td>            
                                 <p>
                                     <strong>Ngày Tạo:</strong>
-                                    <input type="text" th:field="*{ngayTaoNV}"/>
+                                    <input type="text" th:field="*{ngayTaoNV}" disabled/>
                                 </p>
                             </td>
                         </tr>
@@ -68,7 +68,7 @@
                             <td>                
                                 <p>
                                     <strong>Mô Tả:</strong> 
-                                    <input type="text" th:field="*{moTaNhanVien}"/>
+                                    <input type="text" th:field="*{moTaNhanVien}" disabled/>
                                 </p>
                         </td>
                     </tr>
