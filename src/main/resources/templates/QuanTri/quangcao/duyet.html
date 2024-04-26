@@ -1,18 +1,18 @@
 
-<div style="background: green;" th:if="${THONG_BAO_OK}" th:text="${THONG_BAO_OK}">
+<div style="background: rgb(131, 216, 241);" th:if="${THONG_BAO_OK}" th:text="${THONG_BAO_OK}">
 </div>
-  
-<a href="#" role="button" class="primary" th:href="@{/admin/quangcao/them}">Thêm Mới</a>
-<div class="container-fluid pt-4 px-4">
-  <div class="bg-light text-center rounded p-4">
+ 
+<div class="container-fluid pt-4 px-4" style="padding-bottom: 50px;"> 
+    <a role="button" class="primary" th:href="@{/admin/quangcao/them}">Thêm Mới</a>
+    <div class="bg-light text-center rounded p-4">
       <div class="d-flex align-items-center justify-content-between mb-4">
           <h2 class="mb-0">Danh Sách Quảng Cáo</h2>
       </div>
       <div class="table-responsive">  
 
-          <table class="table text-start align-middle table-bordered table-hover mb-0">
+          <table class="table text-dark text-start align-middle table-bordered table-hover mb-0">
               <thead>
-                <tr class="text-dark">
+                <tr style="background-color: rgb(207, 216, 219);">
                     <th scope="col">Ảnh</th>
                     <th scope="col">Tên Quảng Cáo</th>
                     <th>Action</th>
@@ -20,7 +20,7 @@
               </thead>
 
               <tbody>
-                <tr th:each="dl : ${ds}" class="text-dark">
+                <tr th:each="dl, dlStat : ${ds}" th:style="${dlStat.index % 2 == 0} ? 'background-color: #f8f9fa;' : 'background-color:rgb(207, 216, 219);'">
                             
                     <td>
                         <img style="height: 70px; width: 70px;" th:src="${dl.anhQuangCao}">

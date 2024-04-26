@@ -31,10 +31,6 @@ public class DvlDanhMuc implements DviDanhMuc
 
     @Override public DanhMuc  tìmDanhMucTheoId(int id)// 
     {
-        // TODO Auto-generated method stub
-        // return null;
-
-        // return kdl.findById(id);
 
         DanhMuc dl = null;
 

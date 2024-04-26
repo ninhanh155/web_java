@@ -40,7 +40,7 @@ public class QdlGioHang
      HttpSession session,
      RedirectAttributes redirectAttributes) 
     {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("USER_ID")==null)
         {
             request.getSession().setAttribute("LOCATION","/giohang");
             return "redirect:/dangnhap";
@@ -63,7 +63,7 @@ public class QdlGioHang
     public String addToCart(@PathVariable("id") Integer id, Model model, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes) 
     {
 
-        if (session.getAttribute("USER_LOGGED") == null) {
+        if (session.getAttribute("USER_ID") == null) {
             request.getSession().setAttribute("LOCATION", "/giohang/them/" + id);
             return "redirect:/dangnhap";
         }

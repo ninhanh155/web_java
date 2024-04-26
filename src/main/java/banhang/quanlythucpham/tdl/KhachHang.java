@@ -12,25 +12,18 @@ import lombok.Setter;
 @Setter
 public class KhachHang
 {
-    @Id // Khóa chính
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Tăng tự động từ 1,2,3,...
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
     private String tenDayDu;
     private String email;
     private String matKhau;
-    // private String dienThoai;
     private String xacNhanMatKhau;
     private String resetPasswordToken;
 
     public String getMatKhau() {
         return matKhau;
     }
-   
-    public Boolean KhongHopLe() {
-        var khl = false;
-
-        return khl;
-    }
-
+  
 }// end class

@@ -27,7 +27,8 @@ public class QdlIndex {
             return "redirect:/admin/dangnhap";
         }
 
-        return "QuanTri/index.html"; 
+        model.addAttribute("content", "QuanTri/index.html");
+        return "QuanTri/layout.html"; 
 
     }
 

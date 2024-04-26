@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="https://cdn1.iconfinder.com/data/icons/marketing-19/100/Profile-512.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,8 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.jqueryscript.net/demo/Rich-Text-Editor-jQuery-RichText/richtext.min.css">
 
     <!-- Libraries Stylesheet -->
     <link href="/QuanTri/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -26,6 +28,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/QuanTri/css/bootstrap.min.css" rel="stylesheet">
+     
 
     <!-- Template Stylesheet -->
     <link href="/QuanTri/css/style.css" rel="stylesheet">
@@ -33,7 +36,7 @@
 </head>
 
 <body>
-    <!-- <div th:value="${#ctx.session.USER_ID}"></div> -->
+    <div th:value="${#ctx.session.USER_ID}"></div>
     <div class="container-fluid position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -61,9 +64,9 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Thống kê</a>
+                    <a href="index.html" class="nav-item nav-link active"><i class="bi bi-bar-chart-fill me-2"></i>Thống kê</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Quản lí tổng</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-laptop me-2"></i>Quản lí tổng</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a th:href="@{/admin/danhmuc/duyet}" class="dropdown-item"><i class="fa fa-tags me-2"></i>Danh Mục</a>
                             <a th:href="@{/admin/sanpham/duyet}" class="dropdown-item"><i class="fa fa-puzzle-piece fa-fw me-2"></i>Sản Phẩm</a>
@@ -77,7 +80,7 @@
                     
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <a th:href="@{/admin/nhanvien/duyet}" class="nav-item nav-link"><i class="fa fa-user fa-fw me-2"></i>Nhân Viên</a>
-                    <a th:href="@{/admin/caidat/duyet}" class="nav-item nav-link"><i class="fa fa-user fa-fw me-2"></i>Cài Đặt</a>
+                    <a th:href="@{/admin/caidat/duyet}" class="nav-item nav-link"><i class="fas fa-cogs me-2"></i> Cài Đặt</a>
                 </div>
             </nav>
         </div>
@@ -110,7 +113,7 @@
             </nav>
             <!-- Navbar End -->
 
-            <i th:replace="${content}"></i> 
+            <i th:replace="${content}"></i>
 
 
             <!-- Footer Start -->
@@ -131,7 +134,7 @@
 
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> -->
     </div>
 
     <!-- JavaScript Libraries -->
@@ -144,6 +147,13 @@
     <script src="/QuanTri/lib/tempusdominus/js/moment.min.js"></script>
     <script src="/QuanTri/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="/QuanTri/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://www.jqueryscript.net/demo/Rich-Text-Editor-jQuery-RichText/jquery.richtext.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script>
+        $('.mota').css("height", "100px").css("width", "500px").richText();
+    </script>
+    
+    
 
     <!-- Template Javascript -->
     <script src="/QuanTri/js/main.js"></script>

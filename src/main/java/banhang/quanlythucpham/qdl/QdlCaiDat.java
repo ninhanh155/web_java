@@ -1,8 +1,4 @@
 package banhang.quanlythucpham.qdl;
-
-//package Tên_Công_Ty.Tên_Dự_Án.qdl;
-
-// Thư viện chuẩn: Java Standard (JavaSE)
 import java.util.List;
 
 // Thư viện web: Java Spring

@@ -69,7 +69,6 @@ public class QdlNhanVien
         return "QuanTri/layout.html"; 
     }
 
-    // @GetMapping("/admin/nhanvien/sua/{id}")
     @GetMapping("/admin/nhanvien/sua")
     public String getSua(Model model, @RequestParam("id") int id) {
         // trangSua(Model model, @PathVariable(value = "id") int id) {
@@ -79,7 +78,7 @@ public class QdlNhanVien
         // Gửi đối tượng dữ liệu sang bên view
         model.addAttribute("dl", dl);
         
-        // Nội dung riêng của trang...
+        // Nội dung riêng của trang...~
         model.addAttribute("content", "QuanTri/nhanvien/sua.html"); // sua.html
 
         // ...được đặt vào bố cục chung của toàn website

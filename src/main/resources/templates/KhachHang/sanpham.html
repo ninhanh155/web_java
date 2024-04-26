@@ -1,47 +1,54 @@
-<div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Sản Phẩm</h1>
-    <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a th:href="@{/trangchu}">Home</a></li>
-<!-- //         <li class="breadcrumb-item"><a href="#">Pages</a></li> -->
-        <li class="breadcrumb-item active text-white">Sản Phẩm</li>
-    </ol>
-</div>
-
 <div class="container-fluid hero-header">
-    <div class="container-fluid fruite py-5">
-        <div class="container py-5">
-            <div class="tab-class text-center">
-                <div class="tab-content">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-4">
-                            <div class="col-lg-12">
-                                <div class="row g-4">
-                                    <!-- thêm thông tin sản phẩm -->
-                                    <div class="col-md-7 col-lg-4 col-xl-3" th:each="dl : ${ds}">
-                                        <a th:href="@{/chitietsanpham/{id}(id=${dl.Id})}">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img th:src="${dl.anhSanPham}" class="img-fluid w-100 rounded-top" style="height: 350px;" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;" th:text="${dl.dm.tenDanhMuc}"></div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4 th:text="${dl.tenSanPham}"></h4>
-                                                    <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 105) + '...' : dl.moTa}"></p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0" th:text="'$'+ ${dl.donGia} +'/kg'"></p>
-                                                        <a th:href="@{/giohang/them/{id}(id=${dl.Id})}" class="btn border border-secondary rounded-pill px-2 text-primary" style="white-space: nowrap;"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm Giỏ Hàng</a>
+    <div class="container-fluid page-header py-5">
+        <h1 class="text-center text-white display-6">Sản Phẩm</h1>
+        <ol class="breadcrumb justify-content-center mb-0">
+            <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+            <li class="breadcrumb-item active text-white">Sản Phẩm</li>
+        </ol>
+    </div>
+
+    <div class="container py-5">
+        <div class="tab-class text-center">
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="row g-4">
+                        <div class="col-lg-12">
+                            <div class="row g-4">
+                                <!-- thêm thông tin sản phẩm -->
+                                <div class="col-md-7 col-lg-4 col-xl-3" th:each="dl : ${ds}">
+                                    <a th:href="@{/chitietsanpham/{id}(id=${dl.Id})}">
+                                        <div class="rounded position-relative fruite-item">
+                                            <div class="fruite-img">
+                                                <img th:src="${dl.anhSanPham}" class="img-fluid w-100 rounded-top" style="height: 350px;" alt="">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;" th:text="${dl.dm.tenDanhMuc}"></div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4 th:text="${dl.tenSanPham}"></h4>
+                                                <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 45) + '...' : dl.moTa}"></p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <p class="text-dark fs-5 fw-bold mb-0 me-3" th:text="'$' + ${dl.donGia} + '/kg'"></p>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <a th:href="@{/wishlist/add/{id}(id=${dl.Id})}" class="btn btn-circle d-flex justify-content-center align-items-center me-1" style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #81c408 0%, #81c408 100%);">
+                                                            <i class="fa fa-heart text-white"></i>
+                                                        </a>
+                                                        <a th:href="@{/giohang/them/{id}(id=${dl.Id})}" class="btn border border-secondary rounded-circle d-flex justify-content-center align-items-center text-warning btn-circle btn-outline-dark" style="width: 40px; height: 40px;">
+                                                            <i class="fa fa-shopping-bag"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
-                                        </a>
-                                    </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
-            </div>      
-        </div>
+                
+            </div>
+        </div>      
     </div>
 </div>

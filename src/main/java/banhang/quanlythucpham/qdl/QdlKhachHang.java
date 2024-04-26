@@ -22,6 +22,7 @@ import banhang.quanlythucpham.dvl.DvlBinhLuan;
 import banhang.quanlythucpham.dvl.DvlKhachHang;
 import banhang.quanlythucpham.dvl.DvlNhanVien;
 import banhang.quanlythucpham.dvl.DvlSanPham;
+import banhang.quanlythucpham.dvl.DvlYeuThich;
 import banhang.quanlythucpham.tdl.BinhLuan;
 import banhang.quanlythucpham.tdl.KhachHang;
 import banhang.quanlythucpham.tdl.NhanVien;
@@ -46,6 +47,12 @@ public class QdlKhachHang
 
     @Autowired
     private DvlNhanVien dvlNhanVien;
+
+    @Autowired
+    private DvlKhachHang dvlKhachHang;
+
+    @Autowired
+    private DvlYeuThich dvlYeuThich;
 
     @Autowired 
     private JavaMailSender javamailsender;
@@ -126,16 +133,23 @@ public class QdlKhachHang
 
     @GetMapping("/khachhang/taikhoan")
     public String getTaiKhoan(Model model, HttpSession session) {
-        String email = (String) session.getAttribute("USER_LOGGED");
-        if (email != null) {
-            KhachHang dl = dvl.tìmKhachHangTheoEmail(email);
-            model.addAttribute("tk", dl);
-            model.addAttribute("content", "KhachHang/taikhoan.html");
-            return "KhachHang/layout.html";
+        Integer userId = (Integer) session.getAttribute("USER_ID");
+        if (userId != null) {
+            KhachHang dl = dvl.tìmKhachHangTheoId(userId);
+            if (dl != null) {
+                model.addAttribute("tk", dl);
+                model.addAttribute("content", "KhachHang/taikhoan.html");
+                return "KhachHang/layout.html";
+            } else {
+                return "redirect:/dangnhap"; 
+            }
         } else {
-            return "redirect:/dangnhap"; // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+            return "redirect:/dangnhap"; 
         }
     }
+    
+
+    
 
     @GetMapping("/dangky")
     public String getThem(Model model) {
@@ -152,38 +166,32 @@ public class QdlKhachHang
     }
     
     @PostMapping("/dangky")
-    public String postThem(@ModelAttribute("KhachHang") KhachHang dl, RedirectAttributes redirectAttributes) {
+    public String postThem(@ModelAttribute("KhachHang") KhachHang dl, RedirectAttributes redirectAttributes, Model model, HttpSession session) {
 
-        // var password = "123abc";
         var inputPassword = dl.getMatKhau();
         var confirmPassword = dl.getXacNhanMatKhau();
 
-        // System.out.println(" mk 1 " + inputPassword);
-        // System.out.println(" mk 2 " + confirmPassword);
+        if(inputPassword.equals(confirmPassword)) {
+            var hashInputPassword = BCrypt.hashpw(inputPassword, BCrypt.gensalt(10));
+            var hashConfirmPassword = BCrypt.hashpw(confirmPassword, BCrypt.gensalt(10));
 
-        if(inputPassword == confirmPassword)
-        {
-            var hash = BCrypt.hashpw(inputPassword, BCrypt.gensalt(10));
-            // String shorthash = hash.substring(0, 10);
-            var hashpas = BCrypt.hashpw(confirmPassword, BCrypt.gensalt(10));
-            // String shortHash = hashpas.substring(0, 10);
-            dl.setMatKhau(hash);
-            dl.setXacNhanMatKhau(hashpas);
+            dl.setMatKhau(hashInputPassword);
+            dl.setXacNhanMatKhau(hashConfirmPassword);
 
             dvl.lưuKhachHang(dl);
+            session.setAttribute("USER_ID", dl.getId());
 
-            // Gửi thông báo thành công từ view Add/Edit sang view List
             redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Đã đăng kí tài khoản thành công !");
-             
+            return "redirect:/trangchu";
+        } else {
+            // Add the attribute for the form to reload with previous input values
+            model.addAttribute("dl", dl);
+            redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Mật khẩu không khớp !");
+            return "redirect:/dangky"; 
         }
-        else
-        {
-            redirectAttributes.addFlashAttribute("THONG_BAO_OK", " mật khẩu không khớp !");
-            return "redirect:/dangki"; 
-        }
-
-        return "redirect:/trangchu";
     }
+
+
     @GetMapping("/dangnhap")
     public String getDangNhap(Model model) {
 
@@ -357,8 +365,21 @@ public class QdlKhachHang
     }
 
     @GetMapping({"/chitietsanpham/{id}"})
-    public String getChiTietSanPham(Model model, @PathVariable(value = "id") int id) 
+    public String getChiTietSanPham(Model model, @PathVariable(value = "id") int id, HttpServletRequest request, RedirectAttributes redirectAttributes) 
     {
+        HttpSession session = request.getSession();
+        Integer UserId = (Integer) session.getAttribute("USER_ID");
+        
+        if(UserId != null){
+            KhachHang kh = dvlKhachHang.tìmKhachHangTheoId(UserId);
+            boolean wishlist = dvlYeuThich.kiemtra(id, kh.getId());
+            model.addAttribute("wishlist", wishlist);
+        }
+        else{
+            boolean wishlist = false;
+            model.addAttribute("wishlist", wishlist);
+        }
+        
         // Đọc dữ liệu bảng rồi chứa vào biến tạm
         SanPham dl = dvlSanPham.xemSanPham(id);
 

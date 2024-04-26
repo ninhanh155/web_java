@@ -1,18 +1,14 @@
 <form method="post" enctype="multipart/form-data" th:action="@{/admin/nhanvien/them}" th:object="${dl}">
-    <div class="container-fluid pt-4 px-4">
+    <div class="container-fluid pt-4 px-4" style="padding-bottom: 50px;">
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between">
                 <h2 class="mb-0">Tạo Mới</h2>
                 <input type="hidden" th:field="*{Id}"/>
-        
-                <label>&nbsp;</label>
-                <button type="submit">Lưu</button>
-                <button type="reset">Huỷ</button>
             </div>
             <div class="table-responsive">  
     
-                <table class="table text-start align-middle table-bordered table-hover" th:object="${dl}">
-                        <tr class="text-dark"  >
+                <table class="table text-dark text-start align-middle table-bordered table-hover" th:object="${dl}">
+                        <tr>
                             <td rowspan="8"  style="text-align:center;">
                                 <div>
                                     <img style="height: 280px; width: 280px; object-fit: cover; margin-left: 80px;" th:src="*{anhNhanVien}">
@@ -75,6 +71,12 @@
                     </tr>
                     
             </table>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <!-- <button type="reset" class="btn btn-outline-primary">Hủy</button> -->
+                <a th:href="@{/admin/nhanvien/duyet}" role="button" class="primary btn btn-outline-primary">Hủy</a>
+            </div>
+            <label>&nbsp;</label>
         </div>
     </div>
 </div>

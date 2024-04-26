@@ -8,6 +8,8 @@
         <meta content="" name="keywords">
         <meta content="" name="description">
         
+        <link href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSufYGC9k88E3tgWmpWV3-fRQfEwLm1c3RHzPCinkOyASHP14mBj7yollgNAYPTXbjOgdg&usqp=CAU" rel="icon">
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
@@ -26,33 +28,39 @@
 
         <!-- Template Stylesheet -->
         <link href="/KhachHang/css/style.css" rel="stylesheet">
+        
     </head>
 
     <body>
-        <div style="background: green;" th:if="${#ctx.session.USER_LOGGED}" th:text="${#ctx.session.USER_LOGGED}">
-        </div>
+        <!-- <div th:if="${#ctx.session.USER_LOGGED}" th:text="${#ctx.session.USER_LOGGED}">
+        </div> -->
         <!-- Navbar start -->
-        <div class="container-fluid fixed-top">
+        <div class="container-fluid fixed-top text-dark">
             <div class="container topbar bg-primary d-none d-lg-block">
                 <div class="d-flex justify-content-between">
-                    <div class="top-info ps-2">
-                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <span th:text="${caidat.get('diachi')}"></span></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><span th:text="${caidat.get('email')}"></span></small>
-                    </div>
-                    <div class="top-link pe-2">
-                        <small class="me-3"><i class="bi bi-telephone-fill me-2 text-secondary"></i><span th:text="${caidat.get('phone')}"></span></small>
-                    </div>
+                    <a th:href="@{/lienhe}">
+                        <div class="top-info ps-2 text-dark">
+                            <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <span th:text="${caidat.get('diachi')}"></span></small>
+                            <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><span th:text="${caidat.get('email')}"></span></small>
+                        </div>
+                        
+                    </a>
+                    <a th:href="@{/lienhe}">
+                        <div class="top-link pe-2 text-dark">
+                            <small class="me-3"><i class="bi bi-telephone-fill me-2 text-secondary"></i><span th:text="${caidat.get('phone')}"></span></small>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <div class="container px-0">
+            <div class="container px-0 ">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
                     <a href="/" class="navbar-brand"><h1 class="text-primary display-6">Fresh Flavors</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
-                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                    <div class="collapse navbar-collapse text-dark bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a th:href="@{/trangchu}" class="nav-item nav-link active">Trang chủ</a>
+                            <a href="/" class="nav-item nav-link active">Trang chủ</a>
                             <a th:href="@{/sanpham}" class="nav-item nav-link">Sản Phẩm</a>
                             <a th:href="@{/gioithieu}" class="nav-item nav-link">Giới Thiệu</a>
 
@@ -69,18 +77,18 @@
                             <a th:href="@{/lienhe}" class="nav-item nav-link">Liên hệ</a>
                         </div>
                         <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            <a th:href="@{/giohang}" class="position-relative me-4 my-auto">
-                                <i class="fa fa-shopping-bag fa-2x"></i>
-                                <!-- <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span> -->
+                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                            <a th:href="@{/giohang}" class="position-relative my-auto">
+                                <i class="bi bi-cart4 fa-2x me-1"></i>
                             </a>
-                            <div th:unless="${#ctx.session.USER_LOGGED}">
+
+                            <div th:unless="${#ctx.session.USER_ID}">
                                 <a th:href="@{/dangnhap}" class="btn btn-outline-secondary">Đăng Nhập</a>
                                 <a th:href="@{/dangky}" class="btn btn-primary ml-2">Đăng Ký</a>
                             </div>
                             
-                            <div th:if="${#ctx.session.USER_LOGGED}" class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <div th:if="${#ctx.session.USER_ID}" class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                     <i class="fas fa-user fa-2x">
                                     </i>
                                 </a>
@@ -100,13 +108,13 @@
             </div>
         </div>
         <!-- Navbar End -->
-        <div style="background-color: red;" th:text="${#ctx.session.USER_ID}"></div>
+        <!-- <div th:text="${#ctx.session.USER_ID}"></div> -->
         
         <i th:replace="${content}"></i> 
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
-            <div class="container py-5">
+            <div class="container">
                 <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
                     <div class="row g-4">
                         <div class="col-lg-3">
@@ -138,7 +146,7 @@
                             <p class="mb-4">Chúng tôi tự hào là đơn vị cung cấp thực phẩm sạch hàng đầu tại Việt Nam. 
                                 Với kinh nghiệm nhiều năm phục vụ các khách hàng khó tính nhất
                             </p>
-                            <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Đọc Thêm</a>
+                            <a href="/" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Đọc Thêm</a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -155,7 +163,7 @@
                             <h4 class="text-light mb-3">Thông Tin Tài Khoản</h4>
                             <a class="btn-link" th:href="@{/khachhang/taikhoan}">Tài Khoản</a>
                             <a class="btn-link" th:href="@{/giohang}">Giỏ Hàng</a>
-                            <a class="btn-link" href="">Yêu Thích</a>
+                            <a class="btn-link" th:href="@{/danhsachyeuthich}">Yêu Thích</a>
                             <a class="btn-link" href="">Lịch Sử Mua Hàng</a>
                         </div>
                     </div>
@@ -194,7 +202,6 @@
     <script src="/KhachHang/lib/waypoints/waypoints.min.js"></script>
     <script src="/KhachHang/lib/lightbox/js/lightbox.min.js"></script>
     <script src="/KhachHang/lib/owlcarousel/owl.carousel.min.js"></script>
-    
     <script src="/KhachHang/js/main.js"></script>
     </body>
 

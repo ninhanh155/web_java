@@ -1,29 +1,61 @@
-<div class="container">
-   <div class="container-fluid page-header py-5">
-       <h1 class="text-center text-white display-6">Giới Thiệu</h1>
-       <ol class="breadcrumb justify-content-center mb-0">
-           <li class="breadcrumb-item"><a th:href="@{/trangchu}">Home</a></li>
-           <!-- <li class="breadcrumb-item"><a href="#">Pages</a></li> -->
-           <li class="breadcrumb-item active text-white">Giới Thiệu</li>
-       </ol>
-   </div>
-       
-   <div id="content" class="col-sm-9">
-      <h1>Thành Viên Nhóm</h1>
-      <p></p>
-      <table width="100%" cellpadding="15" style="border-collapse: collapse;" th:each="dl: ${ds}">
-          <tbody>
-            <tr valign="top">
-               <td style="vertical-align: top;"><img style="width: 130px;" th:src="${dl.anhNhanVien}"></td>
-               <td style="vertical-align: top;">
-                   <b style="color: black;">Tên: <span th:text="${dl.tenDayDu}"></span></b>
-                   <br><br><p style="color: black;">Email: <span th:text="${dl.email}"></span></p>
-                   <p style="color: black;">Điện thoại: <span th:text="${dl.dienThoai}"></span></p>
-                   <p style="color: black;">Mô tả: <span th:text="${dl.moTaNhanVien}"></span></p>
-               </td>
-           </tr>
-           <tr><td colspan="1"></td></tr>
-          </tbody>
-      </table>
-  </div>
+<div class="container-fluid hero-header">
+    <div class="container-fluid page-header py-5">
+        <h1 class="text-center text-white display-6">Giới Thiệu</h1>
+        <ol class="breadcrumb justify-content-center mb-0">
+            <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+            <li class="breadcrumb-item active text-white">Giới Thiệu</li>
+        </ol>
+    </div>
+        
+    <div class="container py-3 text-dark">
+        <div class="container mt-5 lead">
+            <h4 class="text-primary">Chào Mừng Bạn Đến Với Cửa Hàng Fresh Flavors</h4>
+            <p>Cửa hàng thực phẩm cam kết cung cấp những sản phẩm thực phẩm tươi sạch và chất lượng nhất. Chúng tôi tự hào về việc chăm sóc và lựa chọn các loại rau củ, hoa quả và thực phẩm khác để đem lại sự hài lòng tốt nhất cho khách hàng.</p>
+            <p>Chúng tôi luôn đặt chất lượng sản phẩm và sự hài lòng của khách hàng lên hàng đầu. Với đội ngũ nhân viên chuyên nghiệp và nhiệt tình, chúng tôi cam kết mang đến dịch vụ tốt nhất cho bạn.</p>
+            
+            
+            <h6 class="text-primary">- Đa Dạng Sản Phẩm:</h6>
+            <ul>
+                <li>Rau cải và hoa quả tươi sạch hàng ngày, từ những trang trại nông nghiệp được chăm sóc đặc biệt.</li>
+                <li>Thực phẩm đóng gói chất lượng cao, bảo đảm an toàn và tươi ngon từ nhà sản xuất uy tín.</li>
+                <li>Hải sản tươi sống, được vận chuyển nhanh chóng từ các cảng địa phương, mang lại hương vị biển ngon nhất đến bàn ăn của bạn.</li>
+            </ul>
+            <h6 class="text-primary">- Cam Kết Chất Lượng:</h6>
+            <p>Chúng tôi cam kết mang đến cho quý khách hàng những sản phẩm thực phẩm tươi sạch, không chất bảo quản và không phẩm màu độc hại.</p>
+            <h6 class="text-primary">- Dịch Vụ Tận Tâm:</h6>
+            <p>Nhân viên của chúng tôi luôn sẵn lòng hỗ trợ bạn trong mọi thắc mắc và nhu cầu mua sắm.</p>
+            <p>Hãy đến với cửa hàng thực phẩm tươi của chúng tôi để khám phá và trải nghiệm sự tươi ngon và an toàn của các sản phẩm thực phẩm hàng ngày.</p>
+            <p>Chúng tôi luôn sẵn lòng chào đón và phục vụ bạn!</p>
+                    
+        </div>
+        <div class="p-5 bg-light rounded">
+            <h2 class="text-center text-primary">Danh Sách Nhân Viên</h2>
+            <div class="table-responsive">
+                <table class="table text-dark">
+                    <thead>
+                        <tr>
+                            <th>Ảnh</th>
+                            <th>Tên Nhân Viên</th>
+                            <th>Email</th>
+                            <th>Điện Thoại</th>
+                            <th>Mô Tả</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dl: ${ds}" class="align-middle">
+                            <td><img th:src="${dl.anhNhanVien}" alt="Employee Image" style="width: 80px;"></td>
+                            <td th:text="${dl.tenDayDu}"></td>
+                            <td th:text="${dl.email}"></td>
+                            <td th:text="${dl.dienThoai}"></td>
+                            <td th:text="${dl.moTaNhanVien}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    
 </div>
+
+

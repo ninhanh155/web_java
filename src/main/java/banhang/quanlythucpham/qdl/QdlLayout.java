@@ -7,14 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import banhang.quanlythucpham.dvl.DviKhachHang;
-import banhang.quanlythucpham.dvl.DviNhanVien;
+import banhang.quanlythucpham.dvl.DvlBinhLuan;
 import banhang.quanlythucpham.dvl.DvlCaiDat;
 import banhang.quanlythucpham.dvl.DvlDanhMuc;
 import banhang.quanlythucpham.dvl.DvlGioHang;
+import banhang.quanlythucpham.dvl.DvlKhachHang;
 import banhang.quanlythucpham.dvl.DvlLienHe;
 import banhang.quanlythucpham.dvl.DvlQuangCao;
 import banhang.quanlythucpham.dvl.DvlSanPham;
+import banhang.quanlythucpham.tdl.BinhLuan;
 import banhang.quanlythucpham.tdl.DanhMuc;
 import banhang.quanlythucpham.tdl.GioHang;
 import banhang.quanlythucpham.tdl.KhachHang;
@@ -60,7 +61,10 @@ public class QdlLayout
         private DvlGioHang gh;
 
         @Autowired
-        private DviKhachHang kh;
+        private DvlKhachHang kh;
+
+        @Autowired
+        private DvlBinhLuan bl;
 
         @ModelAttribute("dm")
         public List<DanhMuc> getDanhMuc() {
@@ -90,6 +94,11 @@ public class QdlLayout
         @ModelAttribute("kh")
         public List<KhachHang> getKhachHang(){
             return this.kh.dsKhachHang();
+        }
+
+        @ModelAttribute("bl")
+        public List<BinhLuan> getBinhLuan(){
+            return this.bl.dsBinhLuan();
         }
 
     }
