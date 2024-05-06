@@ -9,12 +9,21 @@
     
                 <table class="table text-dark text-start align-middle table-bordered table-hover" th:object="${dl}">
                     <tr>
+<<<<<<< HEAD
                         <td rowspan="8" style="width: 40%; text-align:center;">
                             <div>
                                 <img style="height: 280px; width: 280px; object-fit: cover;" th:src="*{anhSanPham}">
                             </div>
                             <br>
                             <input type="file" th:field="*{fileSp}" required/>
+=======
+                        <td rowspan="8" style="width: 30%; text-align:center;">
+                            <div style="max-height: 280px; max-width: 280px; overflow: hidden;">
+                                <img style="height: auto; width: 100%; object-fit: cover;" th:src="*{anhSanPham}">
+                            </div>
+                            <br>
+                            <input type="file" th:field="*{fileSp}" />
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                         </td>
                         <td>            
                             <p>
@@ -27,7 +36,11 @@
                     <tr>
                         <td >            
                             <p>
+<<<<<<< HEAD
                                 <strong>Giá(Đ):</strong> 
+=======
+                                <strong>Giá($):</strong> 
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                                 <input type="text" th:field="*{donGia}"/>
                             </p>
                         </td>

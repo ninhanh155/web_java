@@ -6,6 +6,7 @@
             <li class="breadcrumb-item active text-white">Sản Phẩm</li>
         </ol>
     </div>
+<<<<<<< HEAD
     <div class="position-relative justify-content-center  my-5 container-sm">
         <form method="post" th:action="@{/timkiem}" >
             <input class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill" name="tensp" type="text" placeholder="Nhập kí tự" th:value="${#ctx.session.Timkiem}">
@@ -13,6 +14,10 @@
         </form>
     </div>
     <div class="container-fluid py-5">
+=======
+
+    <div class="container py-5">
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
         <div class="tab-class text-center">
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
@@ -29,6 +34,7 @@
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;" th:text="${dl.dm.tenDanhMuc}"></div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4 th:text="${dl.tenSanPham}"></h4>
+<<<<<<< HEAD
                                                 <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 42) + '...' : dl.moTa}"></p>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div>
@@ -43,6 +49,12 @@
                                                                 Giá không khả dụng
                                                             </span>
                                                         </p>
+=======
+                                                <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 45) + '...' : dl.moTa}"></p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <p class="text-dark fs-5 fw-bold mb-0 me-3" th:text="'$' + ${dl.donGia} + '/kg'"></p>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                                                     </div>
                                                     <div class="d-flex align-items-center">
                                                         <a th:href="@{/wishlist/add/{id}(id=${dl.Id})}" class="btn btn-circle d-flex justify-content-center align-items-center me-1" style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #81c408 0%, #81c408 100%);">
@@ -64,8 +76,12 @@
                 </div>
                 
             </div>
+<<<<<<< HEAD
         </div>
               
+=======
+        </div>      
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
     </div>
     <div class="box-footer clearfix py-2" style="text-align: right;">
         <ul class="pagination pagination-sm no-margin" style="display: flex; justify-content: flex-end;">

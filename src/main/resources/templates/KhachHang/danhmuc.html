@@ -7,8 +7,13 @@
 
         </ol>
     </div>
+<<<<<<< HEAD
     <div class="container-fluid py-5">
         <div class="container-fluid text-center">
+=======
+    <div class="container py-5">
+        <div class="tab-class text-center">
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
@@ -27,6 +32,7 @@
                                                 <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 45) + '...' : dl.moTa}"></p>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div>
+<<<<<<< HEAD
                                                         <p class="text-dark fs-5 fw-bold mb-0 me-3">
                                                             <!-- Kiểm tra và định dạng chỉ khi dl.donGia là một số nguyên hợp lệ -->
                                                             <span th:if="${dl.donGia != null}">
@@ -38,6 +44,9 @@
                                                                 Giá không khả dụng
                                                             </span>
                                                         </p>
+=======
+                                                        <p class="text-dark fs-5 fw-bold mb-0 me-3" th:text="'$' + ${dl.donGia} + '/kg'"></p>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                                                     </div>
                                                     <div class="d-flex align-items-center">
                                                         <a th:href="@{/wishlist/add/{id}(id=${dl.Id})}" class="btn btn-circle d-flex justify-content-center align-items-center me-1" style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #81c408 0%, #81c408 100%);">
@@ -61,6 +70,7 @@
         </div>      
     </div>
 
+<<<<<<< HEAD
 </div>
 
 <script th:inline="javascript">
@@ -77,3 +87,6 @@
         }
     }
 </script>
+=======
+</div>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e

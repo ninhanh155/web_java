@@ -2,17 +2,27 @@
 <div  th:if="${#ctx.session.USER_LOGGED}" th:text="${#ctx.session.USER_LOGGED}">
 </div>
 <!-- banner -->
+<<<<<<< HEAD
 <div class="container-fluid mb-5 hero-header py-4">
     <div class="container-fluid">
+=======
+<div class="container-fluid mb-5 hero-header">
+    <div class="container">
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
         <div class="row g-5 align-items-center">
             <div class="col-md-12 col-lg-7">
                 <h4 class="mb-3 text-secondary">100% Sản Phẩm Hữu Cơ</h4>
                 <h1 class="mb-5 display-3 text-primary">Trái Cây Và Rau Củ</h1>
                 <div class="position-relative mx-auto">
+<<<<<<< HEAD
                     <form method="post" th:action="@{/timkiem}" >
                         <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" name="tensp" type="text" placeholder="Nhập từ khóa">
                         <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Tìm Kiếm</button>
                     </form>    
+=======
+                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="Search">
+                    <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Submit Now</button>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                 </div>
             </div>
             <div class="col-md-12 col-lg-5">
@@ -54,7 +64,11 @@
                     </div>
                     <div class="featurs-content text-center">
                         <h5>Miễn Phí Giao Hàng</h5>
+<<<<<<< HEAD
                         <p class="mb-0">Với đơn dưới 300.000Đ</p>
+=======
+                        <p class="mb-0">Miễn phí với đơn dưới $300</p>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                     </div>
                 </div>
             </div>
@@ -123,6 +137,7 @@
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;" th:text="${dl.dm.tenDanhMuc}"></div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4 th:text="${dl.tenSanPham}"></h4>
+<<<<<<< HEAD
                                                 <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 42) + '...' : dl.moTa}"></p>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div>
@@ -137,6 +152,12 @@
                                                                 Giá không khả dụng
                                                             </span>
                                                         </p>
+=======
+                                                <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 45) + '...' : dl.moTa}"></p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <p class="text-dark fs-5 fw-bold mb-0 me-3" th:text="'$' + ${dl.donGia} + '/kg'"></p>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                                                     </div>
                                                     <div class="d-flex align-items-center">
                                                         <a th:href="@{/wishlist/add/{id}(id=${dl.Id})}" class="btn btn-circle d-flex justify-content-center align-items-center me-1" style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #81c408 0%, #81c408 100%);">
@@ -215,7 +236,11 @@
 <!-- Vesitable Shop Start-->
 
 <div class="container-fluid vesitable">
+<<<<<<< HEAD
     <div class="container-fluid py-5">
+=======
+    <div class="container py-5">
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
         <h1 class="mb-0">Sản Phẩm Nổi Bật</h1>
         <div class="vesitable">
             <div class="owl-carousel vegetable-carousel justify-content-center">
@@ -227,6 +252,7 @@
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;" th:text="${dl.dm.tenDanhMuc}"></div>
                         <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                             <h4 th:text="${dl.tenSanPham}"></h4>
+<<<<<<< HEAD
                             <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 42) + '...' : dl.moTa}"></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -241,6 +267,12 @@
                                             Giá không khả dụng
                                         </span>
                                     </p>
+=======
+                            <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 45) + '...' : dl.moTa}"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="text-dark fs-5 fw-bold mb-0 me-3" th:text="'$' + ${dl.donGia} + '/kg'"></p>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <a th:href="@{/wishlist/add/{id}(id=${dl.Id})}" class="btn btn-circle d-flex justify-content-center align-items-center me-1" style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #81c408 0%, #81c408 100%);">
@@ -278,11 +310,19 @@
             <div class="col-lg-6">
                 <div class="position-relative">
                     <img src="/KhachHang/img/baner-1.png" class="img-fluid w-100 rounded" alt="">
+<<<<<<< HEAD
                     <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style="width: 180px; height: 180px; top: 0; left: 0;">
                         <h1 style="font-size: 100px;">1</h1>
 
                         <div class="d-flex flex-column">
                             <span class="h2 mb-0">50.000Đ</span>
+=======
+                    <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style="width: 140px; height: 140px; top: 0; left: 0;">
+                        <h1 style="font-size: 100px;">1</h1>
+
+                        <div class="d-flex flex-column">
+                            <span class="h2 mb-0">50$</span>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                             <span class="h4 text-muted mb-0">kg</span>
                         </div>
                     </div>
@@ -296,7 +336,11 @@
 
 <!-- Bestsaler Product Start -->
 <div class="container-fluid">
+<<<<<<< HEAD
     <div class="container-fluid py-5">
+=======
+    <div class="container py-5">
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
         <div class="text-center mx-auto mb-5" style="max-width: 700px;">
             <h1 class="display-4">Sản Phẩm Bán Chạy</h1>
             <p>Đây là những sản phẩm đang được ưu chuộng, tìm kiếm và có lượt bán nhiều nhất .</p>
@@ -317,6 +361,7 @@
                                     <a th:href="@{/chitietsanpham/{id}(id=${dl.Id})}" th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 10) + '...' : dl.moTa}"></a>
                                 </div>
                                 <div>
+<<<<<<< HEAD
                                     <p class="text-dark fs-5 fw-bold mb-0 me-3">
                                         <!-- Kiểm tra và định dạng chỉ khi dl.donGia là một số nguyên hợp lệ -->
                                         <span th:if="${dl.donGia != null}">
@@ -328,6 +373,9 @@
                                             Giá không khả dụng
                                         </span>
                                     </p>
+=======
+                                    <p class="text-dark fs-5 fw-bold mb-0 me-3" th:text="'$' + ${dl.donGia} + '/kg'"></p>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <a th:href="@{/wishlist/add/{id}(id=${dl.Id})}" class="btn btn-circle d-flex justify-content-center align-items-center me-1" style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #81c408 0%, #81c408 100%);">
@@ -351,7 +399,11 @@
 
 <!-- Fact Start -->
 <div class="container-fluid">
+<<<<<<< HEAD
     <div class="container-fluid">
+=======
+    <div class="container">
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
         <div class="bg-light p-5 rounded">
             <div class="row g-4 justify-content-center">
                 <div class="col-md-6 col-lg-6 col-xl-3">
@@ -399,14 +451,25 @@
         <div class="owl-carousel testimonial-carousel">
             <div th:each="dl : ${bl}" class="testimonial-item img-border-radius bg-light rounded p-4">
                 <div class="position-relative">
+<<<<<<< HEAD
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
                             <img src="https://nhadepso.com/wp-content/uploads/2023/03/cap-nhat-99-hinh-anh-avatar-gau-cute-de-thuong-ngo-nghinh_5.jpg" class="img-fluid rounded" style="width: 70px; height: 70px;" alt="">
+=======
+                    <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
+                    <div class="mb-4 pb-4 border-bottom border-secondary">
+                        <p class="mb-0" th:text="${dl.noiDung}"></p>
+                    </div>
+                    <div class="d-flex align-items-center flex-nowrap">
+                        <div class="bg-secondary rounded">
+                            <img src="https://nhadepso.com/wp-content/uploads/2023/03/cap-nhat-99-hinh-anh-avatar-gau-cute-de-thuong-ngo-nghinh_5.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark" th:text="${dl.kh.tenDayDu}"></h4>
                             <!-- <p class="m-0 pb-3">Profession</p> -->
                             <div class="d-flex pe-5">
+<<<<<<< HEAD
                               <i class="fa fa-quote-right fa-1x text-secondary position-absolute" style="top: 30px; right: 0;"></i>  
                             </div>
                         </div>
@@ -414,10 +477,21 @@
                     
                     <div class="mb-4 pb-4 border-bottom border-secondary"></div>
                     <p class="mb-0" th:text="${dl.noiDung}"></p>
+=======
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 
 <script th:inline="javascript">
@@ -434,3 +508,6 @@
         }
     }
 </script>
+=======
+</div>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e

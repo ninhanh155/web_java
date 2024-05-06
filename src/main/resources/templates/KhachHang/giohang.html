@@ -28,6 +28,7 @@
                     <!-- Thân bảng -->
                     <tbody>
                         <tr th:each="dl: ${ds}">
+<<<<<<< HEAD
                             <form th:action="@{/shopping-cart/update}" method="post">
                                 <th>
                                     <div class="d-flex align-items-center">
@@ -55,6 +56,33 @@
                                     <!-- Button xóa sản phẩm khỏi giỏ hàng -->
                                     <a class="btn btn-md rounded-circle bg-light border mt-4"
                                         th:href="@{/giohang/xoabo/{id}(id=${dl.getId()})}">
+=======
+                            <!-- Form cập nhật số lượng -->
+                            <form th:action="@{/shopping-cart/update}" method="post">
+                                <th>
+                                    <div class="d-flex align-items-center">
+                                        <img th:src="${dl.anhSanPham}" class="rounded-circle" style="width: 80px;height: 80px;" >
+                                    </div>
+                                </th>
+                                <input type="hidden" name="id" th:value="${dl.idSanPham}">
+                                <td>
+                                    <p class="mb-0 mt-4" th:text="${dl.tenSanPham}"></p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4" th:text="${dl.gia}">$</p>
+                                </td>
+                                <td>
+                                    <div class="input-group quantity mt-4" style="width: 100px;">
+                                        <input type="number" name="soLuong" onblur="this.form.submit()" th:value="${dl.soLuong}" style="width: 80px; height: 20px;">
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4" th:text="${dl.gia * dl.soLuong}" ></p>
+                                </td>
+                                <td>
+                                    <!-- Button xóa sản phẩm khỏi giỏ hàng -->
+                                    <a class="btn btn-md rounded-circle bg-light border mt-4" th:href="@{/giohang/xoabo/{idSanPham}(idSanPham=${dl.idSanPham})}">
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                                         <i class="fa fa-times text-danger"></i>
                                     </a>
                                 </td>
@@ -65,8 +93,12 @@
             </div>
             <!-- Nút thanh toán -->
             <div class="row g-4 justify-content-end">
+<<<<<<< HEAD
                 <a class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
                     th:href="@{/thanhtoan}">Thanh toán</a>
+=======
+                <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Thanh Toán</button>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
             </div>
         </div>
     </div>
@@ -85,6 +117,7 @@
 
     <div class="container py-5 text-center d-flex flex-column align-items-center">
         <!-- Thêm hình ảnh giỏ hàng trống -->
+<<<<<<< HEAD
         <img src="https://kangarooshopping.vn/static/version1689569306/frontend/Kangaroo/base/vi_VN/images/cart-empty.png"
             alt="Giỏ hàng trống" class="empty-cart-image mb-4" width="200px">
         <!-- Thêm nút để quay lại trang chủ hoặc điều hướng đến các trang khác -->
@@ -107,3 +140,12 @@
         }
     }
 </script>
+=======
+        <img src="https://kangarooshopping.vn/static/version1689569306/frontend/Kangaroo/base/vi_VN/images/cart-empty.png" alt="Giỏ hàng trống" class="empty-cart-image mb-4" width="200px">
+        <!-- Thêm nút để quay lại trang chủ hoặc điều hướng đến các trang khác -->
+        <a th:href="@{/sanpham}" class="btn btn-primary">Mua Ngay</a>
+    </div>
+    
+</div>
+
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e

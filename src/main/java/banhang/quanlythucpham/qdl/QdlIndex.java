@@ -47,6 +47,7 @@ public class QdlIndex {
         }
         model.addAttribute("dh", dvl_dh.duyệtDonHang());
 
+<<<<<<< HEAD
         model.addAttribute("tongphanhoi", dvl_lh.tongPhanHoi());
 
 
@@ -61,6 +62,8 @@ public class QdlIndex {
         model.addAttribute("tongkhachhang", dvl_kh.sLKhachHang());
 
 
+=======
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
         model.addAttribute("content", "QuanTri/index.html");
         return "QuanTri/layout.html"; 
 

@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<<<<<<< HEAD
 <head>
     <meta charset="utf-8">
     <title>Fresh Flavors</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+=======
+    <head>
+        <meta charset="utf-8">
+        <title>Fresh Flavors</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+        
+        <link href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSufYGC9k88E3tgWmpWV3-fRQfEwLm1c3RHzPCinkOyASHP14mBj7yollgNAYPTXbjOgdg&usqp=CAU" rel="icon">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
 
     <link
         href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSufYGC9k88E3tgWmpWV3-fRQfEwLm1c3RHzPCinkOyASHP14mBj7yollgNAYPTXbjOgdg&usqp=CAU"
@@ -30,6 +45,7 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/KhachHang/css/bootstrap.min.css" rel="stylesheet">
 
+<<<<<<< HEAD
     <!-- Template Stylesheet -->
     <link href="/KhachHang/css/style.css" rel="stylesheet">
 
@@ -187,6 +203,130 @@
                         <a class="btn-link" th:href="@{/lienhe}">Liên Hệ Với Chúng Tôi</a>
                         <a class="btn-link" href="#">Chính Sách Quyền Riêng Tư</a>
                         <a class="btn-link" href="#">Chính Sách Bảo Mật</a>
+=======
+        <!-- Template Stylesheet -->
+        <link href="/KhachHang/css/style.css" rel="stylesheet">
+        
+    </head>
+
+    <body>
+        <!-- <div th:if="${#ctx.session.USER_LOGGED}" th:text="${#ctx.session.USER_LOGGED}">
+        </div> -->
+        <!-- Navbar start -->
+        <div class="container-fluid fixed-top text-dark">
+            <div class="container topbar bg-primary d-none d-lg-block">
+                <div class="d-flex justify-content-between">
+                    <a th:href="@{/lienhe}">
+                        <div class="top-info ps-2 text-dark">
+                            <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <span th:text="${caidat.get('diachi')}"></span></small>
+                            <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><span th:text="${caidat.get('email')}"></span></small>
+                        </div>
+                        
+                    </a>
+                    <a th:href="@{/lienhe}">
+                        <div class="top-link pe-2 text-dark">
+                            <small class="me-3"><i class="bi bi-telephone-fill me-2 text-secondary"></i><span th:text="${caidat.get('phone')}"></span></small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="container px-0 ">
+                <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                    <a href="/" class="navbar-brand"><h1 class="text-primary display-6">Fresh Flavors</h1></a>
+                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars text-primary"></span>
+                    </button>
+                    <div class="collapse navbar-collapse text-dark bg-white" id="navbarCollapse">
+                        <div class="navbar-nav mx-auto">
+                            <a href="/" class="nav-item nav-link active">Trang chủ</a>
+                            <a th:href="@{/sanpham}" class="nav-item nav-link">Sản Phẩm</a>
+                            <a th:href="@{/gioithieu}" class="nav-item nav-link">Giới Thiệu</a>
+
+                            <!-- danh mục -->
+                            <div class="nav-item dropdown">
+                                <a th:href="@{/danhmuc}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Danh Mục</a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <div th:each="dl: ${dm}">
+                                        <a th:href="@{/danhmuc/{id}(id=${dl.Id})}" class="dropdown-item" th:text="${dl.tenDanhMuc}" ></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a th:href="@{/lienhe}" class="nav-item nav-link">Liên hệ</a>
+                        </div>
+                        <div class="d-flex m-3 me-0">
+                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                            <a th:href="@{/giohang}" class="position-relative my-auto">
+                                <i class="bi bi-cart4 fa-2x me-1"></i>
+                            </a>
+
+                            <div th:unless="${#ctx.session.USER_ID}">
+                                <a th:href="@{/dangnhap}" class="btn btn-outline-secondary">Đăng Nhập</a>
+                                <a th:href="@{/dangky}" class="btn btn-primary ml-2">Đăng Ký</a>
+                            </div>
+                            
+                            <div th:if="${#ctx.session.USER_ID}" class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user fa-2x">
+                                    </i>
+                                </a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <a th:href="@{/khachhang/taikhoan}" class="dropdown-item"><i class="fas fa-user me-2" style="color: #81c408;"></i>Tài khoản</a>
+                                    <a th:href="@{/khachhang/doimatkhau}" class="dropdown-item"><i class="fas fa-key me-2" style="color: #81c408;"></i>Đổi mật khẩu</a>
+                                    <a th:href="@{/khachhang/dangthoat}" class="dropdown-item"><i class="fas fa-sign-out-alt me-2" style="color: #81c408;"></i>Đăng xuất</a>
+                                </div>
+                            </div>
+                            
+                                
+                                
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+        <!-- <div th:text="${#ctx.session.USER_ID}"></div> -->
+        
+        <i th:replace="${content}"></i> 
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+            <div class="container">
+                <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+                    <div class="row g-4">
+                        <div class="col-lg-3">
+                            <a href="/">
+                                <h1 class="text-primary mb-0">Fresh Flavors</h1>
+                                <p class="text-secondary mb-0">Sản Phẩm Tươi Sống</p>
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="position-relative mx-auto">
+                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Nhập Email">
+                                <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Subscribe Now</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="d-flex justify-content-end pt-3">
+                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href="https://www.instagram.com/"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">LỜI GIỚI THIỆU</h4>
+                            <p class="mb-4">Chúng tôi tự hào là đơn vị cung cấp thực phẩm sạch hàng đầu tại Việt Nam. 
+                                Với kinh nghiệm nhiều năm phục vụ các khách hàng khó tính nhất
+                            </p>
+                            <a href="/" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Đọc Thêm</a>
+                        </div>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -197,6 +337,7 @@
                         <a class="btn-link" th:href="@{/danhsachyeuthich}">Yêu Thích</a>
                         <a class="btn-link" th:href="@{/lichsumuahang}">Lịch Sử Mua Hàng</a>
                     </div>
+<<<<<<< HEAD
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-item">
@@ -206,6 +347,25 @@
                         <p>Email: <span th:text="${caidat.get('email')}"></span></p>
                         <p>Phone: <span th:text="${caidat.get('phone')}"></span></p>
                         <!-- <p>Payment Accepted</p>
+=======
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Thông Tin Tài Khoản</h4>
+                            <a class="btn-link" th:href="@{/khachhang/taikhoan}">Tài Khoản</a>
+                            <a class="btn-link" th:href="@{/giohang}">Giỏ Hàng</a>
+                            <a class="btn-link" th:href="@{/danhsachyeuthich}">Yêu Thích</a>
+                            <a class="btn-link" href="">Lịch Sử Mua Hàng</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Liên Hệ</h4>
+                            <span th:text="${caidat.get('diachi')}"></span>
+                            <p>Địa Chỉ: </p>
+                            <p>Email: <span th:text="${caidat.get('email')}"></span></p>
+                            <p>Phone: <span th:text="${caidat.get('phone')}"></span></p>
+                            <!-- <p>Payment Accepted</p>
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
                             <img src="/KhachHang/img/payment.png" class="img-fluid" alt=""> -->
                     </div>
                 </div>

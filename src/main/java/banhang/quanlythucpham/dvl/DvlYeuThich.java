@@ -19,7 +19,13 @@ public class DvlYeuThich implements DviYeuThich
     @Override public List<SanPham> dsYeuThich(int user_id) // getAllYeuThich()
     {
   
+<<<<<<< HEAD
      
+=======
+        // return null;
+
+        // mã bởi lập trình viên:
+>>>>>>> 4190f12894e89afedae1742272adcaee23e6eb7e
         return kdl.ds_yeu_thich_by_user(user_id);
     }
     // đổ tất cả các sản phẩm được yêu thích của khách hàng
