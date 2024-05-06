@@ -40,16 +40,20 @@ public class QdlGioHang
      HttpSession session,
      RedirectAttributes redirectAttributes) 
     {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("USER_ID")==null)
         {
             request.getSession().setAttribute("LOCATION","/giohang");
             return "redirect:/dangnhap";
         }
+        session = request.getSession();
+        int UserId = (int) session.getAttribute("USER_ID");
+        KhachHang kh = dvl_kh.tìmKhachHangTheoId(UserId);
+       
 
         // Gửi danh sách sang giao diện View HTML
-        model.addAttribute("ds", dvl.getdlgiohang());
-        model.addAttribute("total", dvl.getGia());
-        model.addAttribute("content","giohang/cart-item.html");
+        model.addAttribute("ds", dvl.dsGioHangByUser(kh.getId()));
+        // model.addAttribute("total", dvl.getGia());
+        // model.addAttribute("content","giohang/cart-item.html");
 
 
         // Nội dung riêng của trang...
@@ -60,40 +64,43 @@ public class QdlGioHang
     }
 
     @GetMapping("/giohang/them/{id}")
-    public String addToCart(@PathVariable("id") Integer id, Model model, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes) 
+    public String addToCart(@PathVariable("id") Integer id, 
+    Model model, 
+    HttpServletRequest request, 
+    HttpSession session, 
+    RedirectAttributes redirectAttributes) 
     {
 
-        if (session.getAttribute("USER_LOGGED") == null) {
+        if (session.getAttribute("USER_ID") == null) {
             request.getSession().setAttribute("LOCATION", "/giohang/them/" + id);
             return "redirect:/dangnhap";
         }
-
-        session = request.getSession();
         int UserId = (int) session.getAttribute("USER_ID");
         KhachHang kh = dvl_kh.tìmKhachHangTheoId(UserId);
         SanPham sp = dvl_sp.tìmSanPhamTheoId(id);
 
         GioHang item = new GioHang();
         item.setMaKhachHang(kh.getId());
-        item.setIdSanPham(sp.getId());
-        item.setAnhSanPham(sp.getAnhSanPham());
-        item.setTenSanPham(sp.getTenSanPham());
-        item.setGia(sp.getDonGia());
+        item.setSp(sp);
         item.setSoLuong(1);
         dvl.themgiohang(item);
         return "redirect:/giohang";
     }
 
     @GetMapping("/shopping-cart/clear")
-    public String clearCart()
+    public String clearCart(HttpSession session)
     {
-        dvl.xoatatca();
+        int UserId = (int) session.getAttribute("USER_ID");
+        dvl.deleteAllGioHangByUserId(UserId);
         return "redirect:/giohang";
     }
     @GetMapping("/giohang/xoabo/{id}")
-    public String removeCart(@PathVariable("id") Integer id )
+    public String removeCart(@PathVariable("id") Integer id ,
+    HttpServletRequest request, 
+    HttpSession session, 
+    RedirectAttributes redirectAttributes)
     {
-        dvl.xoatungsanpham(id);
+        dvl.deleteGioHangById(id);
         return "redirect:/giohang";
     }
 

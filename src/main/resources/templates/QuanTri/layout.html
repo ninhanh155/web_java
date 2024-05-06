@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="https://cdn1.iconfinder.com/data/icons/marketing-19/100/Profile-512.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,21 +19,22 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Libraries Stylesheet -->
     <link href="/QuanTri/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="/QuanTri/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/QuanTri/css/bootstrap.min.css" rel="stylesheet">
-
+     
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- Template Stylesheet -->
     <link href="/QuanTri/css/style.css" rel="stylesheet">
     <!-- <link href="/QuanTri/css/float.css" rel="stylesheet"> -->
 </head>
 
 <body>
-    <!-- <div th:value="${#ctx.session.USER_ID}"></div> -->
+    <div th:value="${#ctx.session.USER_ID}"></div>
     <div class="container-fluid position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -52,32 +53,30 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4" >
                     <div class="position-relative">
-                        <img class="rounded-circle" th:src="${#ctx.session.USER_IMG}" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" th:src="${#ctx.session.ADMIN_USER_IMG}" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0" th:text="${#ctx.session.USER_NAME}"></h6>
-                        <span th:text="${#ctx.session.USER_COMMENT}"></span>
+                        <h6 class="mb-0" th:text="${#ctx.session.ADMIN_USER_NAME}"></h6>
+                        <span th:text="${#ctx.session.ADMIN_USER_COMMENT}"></span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Thống kê</a>
+                    <a th:href="@{/admin}" class="nav-item nav-link active"><i class="bi bi-bar-chart-fill me-2"></i>Thống kê</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Quản lí tổng</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-laptop me-2"></i>Quản lí tổng</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a th:href="@{/admin/danhmuc/duyet}" class="dropdown-item"><i class="fa fa-tags me-2"></i>Danh Mục</a>
                             <a th:href="@{/admin/sanpham/duyet}" class="dropdown-item"><i class="fa fa-puzzle-piece fa-fw me-2"></i>Sản Phẩm</a>
                             <a th:href="@{/admin/nhasanxuat/duyet}" class="dropdown-item"><i class="fa fa-copyright fa-fw me-2"></i>Nhà Sản Xuất</a>
-                            <a th:href="@{/admin/khachhang/duyet}" class="dropdown-item"><i class="fa fa-users fa-fw me-2"></i>Khách Hàng</a>
-                            <a th:href="@{/admin/lienhe/duyet}" class="dropdown-item"><i class="fas fa-address-book me-2"></i>Liên Hệ</a>
-                            <a th:href="@{/donhang/duyet}" class="dropdown-item"><i class="fa fa-shopping-cart fa-fw me-2"></i>Đơn Hàng</a>
-                            <a th:href="@{/admin/quangcao/duyet}" class="dropdown-item"><i class="bi bi-file-earmark-richtext-fill me-2"></i>Ảnh Quảng Cáo</a>
+                            <a th:href="@{/admin/khachhang/duyet}" class="dropdown-item"><i class="fa fa-user fa-fw me-2"></i>Khách Hàng</a>
+                            <a th:href="@{/admin/lienhe/duyet}" class="dropdown-item"><i class="fas fa-address-book fa-fw me-2"></i>Liên Hệ</a>
+                            <a th:href="@{/admin/donhang/duyet}" class="dropdown-item"><i class="bi bi-file-earmark-text-fill fa-fw me-2"></i>Đơn Hàng</a>
+                            <a th:href="@{/admin/quangcao/duyet}" class="dropdown-item"><i class="bi bi-card-image fa-fw me-2"></i>Ảnh Quảng Cáo</a>
                         </div>
                     </div>
-                    
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <a th:href="@{/admin/nhanvien/duyet}" class="nav-item nav-link"><i class="fa fa-user fa-fw me-2"></i>Nhân Viên</a>
-                    <a th:href="@{/admin/caidat/duyet}" class="nav-item nav-link"><i class="fa fa-user fa-fw me-2"></i>Cài Đặt</a>
+                    <a th:href="@{/admin/caidat/duyet}" class="nav-item nav-link"><i class="fas fa-tools me-2"></i> Cài Đặt</a>
                 </div>
             </nav>
         </div>
@@ -98,8 +97,8 @@
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" th:src="${#ctx.session.USER_IMG}" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex" th:text="${#ctx.session.USER_LOGGED}"></span>
+                            <img class="rounded-circle me-lg-2" th:src="${#ctx.session.ADMIN_USER_IMG}" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex" th:text="${#ctx.session.ADMIN_USER_LOGGED}"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a th:href="@{/admin/nhanvien/taikhoan}" class="dropdown-item"><i class="fas fa-user me-2"></i>Tài Khoản</a>
@@ -110,7 +109,7 @@
             </nav>
             <!-- Navbar End -->
 
-            <i th:replace="${content}"></i> 
+            <i th:replace="${content}"></i>
 
 
             <!-- Footer Start -->
@@ -131,7 +130,7 @@
 
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> -->
     </div>
 
     <!-- JavaScript Libraries -->
@@ -144,9 +143,18 @@
     <script src="/QuanTri/lib/tempusdominus/js/moment.min.js"></script>
     <script src="/QuanTri/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="/QuanTri/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- <script src="https://www.jqueryscript.net/demo/Rich-Text-Editor-jQuery-RichText/jquery.richtext.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.mota').css("height", "100px").css("width", "850px").richText();
+        });
+    </script>
 
-    <!-- Template Javascript -->
-    <script src="/QuanTri/js/main.js"></script>
+    
+
+<!-- Template Javascript -->
+<script src="/QuanTri/js/main.js"></script>
 </body>
 
 </html>

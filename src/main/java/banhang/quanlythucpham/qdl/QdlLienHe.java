@@ -1,5 +1,6 @@
 package banhang.quanlythucpham.qdl;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 // Thư viện web: Java Spring
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import banhang.quanlythucpham.dvl.DvlLienHe;
 import banhang.quanlythucpham.tdl.LienHe;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -44,8 +47,13 @@ public class QdlLienHe
             "/admin/lienhe",
             "/admin/lienhe/duyet"
     })
-    public String getDuyet(Model model) 
+    public String getDuyet(Model model, HttpSession session, HttpServletRequest request) 
     {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/lienhe/duyet");
+            return "redirect:/admin/dangnhap";
+        }
         // Đọc dữ liệu bảng rồi chứa vào biến tạm
         List<LienHe> list = dvl.duyệtLienHe();
 
@@ -60,7 +68,12 @@ public class QdlLienHe
     }
 
     @GetMapping("/admin/lienhe/them")
-    public String getThem(Model model) {
+    public String getThem(Model model, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/lienhe/them");
+            return "redirect:/admin/dangnhap";
+        }
         LienHe dl = new LienHe();
 
         // Gửi đối tượng dữ liệu sang bên view
@@ -83,8 +96,13 @@ public class QdlLienHe
 
     // @GetMapping("/lienhe/sua/{id}")
     @GetMapping("/admin/lienhe/sua")
-    public String getSua(Model model, @RequestParam("id") int id) {
+    public String getSua(Model model, @RequestParam("id") int id, HttpSession session, HttpServletRequest request) {
         // Lấy ra bản ghi theo id
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/lienhe/sua"+id);
+            return "redirect:/admin/dangnhap";
+        }
         LienHe dl = dvl.xemLienHe(id);
 
         // Gửi đối tượng dữ liệu sang bên view
@@ -99,7 +117,12 @@ public class QdlLienHe
     }
 
     @GetMapping("/admin/lienhe/xoa")
-    public String getXoa(Model model, @RequestParam(value = "id") int id) {
+    public String getXoa(Model model, @RequestParam(value = "id") int id, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/lienhe/xoa"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         LienHe dl = dvl.tìmLienHeTheoId(id);
 
@@ -115,8 +138,13 @@ public class QdlLienHe
     }
 
     @GetMapping("/admin/lienhe/xem/{id}")
-    public String getXem(Model model, @PathVariable(value = "id") int id) 
+    public String getXem(Model model, @PathVariable(value = "id") int id, HttpServletRequest request, HttpSession session) 
     {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/lienhe/xem/"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         LienHe dl = dvl.xemLienHe(id);
 

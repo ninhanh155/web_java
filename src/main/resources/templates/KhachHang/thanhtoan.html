@@ -1,57 +1,215 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="account.css">
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-    
-</head>
-<body>
-    <section class="vh-100">
-        <div class="container-fluid h-custom">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-md-9 col-lg-6 col-xl-5">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                class="img-fluid" alt="Sample image">
-            </div>
-            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form>
-      
-                <div class="divider d-flex align-items-center my-4">
-                  <p class="text-center"><h3>Thông tin tài khoản</h3></p>
-                </div>
-      
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3" class="form-control form-control-lg"
-                disabled/>
-                  <label class="form-label" for="form3Example3">Địa chỉ email</label>
-                </div>
-      
-                <!-- text input -->
-                <div class="form-outline mb-3">
-                  <input type="text" id="form3Example4" class="form-control form-control-lg"
-                  disabled/>
-                  <label class="form-label" for="form3Example4">Tên Đầy Đủ</label>
-                </div>
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+  <h1 class="text-center text-white display-6">Thanh toán</h1>
+  <ol class="breadcrumb justify-content-center mb-0">
+    <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+    <li class="breadcrumb-item active text-white">Thanh toán</li>
+  </ol>
+</div>
+<!-- Single Page Header End -->
 
-                <div class="form-outline mb-3">
-                    <input type="text" id="form3Example4" class="form-control form-control-lg"
-                    disabled/>
-                    <label class="form-label" for="form3Example4">Địa chỉ</label>
-                </div>
-                <div class="form-outline mb-3">
-                    <input type="text" id="form3Example4" class="form-control form-control-lg"
-                    disabled/>
-                    <label class="form-label" for="form3Example4">Số điện thoại</label>
-                </div>
-              </form>
+
+<!-- Checkout Page Start -->
+<div class="container-fluid py-5 text-dark">
+  <div class="container py-5">
+    <h1 class="mb-4">Thông tin chi tiết</h1>
+    <form name="dathang"th:action="@{/dathang}" method="post" onsubmit="return validateForm()">
+      <div class="row g-5">
+        <div class="col-md-12 col-lg-6 col-xl-7">
+          <div class="row">
+            <div class="col-md-12 col-lg-6">
+              <div class="form-item w-100">
+                <label class="form-label my-3">Tên đầy đủ<sup>*</sup></label>
+                <input type="text" class="form-control" name="tendaydu" required>
+              </div>
             </div>
           </div>
+          <div>
+            <label class="form-label my-3">Chọn địa chỉ<sup>*</sup></label>
+            <select class="form-select form-select-sm mb-3" name="tinhthanhpho" id="city" aria-label=".form-select-sm" required>
+              <option value="" selected>Chọn tỉnh thành</option>
+            </select>
+
+            <select class="form-select form-select-sm mb-3" name="quanhuyen" id="district" aria-label=".form-select-sm" required>
+              <option value="" selected>Chọn quận huyện</option>
+            </select>
+
+            <select class="form-select form-select-sm" id="ward" name="phuongxa" aria-label=".form-select-sm" required>
+              <option value="" selected>Chọn phường xã</option>
+            </select>
+          </div>
+          <br>
+          <div class="form-item">
+            <label class="form-label my-3">Địa chỉ cụ thể</label>
+            <input type="text" class="form-control" name="diachi" placeholder="Số nhà">
+          </div>
+          <div class="form-item">
+            <label class="form-label my-3">Số điện thoại<sup>*</sup></label>
+            <input type="tel" class="form-control" name="sodienthoai" required>
+          </div>
+          <hr>
         </div>
-      </section>
-</body>
-</html>
+        <div class="col-md-12 col-lg-6 col-xl-5">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Sản Phẩm</th>
+                  <th scope="col">Tên</th>
+                  <th scope="col">Giá</th>
+                  <th scope="col">Số Lượng</th>
+                  <th scope="col">Tổng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="dl:${dh}">
+                  <th scope="row">
+                    <div class="d-flex align-items-center mt-2">
+                      <img th:src="${dl.sp.getAnhSanPham()}" class="img-fluid rounded-circle"
+                        style="width: 90px; height: 90px;" alt="">
+                    </div>
+                  </th>
+                  <td class="py-5" th:text="${dl.sp.tenSanPham}"></td>
+                  <td class="py-5">
+                    <span id="formattedNumber" class="formatted-number" th:text="${dl.sp.donGia}"></span>
+                  </td>
+                  <td class="py-5" th:text="${dl.getSoLuong()}"></td>
+                  <td class="py-5">
+                    <span id="formattedNumber" class="formatted-number" th:text="${dl.getSoLuong() * dl.sp.getDonGia()}"></span>
+                  </td>
+                </tr>
+
+                <!-- <tr>
+                  <th scope="row">
+                  </th>
+                  <td colspan="3" class="py-5">
+                    <div class="form-check text-start">
+                      <input type="checkbox" checked class="form-check-input bg-primary border-0" id="Shipping-3"
+                        name="Shipping-1" value="0">
+                      <label class="form-check-label" for="Shipping-3">Miễn phí ship</label>
+                    </div>
+                  </td>
+                </tr> -->
+                <tr>
+                  <th scope="row">
+                  </th>
+                  <td class="py-5">
+                    <p class="mb-0 text-dark text-uppercase py-3">Tổng</p>
+                  </td>
+                  <td class="py-5"></td>
+                  <td class="py-5"></td>
+                  <td class="py-5">
+                    <p class="mb-0 text-dark">
+                      <span id="formattedNumber" class="formatted-number" th:text="${tong}"></span>
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+            <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đặt
+              Hàng</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Checkout Page End -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+  function validateForm() {
+    var tendaydu = document.forms["dathang"]["tendaydu"].value;
+    var sodienthoai = document.forms["dathang"]["sodienthoai"].value;
+  
+    // Kiểm tra xem tên đầy đủ có được nhập hay không
+    if (tendaydu == "") {
+      alert("Vui lòng nhập tên đầy đủ.");
+      return false;
+    }
+  
+    // Kiểm tra xem số điện thoại có được nhập hay không và có đúng định dạng hay không (ví dụ: 10 chữ số)
+    if (sodienthoai == "" || sodienthoai.length !=10 || isNaN(sodienthoai)) {
+      alert("Vui lòng nhập số điện thoại hợp lệ (10 chữ số).");
+      return false;
+    }
+    return true;
+  }
+  
+  var citis = document.getElementById("city");
+  var districts = document.getElementById("district");
+  var wards = document.getElementById("ward");
+  var Parameter = {
+    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+    method: "GET",
+    responseType: "application/json",
+  };
+  var promise = axios(Parameter);
+  promise.then(function (result) {
+    renderCity(result.data);
+  });
+
+  // Thay đổi giá trị của các select box để sử dụng tên thực của địa phương
+function renderCity(data) {
+  for (const x of data) {
+    citis.options[citis.options.length] = new Option(x.Name, x.Name); // Sử dụng tên thực của thành phố
+  }
+
+  citis.onchange = function () {
+    districts.length = 1;
+    wards.length = 1;
+    if (this.value != "") {
+      const result = data.find(n => n.Name === this.value); // Tìm đối tượng tương ứng với tên thành phố
+
+      for (const k of result.Districts) {
+        districts.options[districts.options.length] = new Option(k.Name, k.Name); // Sử dụng tên thực của quận/huyện
+      }
+    }
+  };
+
+  districts.onchange = function () {
+    wards.length = 1;
+    const dataCity = data.find((n) => n.Name === citis.value);
+    if (this.value != "") {
+      const dataWards = dataCity.Districts.find(n => n.Name === this.value).Wards; // Tìm đối tượng tương ứng với tên quận/huyện
+
+      for (const w of dataWards) {
+        wards.options[wards.options.length] = new Option(w.Name, w.Name); // Sử dụng tên thực của phường/xã
+      }
+    }
+  };
+}
+
+// Gửi dữ liệu form với tên thực của các địa phương
+$('form').submit(function () {
+  // Thay đổi giá trị của các trường select box để sử dụng tên thực của địa phương
+  var city = $("#city option:selected").text();
+  var district = $("#district option:selected").text();
+  var ward = $("#ward option:selected").text();
+
+  // Thêm các trường ẩn vào form với tên thực của các địa phương
+  $(this).append('<input type="hidden" name="tinhthanhpho" value="' + city + '">');
+  $(this).append('<input type="hidden" name="quanhuyen" value="' + district + '">');
+  $(this).append('<input type="hidden" name="phuongxa" value="' + ward + '">');
+
+  // Tiếp tục gửi form
+  return true;
+});
+</script>
+
+<script th:inline="javascript">
+  // Lặp qua mỗi phần tử có class "formatted-number"
+  var formattedNumberElements = document.getElementsByClassName('formatted-number');
+  for (var i = 0; i < formattedNumberElements.length; i++) {
+      var formattedNumberText = formattedNumberElements[i].textContent;
+      // Kiểm tra nếu giá trị là một số hợp lệ
+      if (!isNaN(formattedNumberText)) {
+          // Chuyển đổi giá trị thành số và định dạng lại
+          var formattedNumber = parseFloat(formattedNumberText).toLocaleString('vi-VN');
+          // Thay thế nội dung của phần tử bằng giá trị đã định dạng
+          formattedNumberElements[i].textContent = formattedNumber + 'đ';
+      }
+  }
+</script>

@@ -1,8 +1,4 @@
 package banhang.quanlythucpham.qdl;
-
-//package Tên_Công_Ty.Tên_Dự_Án.qdl;
-
-// Thư viện chuẩn: Java Standard (JavaSE)
 import java.util.List;
 
 // Thư viện web: Java Spring
@@ -37,7 +33,7 @@ public class QdlCaiDat
     })
     public String getDuyet(Model model, HttpSession session, HttpServletRequest request) 
     {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
         {
             request.getSession().setAttribute("LOCATION","/admin/caidat/duyet");
             return "redirect:/admin/dangnhap";
@@ -59,7 +55,7 @@ public class QdlCaiDat
     @GetMapping("/admin/caidat/them")
     public String getThem(Model model, HttpSession session, HttpServletRequest request) 
     {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
         {
             request.getSession().setAttribute("LOCATION","/admin/caidat/them");
             return "redirect:/admin/dangnhap";
@@ -78,16 +74,13 @@ public class QdlCaiDat
         return "QuanTri/layout.html"; 
     }
 
-    // @GetMapping("/admin/caidat/sua/{id}")
     @GetMapping("/admin/caidat/sua")
     public String getSua(Model model, @RequestParam("id") int id, HttpSession session, HttpServletRequest request) {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
         {
-            request.getSession().setAttribute("LOCATION","/admin");
+            request.getSession().setAttribute("LOCATION","/admin/caidat/sua"+id);
             return "redirect:/admin/dangnhap";
         }
-        // trangSua(Model model, @PathVariable(value = "id") int id) {
-        // Lấy ra bản ghi theo id
         CaiDat dl = dvl.xemCaiDat(id);
 
         // Gửi đối tượng dữ liệu sang bên view
@@ -104,24 +97,30 @@ public class QdlCaiDat
 
     @GetMapping("/admin/caidat/xoa")
     public String getXoa(Model model, @RequestParam(value = "id") int id, HttpSession session, HttpServletRequest request) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/caidat/xoa"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         CaiDat dl = dvl.tìmCaiDatTheoId(id);
 
         // Gửi đối tượng dữ liệu sang bên view
         model.addAttribute("dl", dl);
+        
+        model.addAttribute("content", "QuanTri/caidat/xoa.html"); 
 
-        // Hiển thị view giao diện
-        // Nội dung riêng của trang...
-        model.addAttribute("content", "QuanTri/caidat/xoa.html"); // xoa.html
-
-        // ...được đặt vào bố cục chung của toàn website
         return "QuanTri/layout.html"; // QuanTri/layout.html
     }
 
     @GetMapping("/admin/caidat/xem/{id}")
     public String getXem(Model model, @PathVariable(value = "id") int id, HttpSession session, HttpServletRequest request) 
     {
-        // Lấy ra bản ghi theo id
+       if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/caidat/xem/"+id);
+            return "redirect:/admin/dangnhap";
+        }
         CaiDat dl = dvl.xemCaiDat(id);
 
         // Gửi đối tượng dữ liệu sang bên view
@@ -146,9 +145,7 @@ public class QdlCaiDat
         return "redirect:/admin/caidat/duyet";
     }
 
-    // How to send success message to List View
-    // https://www.appsloveworld.com/springmvc/100/17/how-to-add-success-notification-after-form-submit
-  
+ 
     @PostMapping("/admin/caidat/sua")
     public String postSua(@ModelAttribute("CaiDat") CaiDat dl, RedirectAttributes redirectAttributes) {
         dvl.lưuCaiDat(dl);
@@ -159,10 +156,6 @@ public class QdlCaiDat
         return "redirect:/admin/caidat/duyet";
     }
 
-    // @PostMapping("/admin/caidat/xoabo/{id}")
-    // public String // Hàm xử lý yêu cầu xoá 1 bản ghi
-    //         xoabo(Model model, @PathVariable(value = "id") int id) 
-    
     @PostMapping("/admin/caidat/xoa")
     public String postXoa(Model model, @RequestParam("Id") int id) // request param phải khớp với name="Id" của thẻ html input
     {

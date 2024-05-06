@@ -1,0 +1,54 @@
+
+<div class="container-fluid pt-4 px-4" style="padding-bottom: 50px;">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="mb-0">Danh Sách Đơn Hàng</h2>
+        </div>
+        <div class="table-responsive">  
+
+            <table class="table text-dark text-start align-middle table-bordered table-hover" th:object="${dl}">
+                <thead>
+                    <tr style="background-color: rgb(207, 216, 219);">
+                        <th scope="col">Tên Khách</th>
+                        <th scope="col">Điện Thoại</th>
+                        <th scope="col">Ngày Đặt</th>
+                        <th scope="col">Tổng Tiền</th>
+                        <th scope="col">Trạng Thái</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="dl, dlStat : ${ds}" th:style="${dlStat.index % 2 == 0} ? 'background-color: #f8f9fa;' : 'background-color:rgb(207, 216, 219);'">
+                        <td th:text="${dl.ten}"></td>
+                        <td th:text="${dl.soDienThoai}"></td>
+                        <td th:text="${dl.ngayDatVi}"></td>
+                        <td><span id="formattedNumber" class="formatted-number" th:text="${dl.tongTien}"></span></td>
+                        <td th:text="${dl.trangThai}"></td>
+                        <td>
+                            <a th:href="@{/admin/donhang/xem/{id}(id=${dl.Id})}"><i class="fas fa-eye"></i></a> 
+                            <!-- <a th:href="@{/admin/donhang/sua(id=${dl.Id})}"><i class="fas fa-edit"></i></a> | -->
+                            <!-- <a th:href="@{/admin/donhang/xoa(id=${dl.Id})}"><i class="fas fa-trash-alt"></i></a> -->
+                        </td>
+                    </tr>
+                    
+                </tbody>	
+            </table>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    // Lặp qua mỗi phần tử có class "formatted-number"
+    var formattedNumberElements = document.getElementsByClassName('formatted-number');
+    for (var i = 0; i < formattedNumberElements.length; i++) {
+        var formattedNumberText = formattedNumberElements[i].textContent;
+        // Kiểm tra nếu giá trị là một số hợp lệ
+        if (!isNaN(formattedNumberText)) {
+            // Chuyển đổi giá trị thành số và định dạng lại
+            var formattedNumber = parseFloat(formattedNumberText).toLocaleString('vi-VN');
+            // Thay thế nội dung của phần tử bằng giá trị đã định dạng
+            formattedNumberElements[i].textContent = formattedNumber + 'đ';
+        }
+    }
+</script>

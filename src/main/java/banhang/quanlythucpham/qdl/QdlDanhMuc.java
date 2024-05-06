@@ -1,8 +1,4 @@
 package banhang.quanlythucpham.qdl;
-
-//package Tên_Công_Ty.Tên_Dự_Án.qdl;
-
-// Thư viện chuẩn: Java Standard (JavaSE)
 import java.util.List;
 
 // Thư viện web: Java Spring
@@ -52,7 +48,7 @@ public class QdlDanhMuc
     })
     public String getDuyet(Model model, HttpSession session, HttpServletRequest request) 
     {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
         {
             request.getSession().setAttribute("LOCATION","/admin/danhmuc/duyet");
             return "redirect:/admin/dangnhap";
@@ -73,7 +69,7 @@ public class QdlDanhMuc
     @GetMapping("/admin/danhmuc/them")
     public String getThem(Model model, HttpSession session, HttpServletRequest request) 
     {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
         {
             request.getSession().setAttribute("LOCATION","/admin/danhmuc/them");
             return "redirect:/admin/dangnhap";
@@ -93,9 +89,13 @@ public class QdlDanhMuc
 
     // @GetMapping("/danhmuc/sua/{id}")
     @GetMapping("/admin/danhmuc/sua")
-    public String getSua(Model model, @RequestParam("id") int id) {
-        // trangSua(Model model, @PathVariable(value = "id") int id) {
-        // Lấy ra bản ghi theo id
+    public String getSua(Model model, @RequestParam("id") int id, HttpSession session, HttpServletRequest request) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/danhmuc/sua"+id);
+            return "redirect:/admin/dangnhap";
+        }
+
         DanhMuc dl = dvl.xemDanhMuc(id);
 
         // Gửi đối tượng dữ liệu sang bên view
@@ -110,11 +110,13 @@ public class QdlDanhMuc
         return "QuanTri/layout.html"; // layout.html
     }
 
-    // @GetMapping("/danhmuc/xoa/{id}")
-    // public String // Giao diện xác nhận xoá
-    // trangXoa(Model model, @PathVariable(value = "id") int id) {
     @GetMapping("/admin/danhmuc/xoa")
-    public String getXoa(Model model, @RequestParam(value = "id") int id) {
+    public String getXoa(Model model, @RequestParam(value = "id") int id, HttpSession session, HttpServletRequest request) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/danhmuc/xoa"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         DanhMuc dl = dvl.tìmDanhMucTheoId(id);
 
@@ -130,8 +132,13 @@ public class QdlDanhMuc
     }
 
     @GetMapping("/admin/danhmuc/xem/{id}")
-    public String getXem(Model model, @PathVariable(value = "id") int id) 
+    public String getXem(Model model, @PathVariable(value = "id") int id, HttpSession session, HttpServletRequest request) 
     {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/danhmuc/xem/"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         DanhMuc dl = dvl.xemDanhMuc(id);
 

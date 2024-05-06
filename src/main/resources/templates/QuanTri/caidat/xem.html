@@ -1,11 +1,11 @@
-<div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4" style="padding-bottom: 50px;">
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h2 class="mb-0">Chi Tiết</h2>
         </div>
         <div class="table-responsive">  
 
-            <table class="table text-start align-middle table-bordered table-hover mb-0" th:object="${dl}">
+            <table class="table text-dark text-start align-middle table-bordered table-hover mb-0" th:object="${dl}">
                     
                     <tr>
                         <td>            <p><strong>Khóa:</strong> <span th:text="${dl.khoa}"></span></p>
@@ -18,7 +18,11 @@
                     </tr>
                    
             </table>
-        </div><br>
-        <a th:href="@{/admin/caidat/duyet}" role="button" class="primary">Quay Lại</a>
+            <label>&nbsp;</label>
+            <div class="text-end">
+                <a th:href="@{/admin/caidat/duyet}" role="button" class="btn btn-primary">Quay Lại</a>
+            </div>
+        <label>&nbsp;</label>
+        </div>
     </div>
 </div>

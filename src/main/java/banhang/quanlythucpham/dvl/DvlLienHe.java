@@ -75,6 +75,9 @@ public class DvlLienHe implements DviLienHe
         // TODO Auto-generated method stub
         this.kdl.save(dl);
     }
+    public Integer tongPhanHoi(){
+        return kdl.tongLienHe();
+    }
 
     @Override
     public void xóaLienHe(int id)

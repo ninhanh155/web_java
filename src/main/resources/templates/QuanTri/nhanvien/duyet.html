@@ -1,23 +1,22 @@
 
-<div style="background: rgb(84, 154, 177);" th:if="${USER_LOGGED}" th:text="${USER_LOGGED}">
+<div style="background: rgb(84, 154, 177);" th:if="${ADMIN_USER_LOGGED}" th:text="${ADMIN_USER_LOGGED}">
 </div>
     
-<a href="#" role="button" class="primary" th:href="@{/admin/nhanvien/them}">Thêm Mới</a>
 
-<div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4" style="padding-bottom: 50px;">
+    <a role="button" class="primary" th:href="@{/admin/nhanvien/them}">Thêm Mới</a>
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h2 class="mb-0">Danh Sách Nhân Viên</h2>
         </div>
         <div class="table-responsive">  
 
-            <table class="table text-start align-middle table-bordered table-hover mb-0">
+            <table class="table text-dark text-start align-middle table-bordered table-hover mb-0">
                 <thead>
-                    <tr class="text-dark">
+                    <tr style="background-color: rgb(207, 216, 219);">
                         <th scope="col">Ảnh Nhân Viên</th>
                         <th scope="col">Tên Đầy Đủ</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Mật Khẩu</th>
                         <th scope="col">Điện Thoại</th>
                         <th scope="col">Ngày Tạo</th>
                         <th scope="col">Mô Tả</th>
@@ -26,13 +25,12 @@
                 </thead>
 
                 <tbody>
-                    <tr class="text-dark" th:each="dl : ${ds}">
+                    <tr th:each="dl, dlStat : ${ds}" th:style="${dlStat.index % 2 == 0} ? 'background-color: #f8f9fa;' : 'background-color:rgb(207, 216, 219);'">
                         <td>
-                            <img style="height: 70px; width: 70px;" th:src="${dl.anhNhanVien}">
+                            <img style="height: 90px; width: 90px;" th:src="${dl.anhNhanVien}">
                         </td>
                         <td th:text="${dl.tenDayDu}"></td>
                         <td th:text="${dl.email}"></td>
-                        <td th:text="${dl.matKhau}"></td>
                         <td th:text="${dl.dienThoai}"></td>
                         <td th:text="${dl.ngayTaoNV}"></td>
                         <td th:text="${dl.moTaNhanVien}"></td>

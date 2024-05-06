@@ -4,7 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.UUID;
 
+
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -22,6 +24,7 @@ import banhang.quanlythucpham.dvl.DvlBinhLuan;
 import banhang.quanlythucpham.dvl.DvlKhachHang;
 import banhang.quanlythucpham.dvl.DvlNhanVien;
 import banhang.quanlythucpham.dvl.DvlSanPham;
+import banhang.quanlythucpham.dvl.DvlYeuThich;
 import banhang.quanlythucpham.tdl.BinhLuan;
 import banhang.quanlythucpham.tdl.KhachHang;
 import banhang.quanlythucpham.tdl.NhanVien;
@@ -47,6 +50,12 @@ public class QdlKhachHang
     @Autowired
     private DvlNhanVien dvlNhanVien;
 
+    @Autowired
+    private DvlKhachHang dvlKhachHang;
+
+    @Autowired
+    private DvlYeuThich dvlYeuThich;
+
     @Autowired 
     private JavaMailSender javamailsender;
 
@@ -56,11 +65,11 @@ public class QdlKhachHang
     })
     public String getDuyet(Model model, HttpSession session, HttpServletRequest request) 
     {
-        // if(session.getAttribute("USER_LOGGED")==null)
-        // {
-        //     request.getSession().setAttribute("LOCATION","/admin/khachhang/duyet");
-        //     return "redirect:/admin/dangnhap";
-        // }
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/khachhang/duyet");
+            return "redirect:/admin/dangnhap";
+        }
         // Đọc dữ liệu bảng rồi chứa vào biến tạm
         List<KhachHang> list = dvl.duyệtKhachHang();
 
@@ -77,7 +86,12 @@ public class QdlKhachHang
 
     // @GetMapping("/admin/khachhang/sua/{id}")
     @GetMapping("/admin/khachhang/sua")
-    public String getSua(Model model, @RequestParam("id") int id) {
+    public String getSua(Model model, @RequestParam("id") int id, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/khachang/sua"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         KhachHang dl = dvl.xemKhachHang(id);
 
@@ -92,7 +106,12 @@ public class QdlKhachHang
 
     
     @GetMapping("/admin/khachhang/xoa")
-    public String getXoa(Model model, @RequestParam(value = "id") int id) {
+    public String getXoa(Model model, @RequestParam(value = "id") int id, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/khachhang/xoa"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         KhachHang dl = dvl.tìmKhachHangTheoId(id);
 
@@ -108,8 +127,13 @@ public class QdlKhachHang
     }
 
     @GetMapping("/admin/khachhang/xem/{id}")
-    public String getXem(Model model, @PathVariable(value = "id") int id) 
+    public String getXem(Model model, @PathVariable(value = "id") int id, HttpServletRequest request, HttpSession session) 
     {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/khachhang/xem/"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         KhachHang dl = dvl.xemKhachHang(id);
 
@@ -126,16 +150,23 @@ public class QdlKhachHang
 
     @GetMapping("/khachhang/taikhoan")
     public String getTaiKhoan(Model model, HttpSession session) {
-        String email = (String) session.getAttribute("USER_LOGGED");
-        if (email != null) {
-            KhachHang dl = dvl.tìmKhachHangTheoEmail(email);
-            model.addAttribute("tk", dl);
-            model.addAttribute("content", "KhachHang/taikhoan.html");
-            return "KhachHang/layout.html";
+        Integer userId = (Integer) session.getAttribute("USER_ID");
+        if (userId != null) {
+            KhachHang dl = dvl.tìmKhachHangTheoId(userId);
+            if (dl != null) {
+                model.addAttribute("tk", dl);
+                model.addAttribute("content", "KhachHang/taikhoan.html");
+                return "KhachHang/layout.html";
+            } else {
+                return "redirect:/dangnhap"; 
+            }
         } else {
-            return "redirect:/dangnhap"; // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+            return "redirect:/dangnhap"; 
         }
     }
+    
+
+    
 
     @GetMapping("/dangky")
     public String getThem(Model model) {
@@ -152,38 +183,32 @@ public class QdlKhachHang
     }
     
     @PostMapping("/dangky")
-    public String postThem(@ModelAttribute("KhachHang") KhachHang dl, RedirectAttributes redirectAttributes) {
+    public String postThem(@ModelAttribute("KhachHang") KhachHang dl, RedirectAttributes redirectAttributes, Model model, HttpSession session) {
 
-        // var password = "123abc";
         var inputPassword = dl.getMatKhau();
         var confirmPassword = dl.getXacNhanMatKhau();
 
-        // System.out.println(" mk 1 " + inputPassword);
-        // System.out.println(" mk 2 " + confirmPassword);
+        if(inputPassword.equals(confirmPassword)) {
+            var hashInputPassword = BCrypt.hashpw(inputPassword, BCrypt.gensalt(10));
+            var hashConfirmPassword = BCrypt.hashpw(confirmPassword, BCrypt.gensalt(10));
 
-        if(inputPassword == confirmPassword)
-        {
-            var hash = BCrypt.hashpw(inputPassword, BCrypt.gensalt(10));
-            // String shorthash = hash.substring(0, 10);
-            var hashpas = BCrypt.hashpw(confirmPassword, BCrypt.gensalt(10));
-            // String shortHash = hashpas.substring(0, 10);
-            dl.setMatKhau(hash);
-            dl.setXacNhanMatKhau(hashpas);
+            dl.setMatKhau(hashInputPassword);
+            dl.setXacNhanMatKhau(hashConfirmPassword);
 
             dvl.lưuKhachHang(dl);
+            session.setAttribute("USER_ID", dl.getId());
 
-            // Gửi thông báo thành công từ view Add/Edit sang view List
             redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Đã đăng kí tài khoản thành công !");
-             
+            return "redirect:/trangchu";
+        } else {
+            // Add the attribute for the form to reload with previous input values
+            model.addAttribute("dl", dl);
+            redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Mật khẩu không khớp !");
+            return "redirect:/dangky"; 
         }
-        else
-        {
-            redirectAttributes.addFlashAttribute("THONG_BAO_OK", " mật khẩu không khớp !");
-            return "redirect:/dangki"; 
-        }
-
-        return "redirect:/trangchu";
     }
+
+
     @GetMapping("/dangnhap")
     public String getDangNhap(Model model) {
 
@@ -218,7 +243,7 @@ public class QdlKhachHang
             if (mật_khẩu_khớp) {
                 System.out.println("\n Đúng tài khoản, đăng nhập thành công");
                 request.getSession().setAttribute("USER_LOGGED", old_dl.getEmail());
-
+                request.getSession().setAttribute("USER_NAME", old_dl.getTenDayDu());
                 request.getSession().setAttribute("USER_ID", old_dl.getId());
                 
             } else {
@@ -330,19 +355,35 @@ public class QdlKhachHang
     }
 
     @GetMapping({"/sanpham"})
-    public String getAllSanPham(Model model) 
+    public String getAllSanPham(Model model,@RequestParam(name = "pageNo" , defaultValue="1") Integer pageNo
+    ) 
     {
         // Đọc dữ liệu bảng rồi chứa vào biến tạm
-        List<SanPham> list = dvlSanPham.duyệtSanPham();
+        Page<SanPham> list = dvlSanPham.findPaginated(pageNo,12);
 
         // Gửi danh sách sang giao diện View HTML
         model.addAttribute("ds", list);
-
+        model.addAttribute("currentPage", pageNo); // trang hiện tại
+        model.addAttribute("totalPages", list.getTotalPages()); // tổng số trang
+        model.addAttribute("totalItems", list.getTotalElements()); // tổng số phần tử tìm thấy
         // Nội dung riêng của trang...
         model.addAttribute("content", "KhachHang/sanpham.html"); // duyet.html
 
         // ...được đặt vào bố cục chung của toàn website
         return "KhachHang/layout.html"; 
+    }
+
+    @PostMapping("/timkiem")
+    public String getTimKiem(Model model, 
+    @RequestParam("tensp") String tensp ,
+    HttpServletRequest request, HttpSession session) {
+        
+        request.getSession().setAttribute("Timkiem", tensp);
+        List<SanPham> list_timkiem = dvlSanPham.timkiem_sp_theoten(tensp);
+        model.addAttribute("ds", list_timkiem);
+
+        model.addAttribute("content", "KhachHang/timkiem.html");
+        return "KhachHang/layout.html";
     }
 
     @GetMapping("/danhmuc/{id}")
@@ -357,8 +398,21 @@ public class QdlKhachHang
     }
 
     @GetMapping({"/chitietsanpham/{id}"})
-    public String getChiTietSanPham(Model model, @PathVariable(value = "id") int id) 
+    public String getChiTietSanPham(Model model, @PathVariable(value = "id") int id, HttpServletRequest request, RedirectAttributes redirectAttributes) 
     {
+        HttpSession session = request.getSession();
+        Integer UserId = (Integer) session.getAttribute("USER_ID");
+        
+        if(UserId != null){
+            KhachHang kh = dvlKhachHang.tìmKhachHangTheoId(UserId);
+            boolean wishlist = dvlYeuThich.kiemtra(id, kh.getId());
+            model.addAttribute("wishlist", wishlist);
+        }
+        else{
+            boolean wishlist = false;
+            model.addAttribute("wishlist", wishlist);
+        }
+        
         // Đọc dữ liệu bảng rồi chứa vào biến tạm
         SanPham dl = dvlSanPham.xemSanPham(id);
 

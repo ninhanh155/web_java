@@ -9,8 +9,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 
 import banhang.quanlythucpham.kdl.KdlSanPham;
@@ -32,6 +36,12 @@ public class DvlSanPham implements DviSanPham
         return kdl.findAll();
     }
 
+    @Override public List<SanPham> timkiem_sp_theoten(String ten_sp){
+
+        return kdl.findbynameproduct(ten_sp);
+    }
+    
+    
     @Override public List<SanPham> ds_sp_thuoc_MaDanhMuc(int id_danh_muc){
 
         return kdl.findByMaDanhMuc(id_danh_muc);
@@ -102,6 +112,9 @@ public class DvlSanPham implements DviSanPham
         }
         this.kdl.save(dl);
     }
+    public List<Object[]> thongKeSoLuongSanPhamTheoNhaSanXuat(){
+        return kdl.thongKeSoLuongSanPhamTheoNhaSanXuat();
+    }
 
     @Override
     public void xóaSanPham(int id)
@@ -110,4 +123,12 @@ public class DvlSanPham implements DviSanPham
         this.kdl.deleteById(id);
     }
 
+    public Page<SanPham> findPaginated(
+	     int pageNo, 
+	     int pageSize
+	) 
+	{
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return this.kdl.findAll(pageable);
+	}
 }

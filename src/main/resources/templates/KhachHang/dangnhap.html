@@ -46,7 +46,7 @@
     
 </head>
 <body>
-  <div class="container-fluid py-5 mb-5 hero-header">
+  <div class="container-fluid py-5 mb-5 hero-header text-dark">
     <section class="vh-100">
         <div class="container-fluid h-custom">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -64,25 +64,24 @@
                 <h4 th:text="${THONG_BAO_OK}"></h4>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3">Địa chỉ email</label>
                   <input type="email" id="email" th:field="*{Email}" class="form-control form-control-lg"
                     placeholder="Nhập địa chỉ email" />
-                  <label class="form-label" for="form3Example3">Địa chỉ email</label>
+                  
                 </div>
       
                 <!-- Password input -->
                 <div class="form-outline mb-3">
+                  <label class="form-label" for="form3Example4">Mật khẩu</label>
                   <input type="password" id="matKhau" th:field="*{MatKhau}" class="form-control form-control-lg"
                     placeholder="Nhập mật khẩu" />
-                  <label class="form-label" for="form3Example4">Mật khẩu</label>
+                  
                 </div>
       
                 <div class="d-flex justify-content-between align-items-center">
                   <!-- Checkbox -->
-                  <div class="form-check mb-0">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                    <label class="form-check-label" for="form2Example3">
-                      Remember me
-                    </label>
+                  <div class="form-check">
+                    
                   </div>
                   <a th:href="@{/khachang/forgotPassword}" class="text-body">Quên mật khẩu</a>
                 </div>
@@ -90,7 +89,7 @@
                 <div class="text-center text-lg-start mt-4 pt-2">
                   <button type="submit" class="btn btn-primary btn-lg"
                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng nhập</button>
-                  <p class="small fw-bold mt-2 pt-1 mb-0">Chưa có tài khoản? <a th:href="@{/dangki}"
+                  <p class="small fw-bold mt-2 pt-1 mb-0">Chưa có tài khoản? <a th:href="@{/dangky}"
                       class="link-danger">Đăng kí</a></p>
                 </div>
       

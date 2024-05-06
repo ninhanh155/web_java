@@ -23,7 +23,7 @@ public class SanPham
     private int Id;
 
     private String tenSanPham;
-    private double donGia;
+    private int donGia;
     private String moTa;
     private String anhSanPham;
     private boolean trangThai;

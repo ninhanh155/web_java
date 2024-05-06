@@ -19,27 +19,34 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 text-dark">
                         <h4 class="fw-bold mb-3" th:text="${dl.tenSanPham}"></h4>
                         <p class="mb-3">Loại Sản Phẩm: 
                             <span th:text="${dl.dm.tenDanhMuc}"></span>
                         </p>
-                        <h5 class="fw-bold mb-3" th:text="'$' + ${dl.donGia}"></h5>
-                        <div class="d-flex mb-4">
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star"></i>
+                        <p class=" fw-bold mb-3">Đơn Giá: 
+                            <span th:text="${dl.donGia} + '$' "></span>
+                        </p>
+                       
+                        
+                        <p class="mb-3">Mô Tả: 
+                           <br><span th:text="${dl.moTa}"></span>
+                        </p>
+
+                        <div class="d-flex align-items-center">
+                            <a th:unless="${wishlist}" th:href="@{/wishlist/add/{id}(id=${dl.Id})}"><button  class="plus-wishlist btn btn-outline-secondary shadow me-1"><i class="fas fa-heart fa-lg"></i></button></a>
+                            <a th:if="${wishlist}" th:href="@{/wishlist/delete/{id}(id=${dl.Id})}"><button  class="minus-wishlist btn btn-outline-danger shadow me-1"><i class="fas fa-heart fa-lg"></i></button></a>
+                         
+                            </a><a th:href="@{/giohang/them/{id}(id=${dl.Id})}" class="btn me-1 border border-secondary rounded-circle d-flex justify-content-center align-items-center text-warning btn-circle btn-outline-dark" style="width: 40px; height: 40px;">
+                                <i class="fa fa-shopping-bag"></i>
+                            </a>
                         </div>
-                        <p class="mb-3" th:text="${dl.moTa}"></p>
-                        <a th:href="@{/add_to_cart/{id}(id=${dl.Id})}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm Giỏ Hàng</a>
                     </div>
                 </div>
             </div>
             
-            <div class="row d-flex justify-content-center"><hr>
-                <div class="shadow-0">
+            <div class="row d-flex justify-content-center">
+                <div class="shadow-0"><hr>
                     <div class="card-body p-4">
                         <div class="form-outline mb-4">
                         <form  method="post" th:action="@{/khachhang/binhluan}">
@@ -53,35 +60,50 @@
                         </form>
                         </div>
                         <div class="mb-4">
-                        <div class="card-body">
-                            <div class="d-flex flex-row align-items-center" th:each="dl : ${bl}">
-                            <h6 th:text="${dl.kh.tenDayDu}"></h6>
-                            <!-- <img th:src="${dl.kh.anhKhachHang}" alt="avatar" width="25" height="25"/> -->
-                            <br><p class="small mb-0 ms-2" th:text="${dl.noiDung}"></p>
+                            <div class="card-body">
+                                <div class="d-flex flex-row align-items-center" th:each="dl : ${bl}">
+                                    <div class="avatar-wrapper me-3 rounded-circle overflow-hidden" style="width: 45px; height: 45px;">
+                                        <img class="avatar" src="https://nhadepso.com/wp-content/uploads/2023/03/cap-nhat-99-hinh-anh-avatar-gau-cute-de-thuong-ngo-nghinh_5.jpg" alt="avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <div style="margin-top: 3px;">
+                                        <h6 class="text-sm mb-0" th:text="${dl.kh.tenDayDu}"></h6>
+                                        <p class="small mb-0" th:text="${dl.noiDung}"></p>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
-                        </div>
+                        
+                        
                     </div>
                 </div>
             </div>
-           
         </div>
         
         <h1 class="fw-bold mb-0">Sản Phẩm Tương Tự</h1>
         <div class="vesitable">
             <div class="owl-carousel vegetable-carousel justify-content-center">
-                <div class="border border-primary rounded position-relative vesitable-item" th:each="dl : ${sp}">
+                <div class="rounded position-relative vesitable-item" th:each="dl : ${sp}">
                     <a th:href="@{/chitietsanpham/{id}(id=${dl.Id})}">
                         <div class="vesitable-img">
                             <img th:src="${dl.anhSanPham}" class="img-fluid w-100 rounded-top" style=" height: 300px;">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;" th:text="${dl.dm.tenDanhMuc}"></div>
-                        <div class="p-4 pb-0 rounded-bottom">
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                             <h4 th:text="${dl.tenSanPham}"></h4>
-                            <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 105) + '...' : dl.moTa}"></p>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold" th:text="'$'+${dl.donGia}+ '/kg'"></p>
-                                <a th:href="@{/giohang/them/{id}(id=${dl.Id})}" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-0 text-primary"></i> Thêm Giỏ Hàng</a>
+                            <p th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 45) + '...' : dl.moTa}"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="text-dark fs-5 fw-bold mb-0 me-3" th:text="${dl.donGia} + 'Đ'+ '/kg'"></p>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <a th:href="@{/wishlist/add/{id}(id=${dl.Id})}" class="btn btn-circle d-flex justify-content-center align-items-center me-1" style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #81c408 0%, #81c408 100%);">
+                                        <i class="fa fa-heart text-white"></i>
+                                    </a>
+                                    <a th:href="@{/giohang/them/{id}(id=${dl.Id})}" class="btn border border-secondary rounded-circle d-flex justify-content-center align-items-center text-primary" style="width: 40px; height: 40px;">
+                                        <i class="fa fa-shopping-bag text-primary"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </a>

@@ -1,0 +1,81 @@
+<div class="container-fluid pt-4 px-4" style="padding-bottom: 50px;">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="mb-0">Chi Tiết Đơn Hàng</h2>
+        </div>
+        <div class="table-responsive">  
+            <table class="table text-dark text-start align-middle table-hover mb-0" th:object="${dl}" style="border-collapse: collapse;">
+                <tr style="border: none;">
+                    <td colspan="3" style="border-bottom: none;">
+                        <p><strong>Tên Người Nhận:</strong> <span th:text="${dl.ten}"></span></p>
+                    </td>
+                </tr>
+                <tr style="border: none;">
+                    <td colspan="3" style="border-bottom: none;">
+                        <p><strong>Số Điện Thoại:</strong> <span th:text="${dl.soDienThoai}"></span></p>
+                    </td>
+                </tr>
+                <tr style="border: none;">
+                    <td colspan="3" style="border-bottom: none;">
+                        <p><strong>Địa Chỉ Nhận Hàng:</strong> <span th:text="${dl.diaChi}"></span></p>
+                    </td>
+                </tr>
+                <tr style="border: none;">
+                    <td colspan="3" style="border-bottom: none;">
+                        <p><strong>Ngày Đặt:</strong> <span th:text="${dl.ngayDatVi}"></span></p>
+                    </td>
+                </tr>
+                <tr style="border: none;" >
+                    <td colspan="3" style="border-bottom: none;">
+                        <p><strong>Trạng Thái:</strong> <span th:text="${dl.trangThai}"></span></p>
+                    </td>
+                </tr>
+                <tr style="border: none;" >
+                    <td colspan="3" style="border-bottom: 1px dashed;">
+                        <p><strong>Nội Dung Đơn Hàng:</strong></p>
+                    </td>
+                </tr>
+                <tr style="border: none;">
+                    <th style="border: 1px dashed;">Tên Sản Phẩm</th>
+                    <th style="border: 1px dashed;">Số Lượng</th>
+                    <th style="border: 1px dashed;">Đơn Giá</th>
+                </tr>
+                <tr th:each="gh:${dl.dsGioHang}" style="border: none;">
+                    <td th:text="${gh.sp.getTenSanPham()}" style="border: 1px dashed;"></td>
+                    <td style="border: 1px dashed;">
+                        <div class="input-group quantity mt-4" style="width: 100px;">
+                            <input type="text" class="form-control form-control-sm text-center border-0"
+                                th:value="${gh.getSoLuong()}" disabled>
+                        </div>
+                    </td>
+                    <td style="border: 1px dashed;"><span id="formattedNumber" class="formatted-number" th:text="${gh.sp.donGia}"></span></td>
+                </tr>
+                <tr style="border: none;">
+                    <th colspan="2" style="border: 1px dashed;">Thành Tiền</th>
+                    <th style="border: 1px dashed;"><span id="formattedNumber" class="formatted-number" th:text="${dl.tongTien}"></span></th>
+                </tr>
+                
+            </table>
+            <label>&nbsp;</label>
+            <div class="text-end">
+                <a th:href="@{/admin/donhang/duyet}" role="button" class="btn btn-primary">Quay Lại</a>
+            </div>
+            <label>&nbsp;</label>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    // Lặp qua mỗi phần tử có class "formatted-number"
+    var formattedNumberElements = document.getElementsByClassName('formatted-number');
+    for (var i = 0; i < formattedNumberElements.length; i++) {
+        var formattedNumberText = formattedNumberElements[i].textContent;
+        // Kiểm tra nếu giá trị là một số hợp lệ
+        if (!isNaN(formattedNumberText)) {
+            // Chuyển đổi giá trị thành số và định dạng lại
+            var formattedNumber = parseFloat(formattedNumberText).toLocaleString('vi-VN');
+            // Thay thế nội dung của phần tử bằng giá trị đã định dạng
+            formattedNumberElements[i].textContent = formattedNumber + 'đ';
+        }
+    }
+</script>

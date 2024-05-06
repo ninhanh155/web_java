@@ -17,10 +17,6 @@ public class DvlCaiDat implements DviCaiDat
 
     @Override public List<CaiDat> dsCaiDat() // getAllThucThe()
     {
-  
-        // return null;
-
-        // mã bởi lập trình viên:
         return kdl.findAll();
     }
 
@@ -31,11 +27,6 @@ public class DvlCaiDat implements DviCaiDat
 
     @Override public CaiDat  tìmCaiDatTheoId(int id)// 
     {
-        // TODO Auto-generated method stub
-        // return null;
-
-        // return kdl.findById(id);
-
         CaiDat dl = null;
 
         Optional<CaiDat> optional = kdl.findById(id);
@@ -66,7 +57,7 @@ public class DvlCaiDat implements DviCaiDat
             dl = optional.get();
         } else// ngược lại
         {
-            //throw new RuntimeException("Không tìm thấy thú cưng ! Ko tim thay thu cung !");
+            
         }
 
         return dl;

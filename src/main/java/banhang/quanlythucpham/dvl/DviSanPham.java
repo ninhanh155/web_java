@@ -13,6 +13,7 @@ public interface DviSanPham
     List<SanPham> duyệtSanPham();
     List<SanPham> ds_sp_thuoc_MaDanhMuc(int id_danh_muc);
 
+    List<SanPham> timkiem_sp_theoten(String tensp);
     // Đọc dữ liệu của một bản ghi
     SanPham tìmSanPhamTheoId(int id);// getThucTheById( int id );
     SanPham xemSanPham( int id );

@@ -32,11 +32,11 @@ public class QdlQuangCao
     })
     public String getDuyet(Model model, HttpSession session, HttpServletRequest request) 
     {
-        // if(session.getAttribute("USER_LOGGED")==null)
-        // {
-        //     request.getSession().setAttribute("LOCATION","/admin/quangcao/duyet");
-        //     return "redirect:/admin/dangnhap";
-        // }
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/quangcao/duyet");
+            return "redirect:/admin/dangnhap";
+        }
         // Đọc dữ liệu bảng rồi chứa vào biến tạm
         List<QuangCao> list = dvl.duyệtQuangCao();
 
@@ -53,11 +53,11 @@ public class QdlQuangCao
     @GetMapping("/admin/quangcao/them")
     public String getThem(Model model, HttpSession session, HttpServletRequest request) 
     {
-        // if(session.getAttribute("USER_LOGGED")==null)
-        // {
-        //     request.getSession().setAttribute("LOCATION","/admin/quangcao/them");
-        //     return "redirect:/admin/dangnhap";
-        // }
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/quangcao/them");
+            return "redirect:/admin/dangnhap";
+        }
         QuangCao dl = new QuangCao();
 
         // Gửi đối tượng dữ liệu sang bên view
@@ -74,7 +74,12 @@ public class QdlQuangCao
 
     // @GetMapping("/admin/quangcao/sua/{id}")
     @GetMapping("/admin/quangcao/sua")
-    public String getSua(Model model, @RequestParam("id") int id) {
+    public String getSua(Model model, @RequestParam("id") int id, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/quangcao/sua"+id);
+            return "redirect:/admin/dangnhap";
+        }
 
         QuangCao dl = dvl.xemQuangCao(id);
 
@@ -91,7 +96,12 @@ public class QdlQuangCao
     }
 
     @GetMapping("/admin/quangcao/xoa")
-    public String getXoa(Model model, @RequestParam(value = "id") int id) {
+    public String getXoa(Model model, @RequestParam(value = "id") int id, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/quangcao/xoa"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         QuangCao dl = dvl.tìmQuangCaoTheoId(id);
 
@@ -107,8 +117,13 @@ public class QdlQuangCao
     }
 
     @GetMapping("/admin/quangcao/xem/{id}")
-    public String getXem(Model model, @PathVariable(value = "id") int id) 
+    public String getXem(Model model, @PathVariable(value = "id") int id, HttpServletRequest request, HttpSession session) 
     {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/quangcao/xem/"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         QuangCao dl = dvl.xemQuangCao(id);
 

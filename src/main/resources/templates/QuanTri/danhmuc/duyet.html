@@ -1,24 +1,22 @@
 
-<div style="background: green;" th:if="${THONG_BAO_OK}" th:text="${THONG_BAO_OK}">
+<div style="background: rgb(131, 216, 241);;" th:if="${THONG_BAO_OK}" th:text="${THONG_BAO_OK}">
 </div>
-    
-<a href="#" role="button" class="primary" th:href="@{/admin/danhmuc/them}">Thêm Mới</a>
-<div class="container-fluid pt-4 px-4">
+ <div class="container-fluid pt-4 px-4" style="padding-bottom: 50px;">   
+    <a role="button" class="primary" th:href="@{/admin/danhmuc/them}">Thêm Mới</a>
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h4 class="mb-0">Danh Mục</h4>
         </div>
         <div class="table-responsive">
-            <table class="table text-start align-middle table-bordered table-hover mb-0">
-            <thead>
-                    <tr class="text-dark">
+            <table class="table text-dark text-start align-middle table-bordered table-hover" th:object="${dl}">
+                <thead>
+                    <tr class="text-dark" style="background-color: rgb(207, 216, 219);">
                         <th scope="col"><h5>Tên Danh Mục</h5></th>
-                        <!-- <th>Tên Sản Phẩm</th> -->
                         <th scope="col"><h5>Action</h5></th>
                     </tr>
-            </thead>    
-            <tbody>
-                    <tr class="text-dark" th:each="dl : ${ds}">
+                </thead>    
+                <tbody>
+                    <tr class="text-dark" th:each="dl, dlStat : ${ds}" th:style="${dlStat.index % 2 == 0} ? 'background-color: #f8f9fa;' : 'background-color:rgb(207, 216, 219);'">
                         <td th:text="${dl.tenDanhMuc}"></td>
                         <td>
                             <a th:href="@{/admin/danhmuc/xem/{id}(id=${dl.Id})}"><i class="fas fa-eye"></i></a> 
@@ -29,7 +27,7 @@
                             
                         </td>
                     </tr>
-            </tbody>
+                </tbody>
             </table>
         </div>
     </div>

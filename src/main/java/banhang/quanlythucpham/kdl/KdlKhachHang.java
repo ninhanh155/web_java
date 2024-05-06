@@ -17,4 +17,7 @@ public interface KdlKhachHang extends JpaRepository<KhachHang, Integer>
     KhachHang findEmail(String email); 
      
     KhachHang findByResetPasswordToken(String token);
+
+    @Query ("SELECT COUNT(*) FROM KhachHang")
+    Integer tongKhachHang();
 }

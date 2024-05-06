@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 public class QdlNhanVien 
 {
     @Autowired
-    private DvlNhanVien dvl; // cung cấp các dịch vụ thao tác dữ liệu
+    private DvlNhanVien dvl; 
 
    
     @GetMapping({
@@ -32,8 +32,13 @@ public class QdlNhanVien
     })
     public String getDuyet(Model model, HttpSession session, HttpServletRequest request) 
     {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+                request.getSession().setAttribute("LOCATION","/admin/nhanvien/duyet");
+            return "redirect:/admin/dangnhap";
+        }
         session = request.getSession();
-        int userId = (int) session.getAttribute("USER_ID");
+        int userId = (int) session.getAttribute("ADMIN_USER_ID");
         NhanVien nv = dvl.tìmNhanVienTheoId(userId);
 
         System.out.println("bao" + nv.getTenDayDu());
@@ -53,7 +58,7 @@ public class QdlNhanVien
     @GetMapping("/admin/nhanvien/them")
     public String getThem(Model model, HttpSession session, HttpServletRequest request) 
     {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
         {
                 request.getSession().setAttribute("LOCATION","/admin/nhanvien/them");
             return "redirect:/admin/dangnhap";
@@ -69,36 +74,39 @@ public class QdlNhanVien
         return "QuanTri/layout.html"; 
     }
 
-    // @GetMapping("/admin/nhanvien/sua/{id}")
     @GetMapping("/admin/nhanvien/sua")
-    public String getSua(Model model, @RequestParam("id") int id) {
-        // trangSua(Model model, @PathVariable(value = "id") int id) {
-        // Lấy ra bản ghi theo id
+    public String getSua(Model model, @RequestParam("id") int id, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/nhanvien/sua"+id);
+            return "redirect:/admin/dangnhap";
+        }
+       
         NhanVien dl = dvl.xemNhanVien(id);
 
         // Gửi đối tượng dữ liệu sang bên view
         model.addAttribute("dl", dl);
         
-        // Nội dung riêng của trang...
+        // Nội dung riêng của trang...~
         model.addAttribute("content", "QuanTri/nhanvien/sua.html"); // sua.html
 
         // ...được đặt vào bố cục chung của toàn website
         return "QuanTri/layout.html"; // QuanTri/layout.html
     }
 
-    // @GetMapping("/admin/nhanvien/xoa/{id}")
-    // public String // Giao diện xác nhận xoá
-    // trangXoa(Model model, @PathVariable(value = "id") int id) {
     @GetMapping("/admin/nhanvien/xoa")
-    public String getXoa(Model model, @RequestParam(value = "id") int id) {
+    public String getXoa(Model model, @RequestParam(value = "id") int id, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/nhanvien/xoa"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         NhanVien dl = dvl.tìmNhanVienTheoId(id);
 
         // Gửi đối tượng dữ liệu sang bên view
         model.addAttribute("dl", dl);
 
-        // Hiển thị view giao diện
-        // Nội dung riêng của trang...
         model.addAttribute("content", "QuanTri/nhanvien/xoa.html"); // xoa.html
 
         // ...được đặt vào bố cục chung của toàn website
@@ -106,16 +114,19 @@ public class QdlNhanVien
     }
 
     @GetMapping("/admin/nhanvien/xem/{id}")
-    public String getXem(Model model, @PathVariable(value = "id") int id) 
+    public String getXem(Model model, @PathVariable(value = "id") int id, HttpServletRequest request, HttpSession session) 
     {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/nhanvien/xem/"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         NhanVien dl = dvl.xemNhanVien(id);
 
         // Gửi đối tượng dữ liệu sang bên view
         model.addAttribute("dl", dl);
 
-        // Hiển thị view giao diện
-        // Nội dung riêng của trang...
         model.addAttribute("content", "QuanTri/nhanvien/xem.html"); 
 
         // ...được đặt vào bố cục chung của toàn website
@@ -131,7 +142,6 @@ public class QdlNhanVien
 
         dvl.lưuNhanVien(dl);
 
-        // Gửi thông báo thành công từ view Add/Edit sang view List
         redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Đã thêm mới thành công !");
 
         return "redirect:/admin/nhanvien/duyet";
@@ -170,11 +180,11 @@ public class QdlNhanVien
             if// nếu
             (mật_khẩu_khớp){
                 System.out.println("\n Đúng tài khoản, đăng nhập thành công");
-                request.getSession().setAttribute("USER_LOGGED", old_dl.getEmail());
-                request.getSession().setAttribute("USER_ID", old_dl.getId());
-                request.getSession().setAttribute("USER_IMG",old_dl.getAnhNhanVien());
-                request.getSession().setAttribute("USER_NAME",old_dl.getTenDayDu());
-                request.getSession().setAttribute("USER_COMMENT",old_dl.getMoTaNhanVien());
+                request.getSession().setAttribute("ADMIN_USER_LOGGED", old_dl.getEmail());
+                request.getSession().setAttribute("ADMIN_USER_ID", old_dl.getId());
+                request.getSession().setAttribute("ADMIN_USER_IMG",old_dl.getAnhNhanVien());
+                request.getSession().setAttribute("ADMIN_USER_NAME",old_dl.getTenDayDu());
+                request.getSession().setAttribute("ADMIN_USER_COMMENT",old_dl.getMoTaNhanVien());
 
 
             }else{
@@ -226,8 +236,13 @@ public class QdlNhanVien
     }
 
     @GetMapping("/admin/nhanvien/taikhoan")
-    public String getTaiKhoan(Model model, HttpSession session) {
-        String email = (String) session.getAttribute("USER_LOGGED");
+    public String getTaiKhoan(Model model, HttpSession session, HttpServletRequest request) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/nhanvien/taikhoan");
+            return "redirect:/admin/dangnhap";
+        }
+        String email = (String) session.getAttribute("ADMIN_USER_LOGGED");
         if (email != null) {
             NhanVien dl = dvl.tìmNhanVienTheoEmail(email);
             model.addAttribute("tknv", dl);

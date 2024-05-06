@@ -47,7 +47,7 @@
 <body>
   <div class="login-box">
     <h2>Đăng Nhập</h2>
-    <form method="post" th:action="@{/admin/dangnhap}" th:object="${dl}" onsubmit="validateForm()">
+    <form method="post" th:action="@{/admin/dangnhap}" th:object="${dl}" onsubmit="return validateForm()" id="loginForm">
       <div class="user-box">
         <input type="email" id="email" th:field="*{Email}"/>
         <label for="email">Email</label>
@@ -56,25 +56,29 @@
         <input type="password" id="matKhau" th:field="*{MatKhau}"/>
         <label for="matKhau">Mật Khẩu</label>
       </div>
-      <button>
-        <a>
+        <a id="loginButton">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
-        Submit
+        Đăng Nhập
       </a>
-      </button>
       
     </form>
-  </div>
-  <div id="error-overlay" onclick="hideErrorContainer()"></div>
-              <div id="error-container">
-                <div id="error-message"></div>
-                <button type="button" class="btn btn-primary btn-lg" onclick="hideErrorContainer()">
-                  <a style="display: flex; align-items: center;" href="#"><h5>Quay lại đăng nhập</h5></a>
-                </button>
-  </div>
+</div>
+
+<script>
+document.getElementById("loginButton").addEventListener("click", function() {
+    document.getElementById("loginForm").submit();
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        document.getElementById("loginForm").submit();
+    }
+});
+</script>
+
 
 <script>
   function validateForm() {

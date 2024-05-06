@@ -128,5 +128,8 @@ public class DvlKhachHang implements DviKhachHang
         kdl.save(khachhang);
     }
 
+    public Integer sLKhachHang(){
+        return kdl.tongKhachHang();
+    }
 }
 

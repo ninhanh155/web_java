@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.PrePersist;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,21 +15,30 @@ import lombok.Setter;
 @Setter
 public class GioHang
 {
+
+    public GioHang()
+    {
+        this.status = true;
+    }
+
     @Id // Khóa chính
     @GeneratedValue(strategy = GenerationType.AUTO) // Tăng tự động từ 1,2,3,...
     private int Id;
 
-    // private int MaKhachHang;
-    private String tenSanPham;
-    private double gia;
     private int soLuong = 1;
-    private int idSanPham;
-    private String anhSanPham;
+    
+    @ManyToOne 
+    @JoinColumn(name="maSanPham")
+    private SanPham sp;
 
     private int maKhachHang;
     @ManyToOne @JoinColumn(name="maKhachHang",insertable=false,updatable=false)
     private KhachHang kh;
-   
-    
 
+    private boolean status;
+
+    private String getStatus()
+    {
+        return this.status ? "chưa thanh toán":" đã thanh toán";
+    }
 }// end class

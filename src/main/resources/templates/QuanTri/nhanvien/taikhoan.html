@@ -1,14 +1,15 @@
-<div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4" style="padding-bottom: 50px;">
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h2 class="mb-0">Tài Khoản</h2>
         </div>
         <div class="table-responsive">  
-            <table class="table text-start align-middle table-bordered table-hover mb-0">
+            <table class="table text-dark text-start align-middle table-bordered table-hover" th:object="${dl}">
                 <tr class="text-dark">
-                    <td rowspan="8">
-                        <img style="height: 300px; object-fit: cover;" th:src="${tknv.anhNhanVien}" class="img-fluid">
+                    <td rowspan="8" style="width: 30%; text-align: center;">
+                        <img style="height: 350px; object-fit: cover; vertical-align: middle;" th:src="${tknv.anhNhanVien}" class="img-fluid">
                     </td>
+                    
                     <td>
                         <p><strong>Tên Đầy Đủ:</strong> <span th:text="${tknv.tenDayDu}"></span></p>
                     </td>
@@ -34,8 +35,11 @@
                     </td>
                 </tr>
             </table>
-             <br/>
-            <a th:href="@{/admin}" role="button" class="primary">Quay Lại</a>
+            <label>&nbsp;</label>
+            <div class="text-end">
+                <a th:href="@{/admin}" role="button" class="btn btn-primary">Quay Lại</a>
+            </div>
+        <label>&nbsp;</label>
            
         </div>
     </div>

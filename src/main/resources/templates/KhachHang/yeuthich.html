@@ -2,11 +2,10 @@
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">Sản Phẩm Yêu Thích</h1>
     <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
         <li class="breadcrumb-item active text-white">Sản Phẩm Yêu Thích</li>
     </ol>
 </div>
-<!-- Single Page Header End -->
 
 
 <div class="container-fluid py-5">
@@ -15,158 +14,66 @@
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Sản Phẩm</th>
+                    <th scope="col">Ảnh</th>
                     <th scope="col">Tên</th>
                     <th scope="col">Giá</th>
-                    <th scope="col"><i class="fa-solid fa-cart-shopping"></i></th>
+                    <!-- <th scope="col"><i class="fa-solid fa-cart-shopping"></i></th> -->
                     <th scope="col">Mô Tả</th>
-                    <th scope="col">Xóa</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr th:each="dl: ${ds}" class="text-dark">
+                        
                         <th scope="row">
                             <div class="d-flex align-items-center">
-                                <img src="img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                <img th:src="${dl.anhSanPham}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;">
                             </div>
                         </th>
                         <td>
-                            <p class="mb-0 mt-4">Big Banana</p>
+                            <p class="mb-0 mt-4" th:text="${dl.tenSanPham}"></p>
                         </td>
                         <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
+                            <p class="mb-0 mt-4">
+                                <span id="formattedNumber" class="formatted-number" th:text="${dl.donGia}"></span>
+                            </p>
+                        </td>
+                        
+                        <td>
+                            <p class="mb-0 mt-4" th:text="${#strings.length(dl.moTa) > 105 ? #strings.substring(dl.moTa, 0, 45) + '...' : dl.moTa}"></p>
                         </td>
                         <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                    <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
-                        </td>
-                    
-                    </tr>
-                    <tr>
-                        <th scope="row">
                             <div class="d-flex align-items-center">
-                                <img src="img/vegetable-item-5.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
+                               
+                                <a th:href="@{/giohang/them/{id}(id=${dl.Id})}" class="btn me-1 border border-secondary rounded-circle d-flex justify-content-center align-items-center text-warning btn-circle btn-outline-dark mt-4" style="width: 40px; height: 40px;">
+                                    <i class="fa fa-shopping-bag"></i>
+                                </a>
+                               
+                                <a class="btn btn-md rounded-circle bg-light border mt-4 me-1" th:href="@{/wishlist/delete/{id}(id=${dl.Id})}">
+                                    <i class="fa fa-times text-danger"></i>
+                                </a>
                             </div>
-                        </th>
-                        <td>
-                            <p class="mb-0 mt-4">Potatoes</p>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                    <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="d-flex align-items-center">
-                                <img src="img/vegetable-item-2.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                            </div>
-                        </th>
-                        <td>
-                            <p class="mb-0 mt-4">Awesome Brocoli</p>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                    <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="mt-5">
-            <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
-            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>
-        </div>
-        <div class="row g-4 justify-content-end">
-            <div class="col-8"></div>
-            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                <div class="bg-light rounded">
-                    <div class="p-4">
-                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
-                        <div class="d-flex justify-content-between mb-4">
-                            <h5 class="mb-0 me-4">Subtotal:</h5>
-                            <p class="mb-0">$96.00</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mb-0 me-4">Shipping</h5>
-                            <div class="">
-                                <p class="mb-0">Flat rate: $3.00</p>
-                            </div>
-                        </div>
-                        <p class="mb-0 text-end">Shipping to Ukraine.</p>
-                    </div>
-                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                        <h5 class="mb-0 ps-4 me-4">Total</h5>
-                        <p class="mb-0 pe-4">$99.00</p>
-                    </div>
-                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
 <!-- Cart Page End -->
 
+<script th:inline="javascript">
+    // Lặp qua mỗi phần tử có class "formatted-number"
+    var formattedNumberElements = document.getElementsByClassName('formatted-number');
+    for (var i = 0; i < formattedNumberElements.length; i++) {
+        var formattedNumberText = formattedNumberElements[i].textContent;
+        // Kiểm tra nếu giá trị là một số hợp lệ
+        if (!isNaN(formattedNumberText)) {
+            // Chuyển đổi giá trị thành số và định dạng lại
+            var formattedNumber = parseFloat(formattedNumberText).toLocaleString('vi-VN');
+            // Thay thế nội dung của phần tử bằng giá trị đã định dạng
+            formattedNumberElements[i].textContent = formattedNumber + 'đ/kg';
+        }
+    }
+</script>

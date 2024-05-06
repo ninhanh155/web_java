@@ -8,49 +8,72 @@
 </div>
 <!-- Single Page Header End -->
 
-
 <!-- Lịch sử mua hàng -->
 <div class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Sản Phẩm</th>
-                    <th scope="col">Tên</th>
-                    <th scope="col">Giá</th>
-                    <th scope="col">Số Lượng</th>
-                    <th scope="col">Thành tiền</th>
-                    <th scope="col">Ngày mua</th>
-                  </tr>
-                </thead>
-                <tbody>
+    <div class="container p-0 my-0">
+        <div class="row m-0 p-0">
+            <div th:each=" dl: ${dh}" class="col-12 m-0 shadow p-3 my-3 border">
+                <div class="info pb-3">
+                    Tên: <span th:text="${dl.ten}"></span><br>
+                    Địa chỉ: <span th:text="${dl.diaChi}"></span><br>
+                    Số điện thoại: <span th:text="${dl.soDienThoai}"></span><br>
+                    Ngày Đặt: <span th:text="${dl.getNgayDatVi()}"></span><br>
+                    Trạng thái: <span th:text="${dl.trangThai}"></span><br>
+                </div>
+                <button class="btn btn-primary btn-sm mb-3" onclick="toggleProductTable(this)">Xem sản phẩm trong đơn hàng</button>
+                <table class="table" style="display: none;">
                     <tr>
+                        <th scope="col">Sản Phẩm</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Số Lượng</th>
+                        <th scope="col">Thành tiền</th>
+                    </tr>
+                    <tr th:each=" gh: ${dl.dsGioHang}">
                         <th scope="row">
                             <div class="d-flex align-items-center">
-                                <img src="img/vegetable-item-2.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
+                                <img th:src="${gh.sp.getAnhSanPham()}" class="img-fluid me-5 rounded-circle"
+                                    style="width: 80px; height: 80px;" alt="">
                             </div>
                         </th>
                         <td>
-                            <p class="mb-0 mt-4">Awesome Brocoli</p>
+                            <p class="mb-0 mt-4" th:text="${gh.sp.getTenSanPham()}"></p>
                         </td>
                         <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
+                            <p class="mb-0 mt-4" th:text="${gh.sp.donGia}">$</p>
                         </td>
                         <td>
                             <div class="input-group quantity mt-4" style="width: 100px;">
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1" disabled>
+                                <input type="text" class="form-control form-control-sm text-center border-0"
+                                    th:value="${gh.getSoLuong()}" disabled>
                             </div>
                         </td>
                         <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
+                            <p class="mb-0 mt-4" th:text="${gh.sp.donGia * gh.getSoLuong()} + '$'"></p>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                </table>
+                <h5 class="text-end">
+                    Tổng thanh toán: <span th:text="${dl.tongTien} + '$'"></span><br>
+                </h5>
+            </div>
         </div>
+    </div>
+</div>
+<script>
+    function toggleProductTable(button) {
+        // Tìm đến bảng danh sách sản phẩm kế tiếp của nút được nhấp
+        var productTable = button.nextElementSibling;
+
+        // Nếu bảng sản phẩm đang ẩn, hiển thị nó lên
+        if (productTable.style.display === "none") {
+            productTable.style.display = "table";
+            button.textContent = "Ẩn sản phẩm";
+        } 
+        // Nếu bảng sản phẩm đang hiện, ẩn đi
+        else {
+            productTable.style.display = "none";
+            button.textContent = "Xem sản phẩm trong đơn hàng";
+        }
+    }
+</script>

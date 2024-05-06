@@ -31,7 +31,7 @@ public class QdlNhaSanXuat
     })
     public String getDuyet(Model model, HttpSession session, HttpServletRequest request) 
     {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
         {
             request.getSession().setAttribute("LOCATION","/admin/nhasanxuat/duyet");
             return "redirect:/admin/dangnhap";
@@ -52,7 +52,7 @@ public class QdlNhaSanXuat
     @GetMapping("/admin/nhasanxuat/them")
     public String getThem(Model model, HttpSession session, HttpServletRequest request) 
     {
-        if(session.getAttribute("USER_LOGGED")==null)
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
         {
             request.getSession().setAttribute("LOCATION","/admin/nhasanxuat/them");
             return "redirect:/admin/dangnhap";
@@ -73,9 +73,12 @@ public class QdlNhaSanXuat
 
     // @GetMapping("/admin/nhasanxuat/sua/{id}")
     @GetMapping("/admin/nhasanxuat/sua")
-    public String getSua(Model model, @RequestParam("id") int id) {
-        // trangSua(Model model, @PathVariable(value = "id") int id) {
-        // Lấy ra bản ghi theo id
+    public String getSua(Model model, @RequestParam("id") int id, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/nhasanxuat/sua"+id);
+            return "redirect:/admin/dangnhap";
+        }
         NhaSanXuat dl = dvl.xemNhaSanXuat(id);
 
         // Gửi đối tượng dữ liệu sang bên view
@@ -91,7 +94,12 @@ public class QdlNhaSanXuat
     }
 
     @GetMapping("/admin/nhasanxuat/xoa")
-    public String getXoa(Model model, @RequestParam(value = "id") int id) {
+    public String getXoa(Model model, @RequestParam(value = "id") int id, HttpServletRequest request, HttpSession session) {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/nhasanxuat/xoa"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         NhaSanXuat dl = dvl.tìmNhaSanXuatTheoId(id);
 
@@ -107,8 +115,13 @@ public class QdlNhaSanXuat
     }
 
     @GetMapping("/admin/nhasanxuat/xem/{id}")
-    public String getXem(Model model, @PathVariable(value = "id") int id) 
+    public String getXem(Model model, @PathVariable(value = "id") int id, HttpServletRequest request, HttpSession session) 
     {
+        if(session.getAttribute("ADMIN_USER_LOGGED")==null)
+        {
+            request.getSession().setAttribute("LOCATION","/admin/nhasanxuat/xem/"+id);
+            return "redirect:/admin/dangnhap";
+        }
         // Lấy ra bản ghi theo id
         NhaSanXuat dl = dvl.xemNhaSanXuat(id);
 
